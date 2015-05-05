@@ -1,0 +1,32 @@
+<ucldc_schema:foo>
+  <bar>
+    <name>
+      <first>Pat</first>
+      <last>Jones</last>
+    </name>
+    <role>Author</role>
+  </bar>
+  <bar>
+    <name>
+      <first>Jan</first>
+      <last>Smith</last>
+    </name>
+    <role>Editor</role>
+  </bar>
+<ucldc_schema:foo>
+
+[{'ucldc_schema:foo':
+   [{'bar': [{'name': [{'first': 'Pat, 'last': 'Jones'}], 'role': ['Author']}]},
+    {'bar': [{'name': [{'first': 'Jan', 'last': 'Smith'}], 'role': ['Editor']}]}]}]
+ 
+['ucldc_schema:subjecttopic':
+  [{'item': [{'heading': 'Canals--United States',
+              'headingType': 'topic',
+              'source': 'lcsh'}]},
+   {'item': [{'heading': 'Water resources development--Colorado River (Colo.-Mexico)',
+              'headingType': 'topic',
+              'source': 'lcsh'}]},
+   {'item': [{'heading': 'Boulder Canyon Project (U.S.)',
+              'headingType': 'topic',
+              'source': 'lcsh'}]}]]
+
