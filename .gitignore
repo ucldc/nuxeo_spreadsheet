@@ -1,0 +1,5 @@
+*.pyc
+**/LOGS/*
+**/DATA/*
+**/.idea/*
+*.bak
