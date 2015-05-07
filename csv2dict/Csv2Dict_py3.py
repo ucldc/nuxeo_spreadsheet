@@ -45,7 +45,7 @@ class Csv2Dict:
 
    # format_string is probably not needed for a csv file,
    def format_string(self, value_str):
-      values = value_str.split('\n')
+      values = value_str.strip().split('\n')
       values = [v.strip() for v in values]
       return ' '.join(values)
 
