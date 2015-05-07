@@ -6,6 +6,12 @@ import unicodecsv
 
 from time import localtime, strftime
 
+class UTF8PrettyPrinter(pprint.PrettyPrinter):
+   def format(self, object, context, maxlevels, level):
+      if isinstance(object, unicode):
+         return(object.encode('utf8'), True, False)
+      return pprint.PrettyPrinter.format(self, object, context, maxlevels, level)
+
 class Csv2Dict:
 
    def __init__(self, data_file):
@@ -24,11 +30,13 @@ class Csv2Dict:
       with open(data_file, 'rb') as infile:
 
          # First row contains the column names
-         data_reader = csv.reader(infile, delimiter=('\t'), quotechar='|')
-         fields = [field for field in next(data_reader)]
+         csv_reader = unicodecsv.reader(infile, delimiter=('\t'), quotechar='|', encoding='utf-8')
+         fields = next(csv_reader)
+
+         print "Fields: %s" % fields
 
          # The rest of the rows contain data
-         for row in data_reader:
+         for row in csv_reader:
             if len(fields) == len(row):
                print "Another row: %s" % row
 
@@ -48,9 +56,10 @@ class Csv2Dict:
       values = [v.strip() for v in values]
       return ' '.join(values)
 
-   def print_meta_dicts(self, outputfile='logs/data_out.txt'):
-      with open(outputfile, 'wb') as fout:
-         pp = pprint.PrettyPrinter(stream=fout)
+   def print_meta_dicts(self, outfile='data_out.txt'):
+      with open(outfile, 'wb') as fout:
+         #pp = pprint.PrettyPrinter(stream=fout)
+         pp = UTF8PrettyPrinter(stream=fout)
          for row in self.meta_dicts:
             pp.pprint(row)
 

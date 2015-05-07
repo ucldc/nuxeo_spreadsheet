@@ -7,9 +7,9 @@ from pprint import PrettyPrinter
 pp = PrettyPrinter().pprint
 
 if len(sys.argv) == 2:
-   csv_data_le = sys.argv[1]
+   csv_data_file = sys.argv[1]
 else:
-   csv_data_file = 'CSV/default_data_file.csv'
+   csv_data_file = 'DATA/default_data_file.csv'
 
 print csv_data_file
 
@@ -39,7 +39,7 @@ for row in row_dicts:
    csv2dict.set_title(row['Title'], n)
    csv2dict.set_alt_title(row['Alternative Title'], n)
    csv2dict.set_id(row['Identifier'], n)
-   csv2dict.set_local_id('Local Identifier', n)
+   csv2dict.set_local_id(row['Local Identifier'], n)
    csv2dict.set_type(row['Type'], n)
    csv2dict.set_campus_unit(row['Campus/Unit'], n)
    csv2dict.set_date(row['Date'],
@@ -134,5 +134,5 @@ for row in row_dicts:
    csv2dict.set_provenance(row['Provenance'], n)
    csv2dict.set_physical_location(row['Physical Location'], n)
 
-csv2dict.print_meta_dicts('logs/latest_output.txt')
+csv2dict.print_meta_dicts('LOGS/latest_output.txt')
 
