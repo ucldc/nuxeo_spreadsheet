@@ -84,8 +84,7 @@ class Csv2Dict:
    def new_dict(self, asset_path):
       #meta_dict = OrderedDict()
       meta_dict = {}
-      meta_dict['path'] = asset_path
-      #meta_dict['properties'] = OrderedDict()
+      meta_dict['path'] = "'%s'" % asset_path
       meta_dict['properties'] = {}
       self.meta_dicts.append(meta_dict)
       return len(self.meta_dicts)-1
@@ -100,7 +99,7 @@ class Csv2Dict:
 
    def set_title(self, title, n):
       if self.verify_title(title):
-         self.meta_dicts[n]['properties']['dc:title'] = title
+         self.meta_dicts[n]['properties']['dc:title'] = "'%s'" % title
 
    def verify_title(self, title):
       print "Verifying title: %s" % title
@@ -109,14 +108,12 @@ class Csv2Dict:
    def set_alt_title(self, alt_title, n):
       if self.verify_alt_title(alt_title):
          properties = self.get_meta_dict(n)['properties']
-         #if not 'ucldc_schema:alternativetitle' in self.meta_dicts[n]['properties'].keys():
          if not 'ucldc_schema:alternativetitle' in properties.keys():
             print "Making alternativetitle item: %s" % alt_title
-            #self.meta_dicts[n]['properties']['ucldc_schema:alternativetitle'] = [alt_title]
-            properties['ucldc_schema:alternativetitle'] = [alt_title]
+            properties['ucldc_schema:alternativetitle'] = ["'%s'" % alt_title]
          else:
             print "Adding alternativetitle item: %s" % alt_title
-            properties['ucldc_schema:alternativetitle'].append(alt_title)
+            properties['ucldc_schema:alternativetitle'].append("'%s'" % alt_title)
 
    def verify_alt_title(self, alt_title):
       print "Verifying alternative title: %s" % alt_title
@@ -124,7 +121,7 @@ class Csv2Dict:
 
    def set_id(self, objid, n):
       if self.verify_id(objid):
-         self.meta_dicts[n]['properties']['ucldc_schema:identifier'] = objid
+         self.meta_dicts[n]['properties']['ucldc_schema:identifier'] = "'%s'" % objid
 
    def verify_id(self, id):
       print "Verifying id: %s" % id
@@ -134,10 +131,10 @@ class Csv2Dict:
       if self.verify_local_id(local_id):
          if not 'ucldc_schema:localitendifier' in self.meta_dicts[n]['properties'].keys():
             print "Making localidentifier element, %s" % local_id
-            self.meta_dicts[n]['properties']['ucldc_schema:localidentifier'] = [{'item': local_id}]
+            self.meta_dicts[n]['properties']['ucldc_schema:localidentifier'] = [{'item': "'%s'" % local_id}]
          else:
             print "Adding localidentier item, %s" % local_id
-            self.meta_dicts[n]['properties']['ucldc_schema:localidentifier'].append({'item': local_id})
+            self.meta_dicts[n]['properties']['ucldc_schema:localidentifier'].append({'item': "'%s'" % local_id})
 
    def verify_local_id(self, local_id):
       print "Verifying localidentifier: %s" % local_id
@@ -145,7 +142,7 @@ class Csv2Dict:
 
    def set_type(self, type, n):
       if self.verify_type(type):
-          self.meta_dicts[n]['properties']['ucldc_schema:type'] = type
+          self.meta_dicts[n]['properties']['ucldc_schema:type'] = "'%s'" % type
 
    def verify_type(self, type):
       print "Verifying type: %s" % type
@@ -155,10 +152,10 @@ class Csv2Dict:
       if self.verify_campus_unit(unit):
          if not 'ucldc_schema:campusunit' in self.meta_dicts[n]['properties'].keys():
             print "Making campusunit item: %s" % unit
-            self.meta_dicts[n]['properties']['ucldc_schema:campusunit'] = [unit]
+            self.meta_dicts[n]['properties']['ucldc_schema:campusunit'] = ["'%s'" % unit]
          else:
             print "Adding campusunit item: %s" % unit
-
+            self.meta_dicts[n]['properties']['ucldc_schema:campusunit'].append("'%s'" % unit)
    def verify_campus_unit(self, unit):
       print "Verifying campus unit: %s" % unit
       return True if unit else False
@@ -168,14 +165,14 @@ class Csv2Dict:
          if not 'ucldc_schema:date' in self.meta_dicts[n]['properties'].keys():
             print "Making date item, %s %s %s %s %s" % (date, date_type, inclusive_start, inclusive_end, single)
             self.meta_dicts[n]['properties']['ucldc:date'] = [
-               {'item': {'date': date, 'datetype': date_type, 'inclusivestart': inclusive_start,
-                'inclusiveend': inclusive_end, 'single': single}}
+               {'item': {'date': "'%s'" % date, 'datetype': "'%s'" % date_type, 'inclusivestart': "'%s'" % inclusive_start,
+                'inclusiveend': "'%s'" % inclusive_end, 'single': "'%s'" % single}}
             ]
          else:
             print "Adding date item, %s %s %s %s %s" % (date, date_type, inclusive_start, inclusive_end, single)
             self.meta_dicts[n]['properties']['ucldc:date'].append(
-               {'item': {'date': date, 'datetype': date_type, 'inclusivestart': inclusive_start,
-                'inclusiveend': inclusive_end, 'single': single}}
+               {'item': {'date': "'%s'" % date, 'datetype': "'%s'" % date_type, 'inclusivestart': "'%s'" % inclusive_start,
+                'inclusiveend': "'%s'" % inclusive_end, 'single': "'%s'" % single}}
             )
 
    def verify_date(self, date, date_type, inclusive_start, inclusive_end, single):
@@ -187,12 +184,14 @@ class Csv2Dict:
          if not 'ucldc_schema:creator' in self.meta_dicts[n]['properties'].keys():
             print "Making creator item, %s %s %s %s %s" % (name, name_type, role, source, authority_id)
             self.meta_dicts[n]['properties']['ucldc_schema:creator'] = [
-               {'item': {'name': name, 'nametype': name_type, 'role': role, 'source': source, 'authorityid': authority_id}}
+               {'item': {'name': "'%s'" % name, 'nametype': "'%s'" % name_type, 'role': "'%s'" % role,
+                         'source': "'%s'" % source, 'authorityid': "'%s'" % authority_id}}
             ]
          else:
             print "Adding creator item, %s %s %s %s %s" % ( name, name_type, role, source, authority_id)
             self.meta_dicts[n]['properties']['ucldc_schema:creator'].append(
-               {'item': {'name': name, 'nametype': name_type, 'role': role, 'source': source, 'authorityid': authority_id}}
+               {'item': {'name': "'%s'" % name, 'nametype':"'%s'" % name_type, 'role': "'%s'" % role,
+                         'source': "'%s'" % source, 'authorityid': "'%s'" % authority_id}}
             )
 
    def verify_creator(self, name, type, role, source, authid):
@@ -204,12 +203,14 @@ class Csv2Dict:
          if not 'ucldc_schema:contributor' in self.meta_dicts[n]['properties'].keys():
             print "Making contributor item, %s %s %s %s %s" % (name, name_type, role, source, auth_id)
             self.meta_dicts[n]['properties']['ucldc_schema:contributor'] = [
-               {'item': {'name': name, 'nametype': name_type, 'role': role, 'source': source, 'authorityid': auth_id}}
+               {'item': {'name': "'%s'" % name, 'nametype': "'%s'" % name_type, 'role': "'%s'" % role,
+                         'source': "'%s'" % source, 'authorityid': "'%s'" % auth_id}}
             ]
          else:
             print "Adding contributor item, %s %s %s %s %s" % (name, name_type, role, source, auth_id)
             self.meta_dicts[n]['properties']['ucldc_schema:contributor'].append(
-               {'item': {'name': name, 'nametype': name_type, 'role': role, 'source': source, 'authorityid': auth_id}}
+               {'item': {'name': "'%s'" % name, 'nametype': "'%s'" % name_type, 'role': "'%s'" % role,
+                         'source': "'%s'" % source, 'authorityid': "'%s'" % auth_id}}
             )
 
    def verify_contributor(self, name, name_type, role, source, auth_id):
@@ -219,7 +220,7 @@ class Csv2Dict:
    def set_physdesc(self, physical_description, n):
       if self.verify_physdesc(physical_description):
          print "Making physdesc element: %s" % physical_description
-         self.meta_dicts[n]['properties']['ucldc_schema:physdesc'] = physical_description
+         self.meta_dicts[n]['properties']['ucldc_schema:physdesc'] = "'%s'" % physical_description
 
    def verify_physdesc(self, physical_description):
       print "Verifying phyical description: %s" % physical_description
@@ -229,10 +230,12 @@ class Csv2Dict:
       if self.verify_description(note, type):
          if not 'ucldc_schema:description' in self.meta_dicts[n]['properties'].keys():
             print "Making description item: %s %s" % (note, type)
-            self.meta_dicts[n]['properties']['ucldc_schema:description'] =  [{'item': {'item': note, 'type': type}}]
+            self.meta_dicts[n]['properties']['ucldc_schema:description'] =  [
+               {'item': {'item': "'%s'" % note, 'type': "'%s'" % type}}]
          else:
             print "Adding description item: %s %s" % (note, type)
-            self.meta_dicts[n]['properties']['ucldc_schema:description'].append({'item': {'item': note, 'type': type}})
+            self.meta_dicts[n]['properties']['ucldc_schema:description'].append(
+               {'item': {'item': "'%s'" % note, 'type': "'%s'" % type}})
 
    def verify_description(self, note, type):
       print "Verifying description: %s %s" % (note, type)
@@ -241,7 +244,7 @@ class Csv2Dict:
    def set_extent(self, extent, n):
       if self.verify_extent(extent):
          print "Making extent element: %s" % extent
-         self.meta_dicts[n]['properties']['ucldc_schema:extent'] = extent
+         self.meta_dicts[n]['properties']['ucldc_schema:extent'] = "'%s'" % extent
 
    def verify_extent(self, extent):
       print "Verifying extent: %s" % extent
@@ -252,12 +255,12 @@ class Csv2Dict:
          if not 'ucldc_schema:language' in self.meta_dicts[n]['properties'].keys():
             print "Making language item: %s %s" % (language, code)
             self.meta_dicts[n]['properties']['ucldc_schema:language'] = [
-               {'item': {'language': language, 'languagecode': code}}
+               {'item': {'language': "'%s'" % language, 'languagecode': "'%s'" % code}}
             ]
          else:
             print "Adding language item: %s %s" % (language, code)
             self.meta_dicts[n]['properties']['ucldc_schema:language'].append(
-               {'item': {'language': language, 'languagecode': code}}
+               {'item': {'language': "'%s'" % language, 'languagecode': "'%s'" % code}}
             )
 
    def verify_language(self, language, code):
@@ -268,10 +271,10 @@ class Csv2Dict:
       if self.verify_temporal_coverage(temporal_coverage):
          if not 'ucldc_schema:temporalcoverate' in self.meta_dicts[n]['properties'].keys():
             print "Making temporalcoverage item: %s" % temporal_coverage
-            self.meta_dicts[n]['properties']['ucldc_schema:temporalcoverage'] = [temporal_coverage]
+            self.meta_dicts[n]['properties']['ucldc_schema:temporalcoverage'] = ["'%s'" % temporal_coverage]
          else:
             print "Adding temporalcoverage item: %s" % temporal_coverage
-            self.meta_dicts[n]['properties']['ucldc_schema:temporalcoverage'].append(temporal_coverage)
+            self.meta_dicts[n]['properties']['ucldc_schema:temporalcoverage'].append("'%s'" % temporal_coverage)
 
    def verify_temporal_coverage(self, temporal_coverage):
       print "Verifying temporal coverage: %s" % temporal_coverage
@@ -280,7 +283,7 @@ class Csv2Dict:
    def set_transcription(self, transcription, n):
       if self.verify_transcription(transcription):
          print "Making transcription element: %s" % transcription
-         self.meta_dicts[n]['properties']['ucldc_schema:transcription'] = transcription
+         self.meta_dicts[n]['properties']['ucldc_schema:transcription'] = "'%s'" % transcription
 
    def verify_transcription(self, transcription):
       print "Verifying transcription: %s" % transcription
@@ -289,7 +292,7 @@ class Csv2Dict:
    def set_access_restrictions(self, restrictions, n):
       if self.verify_access_restrictions(restrictions):
          print "Making accessrestrict element: %s" % restrictions
-         self.meta_dicts[n]['properties']['ucldc_schema:accessrestrict'] = restrictions
+         self.meta_dicts[n]['properties']['ucldc_schema:accessrestrict'] = "'%s'" % restrictions
 
    def verify_access_restrictions(self, restrictions):
       print "Verifying access restrictions: %s" % restrictions
@@ -298,7 +301,7 @@ class Csv2Dict:
    def set_rights_statement(self, statement, n):
       if self.verify_rights_statement(statement):
          print "Making rightsstatement element: %s" % statement
-         self.meta_dicts[n]['properties']['ucldc_schema:rightsstatement'] = statement
+         self.meta_dicts[n]['properties']['ucldc_schema:rightsstatement'] = "'%s'" % statement
 
    def verify_rights_statement(self, statement):
       print "Verifying copyright statement: %s" % statement
@@ -307,7 +310,7 @@ class Csv2Dict:
    def set_rights_status(self, status, n):
       if self.verify_rights_status(status):
          print "Making rightsstatus element: %s" % status
-         self.meta_dicts[n]['properties']['ucldc_schema:rightsstatus'] = status
+         self.meta_dicts[n]['properties']['ucldc_schema:rightsstatus'] = "'%s'" % status
 
    def verify_rights_status(self, status):
       print "Verifying copyright status: %s" % status
@@ -318,12 +321,14 @@ class Csv2Dict:
          if not 'ucldc_schema:rightsholder' in self.meta_dicts[n]['properties'].keys():
             print "Making rightsholder item: %s %s %s %s" % (name, name_type, source, auth_id)
             self.meta_dicts[n]['properties']['ucldc_schema:rightsholder'] = [
-               {'item': {'name': name, 'nametype': name_type, 'source': source, 'authorityid': auth_id}}
+               {'item': {'name': "'%s'" % name, 'nametype': "'%s'" % name_type,
+                         'source': "'%s'" % source, 'authorityid': "'%s'" % auth_id}}
             ]
          else:
             print "Adding rightsholder item: %s %s %s %s" % (name, name_type, source, auth_id)
             self.meta_dicts[n]['properties']['ucldc_schema:rightsholder'].append(
-               {'item': {'name': name, 'nametype': name_type, 'source': source, 'authorityid': auth_id}}
+               {'item': {'name': "'%s'" % name, 'nametype': "'%s'" % name_type,
+                         'source': "'%s'" % source, 'authorityid': "'%s'" % auth_id}}
             )
 
    def verify_rights_holder(self, name, name_type, source, auth_id):
@@ -333,7 +338,7 @@ class Csv2Dict:
    def set_rights_contact(self, contact, n):
       if self.verify_rights_contact(contact):
          print "Making rightscontact element: %s" % contact
-         self.meta_dicts[n]['properties']['ucldc_schema:rightscontact'] = contact
+         self.meta_dicts[n]['properties']['ucldc_schema:rightscontact'] = "'%s'" % contact
 
    def verify_rights_contact(self, contact):
       print "Verifying rights contact: %s" % contact
@@ -342,7 +347,7 @@ class Csv2Dict:
    def set_rights_notice(self, notice, n):
       if self.verify_rights_notice(notice):
          print "Making rightsnotice element: %s" % notice
-         self.meta_dicts[n]['properties']['ucldc_schema:rightsnotice'] = notice
+         self.meta_dicts[n]['properties']['ucldc_schema:rightsnotice'] = "'%s'" % notice
 
    def verify_rights_notice(self, notice):
       print "Verifying rights notice: %s" % notice
@@ -351,7 +356,7 @@ class Csv2Dict:
    def set_rights_determination_date(self, date, n):
       if self.verify_rights_determination_date(date):
          print "Making rightsdeterminationdate element: %s" % date
-         self.meta_dicts[n]['properties']['ucldc_schema:rightsdeterminationdate'] = date
+         self.meta_dicts[n]['properties']['ucldc_schema:rightsdeterminationdate'] = "'%s'" % date
 
    def verify_rights_determination_date(self, date):
       print "Verifying rights determination date: %s" % date
@@ -360,7 +365,7 @@ class Csv2Dict:
    def set_rights_start_date(self, date, n):
       if self.verify_rights_start_date(date):
          print "Making rightsstartdate element: %s" % date
-         self.meta_dicts[n]['properties']['ucldc_schema:rightstartdate'] = date
+         self.meta_dicts[n]['properties']['ucldc_schema:rightstartdate'] = "'%s'" % date
 
    def verify_rights_start_date(self, date):
       print "Verifying rights start date: %s" % date
@@ -369,7 +374,7 @@ class Csv2Dict:
    def set_rights_end_date(self, date, n):
       if self.verify_rights_end_date(date):
          print "Making rightsenddate element: %s" % date
-         self.meta_dicts[n]['properties']['ucldc_schema:rightsenddate'] = date
+         self.meta_dicts[n]['properties']['ucldc_schema:rightsenddate'] = "'%s'" % date
 
    def verify_rights_end_date(self, date):
       print "Verifying rights end date: %s" % date
@@ -378,7 +383,7 @@ class Csv2Dict:
    def set_rights_jurisdiction(self, jurisdiction, n):
       if self.verify_rights_jurisdiction(jurisdiction):
          print "Making rightsjurisdiction element: %s" % jurisdiction
-         self.meta_dicts[n]['properties']['ucldc_schema:rightsjurisdiction'] = jurisdiction
+         self.meta_dicts[n]['properties']['ucldc_schema:rightsjurisdiction'] = "'%s'" % jurisdiction
 
    def verify_rights_jurisdiction(self, jurisdiction):
       print "Verifying rights jurisdiction: %s" % jurisdiction
@@ -387,7 +392,7 @@ class Csv2Dict:
    def set_rights_note(self, note, n):
       if self.verify_rights_note(note):
          print "Making rightsnote element: %s" % note
-         self.meta_dicts[n]['properties']['ucldc_schema:rightsnote'] = note
+         self.meta_dicts[n]['properties']['ucldc_schema:rightsnote'] = "'%s'" % note
 
    def verify_rights_note(self, note):
       print "Verifying rights note: %s" % note
@@ -397,10 +402,10 @@ class Csv2Dict:
       if self.verify_collection(collection):
          if not 'ucldc_schema:collection' in self.meta_dicts[n]['properties'].keys():
             print "Making collection item: %s" % collection
-            self.meta_dicts[n]['properties']['ucldc_schema:collection'] = [collection]
+            self.meta_dicts[n]['properties']['ucldc_schema:collection'] = ["'%s'" % collection]
          else:
             print "Adding collection item: %s" % collection
-            self.meta_dicts[n]['properties']['ucldc_schema:collection'].append(collection)
+            self.meta_dicts[n]['properties']['ucldc_schema:collection'].append("'%s'" % collection)
 
    def verify_collection(self, collection):
       print "Verifying collection: %s" % collection
@@ -410,10 +415,10 @@ class Csv2Dict:
       if self.verify_related_resource(resource):
          if not 'ucldc_schema:relatedresource' in self.meta_dicts[n]['properties'].keys():
             print "Making relatedresource item: %s" % resource
-            self.meta_dicts[n]['properties']['ucldc_schema:relatedresource'] = [resource]
+            self.meta_dicts[n]['properties']['ucldc_schema:relatedresource'] = ["'%s'" % resource]
          else:
             print "Adding relatedresource item: %s" % resource
-            self.meta_dicts[n]['properties']['ucldc_schema:relatedresource'].append(resource)
+            self.meta_dicts[n]['properties']['ucldc_schema:relatedresource'].append("'%s'" % resource)
 
    def verify_related_resource(self, resource):
       print "Verifying related resource: %s" % resource
@@ -421,7 +426,7 @@ class Csv2Dict:
 
    def set_source(self, source, n):
       if self.verify_source(source):
-         self.meta_dicts[n]['properties']['ucldc_schema:source'] = source
+         self.meta_dicts[n]['properties']['ucldc_schema:source'] = "'%s'" % source
 
    def verify_source(self, source):
       print "Verifying source: %s" % source
@@ -432,14 +437,14 @@ class Csv2Dict:
          if not 'ucldc_schema:subjectname' in self.meta_dicts[n]['properties'].keys():
             print "Making subjectname item: %s %s %s %s %s" % (name, name_type, role, source, auth_id)
             self.meta_dicts[n]['properties']['ucldc_schema:subjectname'] = [
-               {'item' : {'name': name, 'nametype': name_type, 'role': role,
-                          'source': source, 'authorityid': auth_id}}
+               {'item' : {'name': "'%s'" % name, 'nametype': "'%s'" % name_type, 'role': "'%s'" % role,
+                          'source': "'%s'" % source, 'authorityid': "'%s'" % auth_id}}
             ]
          else:
             print "Adding subjectname item: %s %s %s %s %s" % (name, name_type, role, source, auth_id)
             self.meta_dicts[n]['properties']['ucldc_schema:subjectname'].append(
-               {'item' : {'name': name, 'nametype': name_type, 'role': role,
-                          'source': source, 'authorityid': auth_id}}
+               {'item' : {'name': "'%s'" % name, 'nametype': "'%s'" % name_type, 'role': "'%s'" % role,
+                          'source': "'%s'" % source, 'authorityid': "'%s'" % auth_id}}
             )
 
    def verify_subject_name(self, name, name_type, role, source, auth_id):
@@ -451,12 +456,14 @@ class Csv2Dict:
          if not 'ucldc_schema:place' in self.meta_dicts[n]['properties'].keys():
             print "Making place item: %s %s %s %s" % (name, source, coordinates, auth_id)
             self.meta_dicts[n]['properties']['ucldc_schema:place'] = [
-               {'item': {'name': name, 'source': source, 'coordinates': coordinates, 'authorityid': auth_id}}
+               {'item': {'name': "'%s'" % name, 'source': "'%s'" % source,
+                         'coordinates': "'%s'" % coordinates, 'authorityid': "'%s'" % auth_id}}
             ]
          else:
             print "Adding place item: %s %s %s %s" % (name, source, coordinates, auth_id)
             self.meta_dicts[n]['properties']['ucldc_schema:place'].append(
-               {'item': {'name': name, 'source': source, 'coordinates': coordinates, 'authorityid': auth_id}}
+               {'item': {'name': "'%s'" % name, 'source': "'%s'" % source,
+                         'coordinates': "'%s'" % coordinates, 'authorityid': "'%s'" % auth_id}}
             )
 
    def verify_place(self, name, source, coordinates, auth_id):
@@ -468,12 +475,14 @@ class Csv2Dict:
          if not 'ucldc_schema:subjecttopic' in self.meta_dicts[n]['properties'].keys():
             print "Making subjecttopic item: %s %s %s %s" % (heading, heading_type, source, auth_id)
             self.meta_dicts[n]['properties']['ucldc_schema:subjecttopic'] = [
-               {'item': {'heading': heading, 'headingtype': heading_type, 'source': source, 'authorityid': auth_id}}
+               {'item': {'heading': "'%s'" % heading, 'headingtype': "'%s'" % heading_type,
+                         'source': "'%s'" % source, 'authorityid': "'%s'" % auth_id}}
             ]
          else:
             print "Adding subjecttopic item: %s %s %s %s" % (heading, heading_type, source, auth_id)
             self.meta_dicts[n]['properties']['ucldc_schema:subjecttopic'].append(
-               {'item': {'heading': heading, 'headingtype': heading_type, 'source': source, 'authorityid': auth_id}}
+               {'item': {'heading': "'%s'" % heading, 'headingtype': "'%s'" % heading_type,
+                         'source': "'%s'" % source, 'authorityid': "'%s'" % auth_id}}
             )
 
    def verify_subject_topic(self, heading, heading_type, source, auth_id):
@@ -485,12 +494,12 @@ class Csv2Dict:
          if not 'ucldc_schema:formgenre' in self.meta_dicts[n]['properties'].keys():
             print "Making formgenre item; %s %s %s" % (heading, source, auth_id)
             self.meta_dicts[n]['properties']['ucldc_schema:formgenre'] = [
-               {'item': {'heading': heading, 'source': source, 'authorityid': auth_id}}
+               {'item': {'heading': "'%s'" % heading, 'source': "'%s'" % source, 'authorityid': "'%s'" % auth_id}}
             ]
          else:
             print "Adding formgenre item: %s %s %s" % (heading, source, auth_id)
             self.meta_dicts[n]['properties']['ucldc_schema:formgenre'].append(
-               {'item': {'heading': heading, 'source': source, 'authorityid': auth_id}}
+               {'item': {'heading': "'%s'" % heading, 'source': "'%s'" % source, 'authorityid': "'%s'" % auth_id}}
             )
 
    def verify_form_genre(self, heading, source, auth_id):
@@ -501,10 +510,10 @@ class Csv2Dict:
       if self.verify_provenance(provenance):
          if not 'ucldc:provenance' in self.meta_dicts[n]['properties'].keys():
             print "Making provenance item: %s" % provenance
-            self.meta_dicts[n]['properties']['ucldc_schema:provenance'] = [provenance]
+            self.meta_dicts[n]['properties']['ucldc_schema:provenance'] = ["'%s'" % provenance]
          else:
             print "Making provenance item: %s" % provenance
-            self.meta_dicts[n]['properties']['ucldc_schema:provenance'].append(provenance)
+            self.meta_dicts[n]['properties']['ucldc_schema:provenance'].append("'%s'" % provenance)
 
    def verify_provenance(self, provenance):
       print "Verifying provenance: %s" % provenance
@@ -513,7 +522,7 @@ class Csv2Dict:
    def set_physical_location(self, location, n):
       if self.verify_physical_location(location):
          print "Making phylocation element: %s" % location
-         self.meta_dicts[n]['properties']['ucldc_schema:physlocation'] = location
+         self.meta_dicts[n]['properties']['ucldc_schema:physlocation'] = "'%s'" % location
 
    def verify_physical_location(self, location):
       print "Verifying phyical location: %s" % location
