@@ -1,3 +1,10 @@
 Python scripts for processing and migrating data into Nuxeo
 
 csv2dict : a project to develop a csv template approach
+    There are four files in csv2dict
+    Csv2Dict.py          A class to encapsulate a data dictionary
+    meta_from_csv.py     A wrapper program using Csv2Dict
+    Csv2Dict_py3.py      A python3 version of the Csv2Dict class
+    meta_from_csv_py3.py A wrapper program using Csv2Dict_py3.py. It
+                         differs only trivially from the python2 version.
+                          

@@ -1,7 +1,7 @@
 __author__ = 'glen'
 
 import sys
-from Csv2Dict import Csv2Dict
+from Csv2Dict_py3 import Csv2Dict
 from pprint import PrettyPrinter
 
 pp = PrettyPrinter().pprint
@@ -9,23 +9,23 @@ pp = PrettyPrinter().pprint
 if len(sys.argv) == 2:
    csv_data_file = sys.argv[1]
 else:
-   print 'A data file must be provided..'
+   print ('A data file must be provided..')
    sys.exit(1)
 
-print csv_data_file
+print (csv_data_file)
 
 # get and instance of the Csv2Dict class which must be initialized
 # with the name of an input data (csv) file
 csv2dict = Csv2Dict(csv_data_file)
 
 if csv2dict.status != 0:
-   print 'The Csv2Dict constructor reported and error (%d).' % csv2dict.status
+   print ('The Csv2Dict constructor reported and error (%d).' % csv2dict.status)
    sys.exit(csv2dict.status)
 
 row_dicts = csv2dict.get_row_dicts()
 
 for n in range(len(row_dicts)):
-   print 'Metarow%3d) %s' % (n, str(row_dicts[n]))
+   print ('Metarow%3d) %s' % (n, str(row_dicts[n])))
 
 for row in row_dicts:
    '''
