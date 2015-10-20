@@ -4,7 +4,7 @@ Python scripts for processing and migrating data into Nuxeo
 
 You will need a python environment.
 
-You will need to have pynux set up in the environment.
+You will need to install and have <a href="https://github.com/ucldc/pynux">pynux</a> set up in the environment.
 
 You will need information from the Nuxeo Administrator for setting up a `.pynuxrc` file.
 
@@ -35,7 +35,7 @@ nxls /asset-library/UCX/Project_folder
 * Once you've completed the process of creating metadata records using the template, save a copy as a comma-separated value (CSV) file. This 
 * For additional information on each Nuxeo field, consult our <a href="https://registry.cdlib.org/documentation/docs/dams/metadata-model/">Nuxeo user guide</a>
 
-4) Load with `meta_from_csv.py`
+4) Load with `meta_from_csv.py`. This process converts the CSV metadata records into Python dict files, which are then directly imported into Nuxeo via pynux.
 
 ```
 usage: meta_from_csv.py [-h] --datafile DATAFILE --rcfile RCFILE
