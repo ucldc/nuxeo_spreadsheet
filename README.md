@@ -13,7 +13,7 @@ These directions are for python 2.x.
 ```
 virtualenv venv
 . venv/bin/activate
-pip install git+git://github.com/ucldc/pynux.git
+pip install https://github.com/ucldc/nuxeo_spreadsheet/archive/master.zip
 pip install unicodecsv
 ```
 
