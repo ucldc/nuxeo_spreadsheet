@@ -1,21 +1,7 @@
 Python scripts for processing and migrating data into Nuxeo
 
 ### Requirements
-
-You will need a python environment.
-
-You will need to have <a href="https://github.com/ucldc/pynux">pynux</a> set up in the environment.
-
-You will need information from the Nuxeo Administrator for setting up a `.pynuxrc` file.
-
-These directions are for python 2.x.
-
-```
-virtualenv venv
-. venv/bin/activate
-pip install https://github.com/ucldc/nuxeo_spreadsheet/archive/master.zip
-pip install unicodecsv
-```
+[see the wiki for this repo](https://github.com/ucldc/nuxeo_spreadsheet/wiki)
 
 ## `csv2dict`
 A prototype comma-separated value (CSV) spreadsheet metadata import process, for use with Nuxeo.
