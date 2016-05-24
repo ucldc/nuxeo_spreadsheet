@@ -6,13 +6,12 @@ import sys
 reload(sys)
 sys.setdefaultencoding("utf8")
 
+
 import argparse
 import os.path
 from Csv2Dict import Csv2Dict
-from pprint import PrettyPrinter
 from pynux import utils
 
-#pp = PrettyPrinter().pprint
 
 def process_rows( csv2dict):
    row_dicts = csv2dict.get_row_dicts()
@@ -138,28 +137,14 @@ def main(argv):
    parser.add_argument("--datafile", type=str, required=True,
                         help="CSV data input file -- required")
 
-   parser.add_argument("--rcfile", type=str, required=True,
-                        help="Pynux resource file -- required")
+   utils.get_common_options(parser)
 
-   parser.add_argument("--loglevel", type=str, required=False, default="INFO",
-                        help="Set Pynux logging level")
-
-   try:
-      args = parser.parse_args()
-   except:
-      print "Unable to parse input parameters..."
-      sys.exit(2)
+   args = parser.parse_args()
 
    try:
       assert os.path.isfile( args.datafile )
    except AssertionError:
       print "Not a file: ", args.datafile
-      sys.exit(2)
-
-   try:
-      assert os.path.isfile( args.rcfile )
-   except AssertionError:
-      print "Not a file: ", args.rcfile
       sys.exit(2)
 
    csv_data_file = args.datafile

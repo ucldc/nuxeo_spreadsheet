@@ -25,14 +25,17 @@ nxls /asset-library/UCX/Project_folder
 4) Load with `meta_from_csv.py`. This process will convert the metadata from the CSV file into Python dict outputs, and call pynux to import the Python dict outputs directly into Nuxeo.
 
 ```
-usage: meta_from_csv.py [-h] --datafile DATAFILE --rcfile RCFILE
-                        [--loglevel LOGLEVEL]
+usage: meta_from_csv.py [-h] --datafile DATAFILE [--loglevel LOGLEVEL]
+                        [--rcfile RCFILE]
 
 optional arguments:
   -h, --help           show this help message and exit
   --datafile DATAFILE  CSV data input file -- required
-  --rcfile RCFILE      Pynux resource file -- required
-  --loglevel LOGLEVEL  Set Pynux logging level
+
+common options for pynux commands:
+  --loglevel LOGLEVEL  CRITICAL ERROR WARNING INFO DEBUG NOTSET, default is
+                       ERROR
+  --rcfile RCFILE      path to ConfigParser compatible ini file
 ```
 
 
