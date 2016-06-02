@@ -1,10 +1,9 @@
-Python scripts for processing and migrating data into Nuxeo
-
 # Prerequisites
 [see the wiki for this repo](https://github.com/ucldc/nuxeo_spreadsheet/wiki)
 
+
 # Using `nuxeo_spreadsheet`
-`nuxeo_spreadsheet` constitutes a set of prototype Python scripts ("csv2dict"), which can be used to import metadata in a tab-delimited spreadsheet into  Nuxeo. Note that CSV-based spreadsheets are not supported ("csv" is a misnomer).
+`nuxeo_spreadsheet` constitutes a set of prototype Python scripts ("csv2dict"), which can be used to import metadata in a tab-delimited spreadsheet into  Nuxeo. Note that comma separated value-based spreadsheets (CSV) are not supported ("csv2dict" is a misnomer).
 
 ## 1. Upload files to a Project Folder in Nuxeo
 Once you have the prerequisites in place, upload your content files into a Project Folder in Nuxeo.  Import the files through the Nuxeo UI, or use the <a href="https://registry.cdlib.org/documentation/docs/dams/bulk-import/">bulk import options</a>.
