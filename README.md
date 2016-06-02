@@ -46,7 +46,7 @@ If using Google Sheets, download as tab seperated value:
  
 
 ## 4. Import metadata in tab-delimited spreadsheet into Nuxeo 
-Load with `meta_from_csv.py`. This process will convert the metadata from the CSV file into Python dict outputs, and call pynux to import the Python dict outputs directly into Nuxeo.
+Load with `meta_from_csv.py`. This process will convert the metadata from the spreadsheet into Python dict outputs, and call pynux to import the Python dict outputs directly into Nuxeo.
 
 ```
 usage: meta_from_csv.py [-h] --datafile DATAFILE [--loglevel LOGLEVEL]
