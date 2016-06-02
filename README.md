@@ -51,7 +51,11 @@ common options for pynux commands:
 ```
 
 Note for Windows: you may need to run `python meta_from_csv.py ...`
-or edit the shebang.
+or edit the shebang. If you're using miniconda within Windows, here's an overview of the process:
+
+* Open the Command Prompt from the Start menu
+* Go to the `csv2dict` directory on your computer (e.g., cd C:\Users\yourname\nuxeo_spreadsheet\csv2dict)
+* Run the command, e.g. `python meta_from_csv.py --datafile C:\Users\yourname\Desktop\tab-delimited-metadata.txt`
 
 
 ## `mets_example`
