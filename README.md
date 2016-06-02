@@ -54,7 +54,7 @@ usage: meta_from_csv.py [-h] --datafile DATAFILE [--loglevel LOGLEVEL]
 
 optional arguments:
   -h, --help           show this help message and exit
-  --datafile DATAFILE  CSV data input file -- required
+  --datafile DATAFILE  tab-delimited spreadsheet input file -- required
 
 common options for pynux commands:
   --loglevel LOGLEVEL  CRITICAL ERROR WARNING INFO DEBUG NOTSET, default is
