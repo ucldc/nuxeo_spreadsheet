@@ -3,8 +3,8 @@ Python scripts for processing and migrating data into Nuxeo
 # Prerequisites
 [see the wiki for this repo](https://github.com/ucldc/nuxeo_spreadsheet/wiki)
 
-# Using `csv2dict`
-`csv2dict` constitutes a set of prototype Python scripts, which can be used to import metadata in a tab-delimited spreadsheet into  Nuxeo. Note that CSV-based spreadsheets are not supported ("csv" is a misnomer).
+# Using `nuxeo_spreadsheet`
+`nuxeo_spreadsheet` constitutes a set of prototype Python scripts ("csv2dict"), which can be used to import metadata in a tab-delimited spreadsheet into  Nuxeo. Note that CSV-based spreadsheets are not supported ("csv" is a misnomer).
 
 ## 1. Upload files to a Project Folder in Nuxeo
 Once you have the prerequisites in place, upload your content files into a Project Folder in Nuxeo.  Import the files through the Nuxeo UI, or use the <a href="https://registry.cdlib.org/documentation/docs/dams/bulk-import/">bulk import options</a>.
@@ -24,7 +24,7 @@ If you're using miniconda within Windows, here's an overview of the process:
 ## 3. Create metadata in tab-delimited spreadsheet
 Use the <a href="https://docs.google.com/spreadsheets/d/1JFiLA2eE6O2KDtSl3nHGpNU7zGP8Sk4p60GqOZtnUoM/edit#gid=0">Nuxeo Tab-Delimited Spreadsheet Template</a> to format your metadata records. The first tab comprises the template; the second tab provides an example for reference purposes.  Note with the following considerations:
 
-* The column headings in the tab-delimited spreadsheet need to *exactly* match the headings expected by the Python scripts constituting `csv2dict`. You can double-check the headings by reviewing the source `meta_from_csv.py` file in GitHub.
+* The column headings in the tab-delimited spreadsheet need to *exactly* match the headings expected by the Python scripts constituting `nuxeo_spreadsheet`. You can double-check the headings by reviewing the source `meta_from_csv.py` file in GitHub.
 
 * In cases where metadata elements are repeatable in Nuxeo, you can append a numeric indicator after the column heading.  In the <a href="https://docs.google.com/spreadsheets/d/1JFiLA2eE6O2KDtSl3nHGpNU7zGP8Sk4p60GqOZtnUoM/edit#gid=0">Nuxeo Tab-Delimited Spreadsheet Template</a>, you can see examples of this for Creator and Contributor.
 
