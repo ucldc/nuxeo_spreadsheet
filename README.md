@@ -4,11 +4,13 @@ Python scripts for processing and migrating data into Nuxeo
 [see the wiki for this repo](https://github.com/ucldc/nuxeo_spreadsheet/wiki)
 
 # Using `csv2dict`
-`csv2dict` constitutes a set of prototype Python scripts, which can be used to import tab-delimited spreadsheet metadata into  Nuxeo. Note that CSV-based spreadsheets are not supported ("csv" is a misnomer).
+`csv2dict` constitutes a set of prototype Python scripts, which can be used to import metadata in a tab-delimited spreadsheet into  Nuxeo. Note that CSV-based spreadsheets are not supported ("csv" is a misnomer).
 
-1) Once your `.pynuxrc` file is configured, upload your content files into a Project Folder in Nuxeo.  Import the files through the Nuxeo UI, or use the <a href="https://registry.cdlib.org/documentation/docs/dams/bulk-import/">bulk import options</a>.
+## 1. Upload files to a Project Folder in Nuxeo
+Once your `.pynuxrc` file is configured, upload your content files into a Project Folder in Nuxeo.  Import the files through the Nuxeo UI, or use the <a href="https://registry.cdlib.org/documentation/docs/dams/bulk-import/">bulk import options</a>.
 
-2) Next, generate a list of directory paths for the files in that Project Folder.  Make sure you are in your python environment (e.g., venv) and run this command. 
+## 2. Get directory paths to the files
+Next, generate a list of directory paths for the files in that Project Folder.  Make sure you are in your python environment (e.g., venv) and run this command. 
 ```
 nxls /asset-library/UCX/Project_folder
 ```
@@ -19,7 +21,8 @@ If you're using miniconda within Windows, here's an overview of the process:
 * Activate your python environment.  In this example, we're activating a python environment named "venv": `activate venv`
 * Run the command: `nxls /asset-library/UCX/Project_folder`
 
-3) Use the <a href="https://docs.google.com/spreadsheets/d/1JFiLA2eE6O2KDtSl3nHGpNU7zGP8Sk4p60GqOZtnUoM/edit#gid=0">Nuxeo CSV Import Template</a> to format your metadata records. The first tab comprises the template; the second tab provides an example for reference purposes.  Note with the following considerations:
+## 3. Create metadata in tab-delimited spreadsheet
+Use the <a href="https://docs.google.com/spreadsheets/d/1JFiLA2eE6O2KDtSl3nHGpNU7zGP8Sk4p60GqOZtnUoM/edit#gid=0">Nuxeo CSV Import Template</a> to format your metadata records. The first tab comprises the template; the second tab provides an example for reference purposes.  Note with the following considerations:
 
 * The column headings need to have the exact same headings as the Nuxeo metadata elements. You can double-check the headings by reviewing the source `meta_from_csv.py` file in GitHub.
 
@@ -40,7 +43,8 @@ If using Google Sheets, download as tab seperated value:
 <img width="642" alt="screen shot 2016-06-01 at 9 59 58 pm" src="https://cloud.githubusercontent.com/assets/227374/15734442/9421a0c8-2844-11e6-8179-27e4397e8c4d.png">
  
 
-4) Load with `meta_from_csv.py`. This process will convert the metadata from the CSV file into Python dict outputs, and call pynux to import the Python dict outputs directly into Nuxeo.
+## 4. Import metadata in tab-delimited spreadsheet into Nuxeo 
+Load with `meta_from_csv.py`. This process will convert the metadata from the CSV file into Python dict outputs, and call pynux to import the Python dict outputs directly into Nuxeo.
 
 ```
 usage: meta_from_csv.py [-h] --datafile DATAFILE [--loglevel LOGLEVEL]
@@ -65,5 +69,5 @@ or edit the shebang. If you're using miniconda within Windows, here's an overvie
 * Run the command.  In this example, the DATAFILE is the location of a tab-delimited file (named "tab-delimited-metadata.txt") that's on our Desktop. `python meta_from_csv.py --datafile C:\Users\yourname\Desktop\tab-delimited-metadata.txt`
 
 
-## `mets_example`
+# `mets_example`
 Sample code for loading METS into Nuxeo
