@@ -7,7 +7,7 @@ Python scripts for processing and migrating data into Nuxeo
 `csv2dict` constitutes a set of prototype Python scripts, which can be used to import metadata in a tab-delimited spreadsheet into  Nuxeo. Note that CSV-based spreadsheets are not supported ("csv" is a misnomer).
 
 ## 1. Upload files to a Project Folder in Nuxeo
-Once your `.pynuxrc` file is configured, upload your content files into a Project Folder in Nuxeo.  Import the files through the Nuxeo UI, or use the <a href="https://registry.cdlib.org/documentation/docs/dams/bulk-import/">bulk import options</a>.
+Once you have the prerequisites in place, upload your content files into a Project Folder in Nuxeo.  Import the files through the Nuxeo UI, or use the <a href="https://registry.cdlib.org/documentation/docs/dams/bulk-import/">bulk import options</a>.
 
 ## 2. Get directory paths to the files
 Next, generate a list of directory paths for the files in that Project Folder.  Make sure you are in your python environment (e.g., venv) and run this command. 
