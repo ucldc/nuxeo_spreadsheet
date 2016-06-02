@@ -6,12 +6,18 @@ Python scripts for processing and migrating data into Nuxeo
 ## `csv2dict`
 A prototype tab-delimited spreadsheet metadata import process, for use with Nuxeo. ("csv" is a misnomer).
 
-1) Once your `.pynuxrc` file is configured, upload your content files into Nuxeo.  Import the files through the Nuxeo UI, or use the <a href="https://registry.cdlib.org/documentation/docs/dams/bulk-import/">bulk import options</a>.
+1) Once your `.pynuxrc` file is configured, upload your content files into a Project Folder in Nuxeo.  Import the files through the Nuxeo UI, or use the <a href="https://registry.cdlib.org/documentation/docs/dams/bulk-import/">bulk import options</a>.
 
-2) Next, generate a list of content file directory paths:
+2) Next, generate a list of directory paths for the files in that Project Folder.  Make sure you are in your python environment (e.g., venv) and run this command. 
 ```
 nxls /asset-library/UCX/Project_folder
 ```
+
+If you're using miniconda within Windows, here's an overview of the process:
+
+* Open the Command Prompt from the Start menu
+* Activate your python environment.  In this example, we're activating a python environment named "venv": `activate venv`
+* Run the command: `nxls /asset-library/UCX/Project_folder`
 
 3) Use the <a href="https://docs.google.com/spreadsheets/d/1JFiLA2eE6O2KDtSl3nHGpNU7zGP8Sk4p60GqOZtnUoM/edit#gid=0">Nuxeo CSV Import Template</a> to format your metadata records. The first tab comprises the template; the second tab provides an example for reference purposes.  Note with the following considerations:
 
