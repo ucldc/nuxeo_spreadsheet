@@ -1,5 +1,5 @@
 # Prerequisites
-[see the wiki for this repo](https://github.com/ucldc/nuxeo_spreadsheet/wiki)
+[Follow these instructions first](https://github.com/ucldc/nuxeo_spreadsheet/wiki), to install the prerequisites to run `nuxeo_spreadsheet`. 
 
 
 # Using `nuxeo_spreadsheet`
