@@ -1,0 +1,66 @@
+File path
+Title
+Alternative Title
+Identifier
+Local Identifier
+Type
+Campus/Unit
+Date
+Date Type
+Inclusive Start
+Inclusive End
+Single
+Publication/Origination Info
+Creator %d Name
+Creator %d Name Type
+Creator %d Role
+Creator %d Source
+Creator %d Authority ID
+Contributor Name
+Contributor Name Type
+Contributor Role
+Contributor Source
+Contributor Authority ID
+Format/Physical Description
+Description %d Note
+Description %d Type
+Extent
+Language
+Language Code
+Temporal Coverage
+Transcription
+Access Restrictions
+Copyright Statement
+Copyright Status
+Copyright Holder Name
+Copyright Holder Name Type
+Copyright Holder Source
+Copyright Holder Authority ID
+Copyright Contact
+Copyright Notice
+Copyright Determination Date
+Copyright Start Date
+Copyright End Date
+Copyright Jurisdiction
+Copyright Note
+Collection %d
+Related Resource
+Source
+Subject (Name) %d Name
+Subject (Name) %d Name Type
+Subject (Name) %d Role
+Subject (Name) %d Source
+Subject (Name) %d Authority ID
+Place %d Name
+Place %d Source
+Place %d Coordinates
+Place %d Authority ID
+Subject (Topic) %d Heading
+Subject (Topic) %d Heading Type
+Subject (Topic) %d Source
+Subject (Topic) %d Authority ID
+Form/Genre %d Heading
+Form/Genre %d Source
+Form/Genre %d Authority ID
+Provenance
+Physical Location
