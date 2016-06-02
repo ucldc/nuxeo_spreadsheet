@@ -6,6 +6,14 @@ Python scripts for processing and migrating data into Nuxeo
 ## `csv2dict`
 A prototype comma-separated value (CSV) spreadsheet metadata import process, for use with Nuxeo.
 
+"CVS" is a misnomer, from Microsoft Excel, save as: Text (Tab delimited)
+
+![screen shot 2016-06-01 at 5 23 53 pm](https://cloud.githubusercontent.com/assets/227374/15734242/789b2380-2842-11e6-9427-a39f64eed608.png)
+
+and from google docs, Download as tab seperated value:
+
+<img width="642" alt="screen shot 2016-06-01 at 9 59 58 pm" src="https://cloud.githubusercontent.com/assets/227374/15734442/9421a0c8-2844-11e6-8179-27e4397e8c4d.png">
+
 1) Once your `.pynuxrc` file is configured, upload your content files into Nuxeo.  Import the files through the Nuxeo UI, or use the <a href="https://registry.cdlib.org/documentation/docs/dams/bulk-import/">bulk import options</a>.
 
 2) Next, generate a list of content file directory paths:
@@ -37,6 +45,9 @@ common options for pynux commands:
                        ERROR
   --rcfile RCFILE      path to ConfigParser compatible ini file
 ```
+
+Note for Windows: you may need to run `python meta_from_csv.py ...`
+or edit the shebang.
 
 
 ## `mets_example`
