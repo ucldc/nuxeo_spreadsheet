@@ -21,7 +21,11 @@ If you're using miniconda within Windows, here's an overview of the process:
 * Run the command: `nxls /asset-library/UCX/Project_folder`
 
 ## 3. Create metadata in tab-delimited spreadsheet
-Use the <a href="https://docs.google.com/spreadsheets/d/1JFiLA2eE6O2KDtSl3nHGpNU7zGP8Sk4p60GqOZtnUoM/edit#gid=0">Nuxeo Tab-Delimited Spreadsheet Template</a> to format your metadata records. The first tab comprises the template; the second tab provides an example for reference purposes.  Note with the following considerations:
+Use the <a href="https://docs.google.com/spreadsheets/d/1JFiLA2eE6O2KDtSl3nHGpNU7zGP8Sk4p60GqOZtnUoM/edit#gid=0">Nuxeo Tab-Delimited Spreadsheet Template</a> to format your metadata records. The first tab comprises the template; the second tab provides an example for reference purposes.  
+
+Note with the following considerations:
+
+* We'd recommend saving a copy of the template in Google Sheets, and working directly in Google Sheets to build out the metadata. (While it's possible to save a copy of the template into Excel, we've found in some early testing that Excel may include some additional characters (new-line characters, double quotes) that need to be cleaned up after the spreadsheet is saved into a tab-delimited file).
 
 * The column headings in the tab-delimited spreadsheet need to *exactly* match the headings expected by the Python scripts constituting `nuxeo_spreadsheet`. You can double-check the headings by reviewing the columns.txt file in GitHub.
 
