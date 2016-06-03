@@ -25,7 +25,7 @@ Use the <a href="https://docs.google.com/spreadsheets/d/1JFiLA2eE6O2KDtSl3nHGpNU
 
 Note with the following considerations:
 
-* We'd recommend saving a copy of the template in Google Sheets, and working directly in Google Sheets to build out the metadata. (While it's possible to save a copy of the template into Excel, we've found in some early testing that Excel may include some additional characters (new-line characters, double quotes) that need to be cleaned up after the spreadsheet is saved into a tab-delimited file).
+* We'd suggest saving a copy of the template in Google Sheets, and working directly in the Google Sheets format to build out the metadata. You can also download a copy the template into Excel (.xlsx) format.
 
 * The column headings in the tab-delimited spreadsheet need to *exactly* match the headings expected by the Python scripts constituting `nuxeo_spreadsheet`. You can double-check the headings by reviewing the columns.txt file in GitHub.
 
