@@ -135,7 +135,10 @@ def main(argv):
     parser = argparse.ArgumentParser()
 
     parser.add_argument("--datafile", type=str, required=True,
-                         help="CSV data input file -- required")
+                         help="tab-delimited spreadsheet input file -- required")
+
+    parser.add_argument('-d', '--dry-run', action='store_true',
+                         help='dry run')
 
     utils.get_common_options(parser)
 
@@ -169,14 +172,14 @@ def main(argv):
     for n in range(csv2dict.get_meta_dict_length()):
         print "Loading payload %d" % n
         payload = csv2dict.get_meta_dict(n)
-        print payload['path']
-        uid = nx.get_uid(payload['path'])
-        print "Returned UID: %d) %s." % (n, uid)
         print payload
         print payload['path']
-        nx.update_nuxeo_properties(payload, path=payload['path'])
+        if not args.dry_run:
+            uid = nx.get_uid(payload['path'])
+            print "Returned UID: %d) %s." % (n, uid)
+            nx.update_nuxeo_properties(payload, path=payload['path'])
 
-    csv2dict.print_meta_dicts('LOGS/latest_output.txt')
+    # csv2dict.print_meta_dicts('LOGS/latest_output.txt')
 
 if __name__ == '__main__':
 

@@ -52,12 +52,13 @@ If using Google Sheets, download as tab separated value:
 Load with `meta_from_csv.py`. This process will convert the metadata from the spreadsheet into Python dict outputs, and call pynux to import the Python dict outputs directly into Nuxeo.
 
 ```
-usage: meta_from_csv.py [-h] --datafile DATAFILE [--loglevel LOGLEVEL]
+usage: meta_from_csv.py [-h] --datafile DATAFILE [-d] [--loglevel LOGLEVEL]
                         [--rcfile RCFILE]
 
 optional arguments:
   -h, --help           show this help message and exit
   --datafile DATAFILE  tab-delimited spreadsheet input file -- required
+  -d, --dry-run        dry run
 
 common options for pynux commands:
   --loglevel LOGLEVEL  CRITICAL ERROR WARNING INFO DEBUG NOTSET, default is
