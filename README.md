@@ -11,14 +11,19 @@ Once you have the prerequisites in place, upload your content files into a Proje
 ## 2. Get directory paths to the files
 Next, generate a list of directory paths for the files in that Project Folder.  You'll need the path to the Project Folder; it's reflected in the URL in your browser view of Nuxeo. Make sure you are in your python environment (e.g., venv) and run this command. 
 ```
-nxls /asset-library/UCX/Project_folder
+nxls /asset-library/UCX/Project_folder --show-only-path
+```
+Optionally, add the additional `>` command followed a .txt filename, to output the list of directory paths to a .txt file in your home directory (e.g., at `cd C:\Users\yourname\`):
+
+```
+nxls /asset-library/UCX/Project_folder --show-only-path > paths.txt 
 ```
 
 If you're using miniconda within Windows, here's an overview of the process:
 
 * Open the Command Prompt from the Start menu
 * Activate your python environment.  In this example, we're activating a python environment named "venv": `activate venv`
-* Run the command: `nxls /asset-library/UCX/Project_folder` 
+* Run the command: `nxls /asset-library/UCX/Project_folder --show-only-path` 
 
 ## 3. Create metadata in tab-delimited spreadsheet
 Use the <a href="https://docs.google.com/spreadsheets/d/1JFiLA2eE6O2KDtSl3nHGpNU7zGP8Sk4p60GqOZtnUoM/edit#gid=0">Nuxeo Tab-Delimited Spreadsheet Template</a> to format your metadata records. The first tab comprises the template; the second tab provides an example for reference purposes.  
