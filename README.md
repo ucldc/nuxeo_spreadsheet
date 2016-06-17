@@ -30,11 +30,11 @@ Use the <a href="https://docs.google.com/spreadsheets/d/1JFiLA2eE6O2KDtSl3nHGpNU
 
 Note with the following considerations:
 
-* We'd suggest saving a copy of the template in Google Sheets, and working directly in the Google Sheets format to build out the metadata. You can also download a copy the template into Excel (.xlsx) format.
+* We'd suggest saving a copy of the template in Google Sheets, and working directly in the Google Sheets format to build out the metadata. We do not recommend using Excel (.xlsx), based on our initial tests (Excel can add additional quotes around text, and also introduce errors with special characters).
 
 * The column headings in the tab-delimited spreadsheet need to *exactly* match the headings expected by the Python scripts constituting `nuxeo_spreadsheet`. You can double-check the headings by reviewing the columns.txt file in GitHub.
 
-* In cases where metadata elements are repeatable in Nuxeo, you can append a numeric indicator after the column heading.  In the <a href="https://docs.google.com/spreadsheets/d/1JFiLA2eE6O2KDtSl3nHGpNU7zGP8Sk4p60GqOZtnUoM/edit#gid=0">Nuxeo Tab-Delimited Spreadsheet Template</a>, you can see examples of this for Creator and Contributor.
+* In cases where metadata elements are repeatable in Nuxeo, you can append a numeric indicator after the column heading.  In the <a href="https://docs.google.com/spreadsheets/d/1JFiLA2eE6O2KDtSl3nHGpNU7zGP8Sk4p60GqOZtnUoM/edit#gid=0">Nuxeo Tab-Delimited Spreadsheet Template</a>, you can see examples of this for Creator.  When using this function, note that you must include columns for all complex data fields (e.g., if repeating Creator information, the following fields must be in place: `Creator # Name`, `Creator # Name Type`, `Creator # Role`, `Creator # Source`, and `Creator # Authority ID`).
 
 * Each row in the spreadsheet should contain metadata for either a simple object, or the parent-level record for a complex object.  
 
