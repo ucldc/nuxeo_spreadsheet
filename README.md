@@ -36,7 +36,7 @@ Note with the following considerations:
 
 * In cases where metadata elements are repeatable in Nuxeo, you can append a numeric indicator after the column heading.  In the <a href="https://docs.google.com/spreadsheets/d/1JFiLA2eE6O2KDtSl3nHGpNU7zGP8Sk4p60GqOZtnUoM/edit#gid=0">Nuxeo Tab-Delimited Spreadsheet Template</a>, you can see examples of this for Creator.  When using this function, note that you must include columns for all complex data fields (e.g., if repeating Creator information, the following fields must be in place: `Creator # Name`, `Creator # Name Type`, `Creator # Role`, `Creator # Source`, and `Creator # Authority ID`).
 
-* Each row in the spreadsheet should contain metadata for either a simple object, or the parent-level record for a complex object.  
+* Each row in the spreadsheet can contain metadata for either a simple object, a parent-level record for a complex object, or a component for a complex object. The main thing to ensure is that the row corresponds to the correct <b>File Path</b> in Nuxeo.
 
 * <b>File Path</b> (color-coded in red) is required for each row; additionally, either <b>Title</b>, <b>Type</b>, <b>Copyright Status</b>, and/or <b>Copyright Statement</b> is required, if and when the objects will be published in Calisphere. For additional information on the metadata requirements, see the <a href="https://registry.cdlib.org/documentation/docs/dams/metadata-model/">Nuxeo user guide</a>
 
