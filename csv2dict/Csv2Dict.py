@@ -1,8 +1,10 @@
 __author__ = 'glen'
 
+import os
 import pprint
 import csv
 import unicodecsv
+import json
 
 from time import localtime, strftime
 
@@ -16,7 +18,9 @@ class UTF8PrettyPrinter(pprint.PrettyPrinter):
 
 class Csv2Dict:
 
-    def __init__(self, data_file):
+
+
+    def __init__(self, data_file, blankout=False):
         '''
         The Csv2Dict class reads a csv data file, the first line of which contains column names. Succeeding
         lines represent rows of data. Initially the column names are used as the keys to a list of dicts, one
@@ -28,6 +32,17 @@ class Csv2Dict:
         self.status = 0
         self.row_dicts = []
         self.meta_dicts = []
+
+        self.meta_dict_properties_template = {}
+
+        if blankout:
+            blankout_ucldc_file_name = os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'blank-ucldc.json',
+            )
+            with open(blankout_ucldc_file_name, 'r') as blankout_ucldc_file:
+                self.meta_dict_properties_template = json.load(blankout_ucldc_file).get('properties', {})
+
 
         with open(data_file, 'rb') as infile:
 
@@ -91,7 +106,7 @@ class Csv2Dict:
         #meta_dict = OrderedDict()
         meta_dict = {}
         meta_dict['path'] = "%s" % asset_path
-        meta_dict['properties'] = {}
+        meta_dict['properties'] = self.meta_dict_properties_template
         self.meta_dicts.append(meta_dict)
         return len(self.meta_dicts)-1
 
