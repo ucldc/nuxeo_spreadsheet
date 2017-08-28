@@ -64,6 +64,7 @@ optional arguments:
   -h, --help           show this help message and exit
   --datafile DATAFILE  tab-delimited spreadsheet input file -- required
   -d, --dry-run        dry run
+  --blankout           blank out all fields not set in sheet
 
 common options for pynux commands:
   --loglevel LOGLEVEL  CRITICAL ERROR WARNING INFO DEBUG NOTSET, default is
