@@ -5,6 +5,7 @@ import pprint
 import csv
 import unicodecsv
 import json
+import copy
 
 from time import localtime, strftime
 
@@ -106,7 +107,7 @@ class Csv2Dict:
         #meta_dict = OrderedDict()
         meta_dict = {}
         meta_dict['path'] = "%s" % asset_path
-        meta_dict['properties'] = self.meta_dict_properties_template
+        meta_dict['properties'] = copy.deepcopy(self.meta_dict_properties_template)
         self.meta_dicts.append(meta_dict)
         return len(self.meta_dicts)-1
 
