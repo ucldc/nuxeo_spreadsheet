@@ -6,7 +6,7 @@ Local Identifier %d
 Type
 Campus/Unit %d
 Date %d
-Date Type %d
+Date %d Type
 Inclusive Start
 Inclusive End
 Single
