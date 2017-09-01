@@ -1,3 +1,5 @@
+### This is ULCA's updated nuxeo_spreadsheet script that adds support for all Nuxeo repeatable fields
+
 # Prerequisites
 [Follow these instructions first](https://github.com/ucldc/nuxeo_spreadsheet/wiki), to install the prerequisites to run `nuxeo_spreadsheet`. 
 
@@ -27,6 +29,7 @@ If you're using miniconda within Windows, here's an overview of the process:
 
 ## 3. Create metadata in tab-delimited spreadsheet
 Use the <a href="https://docs.google.com/spreadsheets/d/1JFiLA2eE6O2KDtSl3nHGpNU7zGP8Sk4p60GqOZtnUoM/edit#gid=0">Nuxeo Tab-Delimited Spreadsheet Template</a> to format your metadata records. The first tab comprises the template; the second tab provides an example for reference purposes.  
+** Use the updated [UCLA Nuxeo Spreadsheet Template](https://docs.google.com/spreadsheets/d/1vl4va-deIf3wo1s3J9VMG3k_TAJY4wYCtWFbFxTBoRk/edit#gid=0) **
 
 Note with the following considerations:
 
