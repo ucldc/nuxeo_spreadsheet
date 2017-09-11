@@ -34,7 +34,7 @@ Note with the following considerations:
 
 * The column headings in the tab-delimited spreadsheet need to *exactly* match the headings expected by the Python scripts constituting `nuxeo_spreadsheet`. You can double-check the headings by reviewing the columns.txt file in GitHub.
 
-* In cases where metadata elements are repeatable in Nuxeo, you can append a numeric indicator after the column heading.  In the <a href="https://docs.google.com/spreadsheets/d/1JFiLA2eE6O2KDtSl3nHGpNU7zGP8Sk4p60GqOZtnUoM/edit#gid=0">Nuxeo Tab-Delimited Spreadsheet Template</a>, you can see examples of this for Creator.  When using this function, note that you must include columns for all complex data fields (e.g., if repeating Creator information, the following fields must be in place: `Creator # Name`, `Creator # Name Type`, `Creator # Role`, `Creator # Source`, and `Creator # Authority ID`).
+* In cases where metadata elements are repeatable in Nuxeo, you can append a numeric indicator after the column heading.  In the <a href="https://docs.google.com/spreadsheets/d/1vl4va-deIf3wo1s3J9VMG3k_TAJY4wYCtWFbFxTBoRk/edit#gid=0">Nuxeo Tab-Delimited Spreadsheet Template</a>, you can see examples of this for Creator.  When using this function, note that you must include columns for all complex data fields (e.g., if repeating Creator information, the following fields must be in place: `Creator # Name`, `Creator # Name Type`, `Creator # Role`, `Creator # Source`, and `Creator # Authority ID`).
 
 * Each row in the spreadsheet can contain metadata for either a simple object, a parent-level record for a complex object, or a component for a complex object. The main thing to ensure is that the row corresponds to the correct <b>File Path</b> in Nuxeo.
 

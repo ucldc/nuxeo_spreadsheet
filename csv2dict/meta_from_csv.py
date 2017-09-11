@@ -54,9 +54,9 @@ def process_rows( csv2dict):
         while 'Date %d' % num in row.keys():
             csv2dict.set_creator(row['Date %d' % num],
                                  row['Date %d Type' % num],
-                                 row['Inclusive Start'],
-                                 row['Inclusive End'],
-                                 row['Single'], n)
+                                 row['Date %d Inclusive Start'],
+                                 row['Date %d Inclusive End'],
+                                 row['Date %d Single'], n)
             num += 1
 
         num = 1
