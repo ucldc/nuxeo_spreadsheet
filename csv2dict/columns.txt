@@ -7,9 +7,9 @@ Type
 Campus/Unit %d
 Date %d
 Date %d Type
-Inclusive Start
-Inclusive End
-Single
+Date %d Inclusive Start
+Date %d Inclusive End
+Date %d Single
 Publication/Origination Info %d
 Creator %d Name
 Creator %d Name Type
