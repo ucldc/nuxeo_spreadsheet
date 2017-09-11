@@ -1,5 +1,3 @@
-### This is ULCA's updated nuxeo_spreadsheet script that adds support for all Nuxeo repeatable fields
-
 # Prerequisites
 [Follow these instructions first](https://github.com/ucldc/nuxeo_spreadsheet/wiki), to install the prerequisites to run `nuxeo_spreadsheet`. 
 
