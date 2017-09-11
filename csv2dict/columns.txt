@@ -1,41 +1,41 @@
 File path
 Title
-Alternative Title
+Alternative Title %d
 Identifier
-Local Identifier
+Local Identifier %d
 Type
-Campus/Unit
-Date
-Date Type
+Campus/Unit %d
+Date %d
+Date %d Type
 Inclusive Start
 Inclusive End
 Single
-Publication/Origination Info
+Publication/Origination Info %d
 Creator %d Name
 Creator %d Name Type
 Creator %d Role
 Creator %d Source
 Creator %d Authority ID
-Contributor Name
-Contributor Name Type
-Contributor Role
-Contributor Source
-Contributor Authority ID
+Contributor %d Name
+Contributor %d Name Type
+Contributor %d Role
+Contributor %d Source
+Contributor %d Authority ID
 Format/Physical Description
 Description %d Note
 Description %d Type
 Extent
-Language
-Language Code
-Temporal Coverage
+Language %d
+Language %d Code
+Temporal Coverage %d
 Transcription
 Access Restrictions
 Copyright Statement
 Copyright Status
-Copyright Holder Name
-Copyright Holder Name Type
-Copyright Holder Source
-Copyright Holder Authority ID
+Copyright Holder %d Name
+Copyright Holder %d Name Type
+Copyright Holder %d Source
+Copyright Holder %d Authority ID
 Copyright Contact
 Copyright Notice
 Copyright Determination Date
@@ -44,7 +44,7 @@ Copyright End Date
 Copyright Jurisdiction
 Copyright Note
 Collection %d
-Related Resource
+Related Resource %d
 Source
 Subject (Name) %d Name
 Subject (Name) %d Name Type
@@ -62,5 +62,5 @@ Subject (Topic) %d Authority ID
 Form/Genre %d Heading
 Form/Genre %d Source
 Form/Genre %d Authority ID
-Provenance
+Provenance %d
 Physical Location
