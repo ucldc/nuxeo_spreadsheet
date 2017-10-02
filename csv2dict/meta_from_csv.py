@@ -33,7 +33,7 @@ def process_rows( csv2dict):
 
         num = 1
         while 'Alternative Title %d' % num in row.keys():
-            csv2dict.set_collection(row['Alternative Title %d' % num], n)
+            csv2dict.set_alt_title(row['Alternative Title %d' % num], n)
             num += 1
 
         csv2dict.set_id(row['Identifier'], n)
