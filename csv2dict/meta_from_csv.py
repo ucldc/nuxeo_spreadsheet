@@ -40,19 +40,19 @@ def process_rows( csv2dict):
 
         num = 1
         while 'Local Identifier %d' % num in row.keys():
-            csv2dict.set_collection(row['Local Identifier %d' % num], n)
+            csv2dict.set_local_id(row['Local Identifier %d' % num], n)
             num += 1
 
         csv2dict.set_type(row['Type'], n)
 
         num = 1
         while 'Campus/Unit %d' % num in row.keys():
-            csv2dict.set_collection(row['Campus/Unit %d' % num], n)
+            csv2dict.set_campus_unit(row['Campus/Unit %d' % num], n)
             num += 1
 
         num = 1
         while 'Date %d' % num in row.keys():
-            csv2dict.set_creator(row['Date %d' % num],
+            csv2dict.set_date(row['Date %d' % num],
                                  row['Date %d Type' % num],
                                  row['Date %d Inclusive Start' % num],
                                  row['Date %d Inclusive End' % num],
@@ -61,7 +61,7 @@ def process_rows( csv2dict):
 
         num = 1
         while 'Publication/Origination Info %d' % num in row.keys():
-            csv2dict.set_collection(row['Publication/Origination Info %d' % num], n)
+            csv2dict.set_publication_origination(row['Publication/Origination Info %d' % num], n)
             num += 1
 
         num = 1
@@ -100,7 +100,7 @@ def process_rows( csv2dict):
 
         num = 1
         while 'Temporal Coverage %d' % num in row.keys():
-            csv2dict.set_collection(row['Temporal Coverage %d' % num], n)
+            csv2dict.set_temporal_coverage(row['Temporal Coverage %d' % num], n)
             num += 1
 
         csv2dict.set_transcription(row['Transcription'], n)
@@ -131,7 +131,7 @@ def process_rows( csv2dict):
 
         num = 1
         while 'Related Resource %d' % num in row.keys():
-            csv2dict.set_collection(row['Related Resource %d' % num], n)
+            csv2dict.set_related_resource(row['Related Resource %d' % num], n)
             num += 1
 
         csv2dict.set_source(row['Source'], n)
@@ -171,7 +171,7 @@ def process_rows( csv2dict):
 
         num = 1
         while 'Provenance %d' % num in row.keys():
-            csv2dict.set_collection(row['Provenance %d' % num], n)
+            csv2dict.set_provenance(row['Provenance %d' % num], n)
             num += 1
 
         csv2dict.set_physical_location(row['Physical Location'], n)
