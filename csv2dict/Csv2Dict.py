@@ -9,7 +9,7 @@ import copy
 
 from time import localtime, strftime
 
-import valid_columns
+#import valid_columns
 
 class UTF8PrettyPrinter(pprint.PrettyPrinter):
     def format(self, object, context, maxlevels, level):
@@ -52,7 +52,7 @@ class Csv2Dict:
             fields = next(csv_reader)
 
             print "Fields: %s" % fields
-            valid_columns.validate(fields)
+            #valid_columns.validate(fields)
 
             # The rest of the rows contain data
             for row in csv_reader:
