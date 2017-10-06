@@ -11,7 +11,6 @@ import argparse
 import os.path
 from Csv2Dict import Csv2Dict
 from pynux import utils
-import valid_columns
 
 def process_rows( csv2dict):
     row_dicts = csv2dict.get_row_dicts()
@@ -307,7 +306,7 @@ def process_rows( csv2dict):
             csv2dict.set_physical_location(row['Physical Location'], n)
         except:
             pass
-    return valid_columns.validate(row_dicts[0].keys())
+    
 
 def main(argv):
     parser = argparse.ArgumentParser()
@@ -348,7 +347,7 @@ def main(argv):
         print 'The Csv2Dict constructor reported and error (%d).' % csv2dict.status
         sys.exit(csv2dict.status)
 
-    columns = process_rows(csv2dict)
+    process_rows(csv2dict)
 
     for n in range(csv2dict.get_meta_dict_length()):
         print "Loading payload %d" % n
@@ -359,8 +358,6 @@ def main(argv):
             uid = nx.get_uid(payload['path'])
             print "Returned UID: %d) %s." % (n, uid)
             nx.update_nuxeo_properties(payload, path=payload['path'])
-            if columns != True:
-            	print "****The following columns did not get ingested: %s****" % columns
             
     # csv2dict.print_meta_dicts('LOGS/latest_output.txt')
 

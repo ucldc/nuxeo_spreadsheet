@@ -19,9 +19,9 @@ def validate(array):
         valid_columns = valid_columns_file.read().splitlines()
         for member in array:
             if not normalize(member) in valid_columns:
-                errors.append('{}'.format(member))
+                errors.append('{} not in `columns.txt`'.format(member))
         if len(errors) > 0:
-            return errors
+            raise Exception(errors)
         else:
             return True
 
