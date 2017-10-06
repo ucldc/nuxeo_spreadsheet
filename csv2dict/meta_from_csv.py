@@ -362,7 +362,6 @@ def main(argv):
             if columns != True:
             	print "****The following columns did not get ingested: %s****" % columns
             
-            #print(valid_columns.validate(csv2dict))
     # csv2dict.print_meta_dicts('LOGS/latest_output.txt')
 
 if __name__ == '__main__':
