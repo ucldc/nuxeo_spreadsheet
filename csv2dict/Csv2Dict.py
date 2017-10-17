@@ -543,7 +543,7 @@ class Csv2Dict:
 
     def set_provenance(self, provenance, n):
         if self.verify_provenance(provenance):
-            if not 'ucldc:provenance' in self.meta_dicts[n]['properties'].keys():
+            if not 'ucldc_schema:provenance' in self.meta_dicts[n]['properties'].keys():
                 print "Making provenance item: %s" % provenance
                 self.meta_dicts[n]['properties']['ucldc_schema:provenance'] = ["%s" % provenance]
             else:
