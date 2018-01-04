@@ -138,6 +138,10 @@ def process_rows( csv2dict):
             
         num = 1
         while 'Language %d' % num in row.keys():
+            if 'Language %d' % num not in row.keys():
+                row['Language %d' % num] = ''
+            if 'Language %d Code' % num not in row.keys():
+                row['Language %d Code' % num] = ''
             csv2dict.set_language(row['Language %d' % num],
                                 row['Language %d Code' % num], n)
             num += 1
