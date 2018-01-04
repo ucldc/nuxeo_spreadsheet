@@ -33,13 +33,10 @@ def process_rows( csv2dict):
         except:
             pass
             
-        try:
-            num = 1
-            while 'Alternative Title %d' % num in row.keys():
-                csv2dict.set_alt_title(row['Alternative Title %d' % num], n)
-                num += 1
-        except:
-            pass
+        num = 1
+        while 'Alternative Title %d' % num in row.keys():
+            csv2dict.set_alt_title(row['Alternative Title %d' % num], n)
+            num += 1
 
         try:
             csv2dict.set_id(row['Identifier'], n)
@@ -57,13 +54,10 @@ def process_rows( csv2dict):
         except:
             pass
         
-        try:
-            num = 1
-            while 'Campus/Unit %d' % num in row.keys():
-                csv2dict.set_campus_unit(row['Campus/Unit %d' % num], n)
-                num += 1
-        except:
-            pass
+        num = 1
+        while 'Campus/Unit %d' % num in row.keys():
+            csv2dict.set_campus_unit(row['Campus/Unit %d' % num], n)
+            num += 1
 
         num = 1
         while 'Date %d' % num in row.keys():
@@ -82,13 +76,12 @@ def process_rows( csv2dict):
                                  row['Date %d Single' % num], n)
             num += 1
 
-        try:
-            num = 1
-            while 'Publication/Origination Info %d' % num in row.keys():
-                csv2dict.set_publication_origination(row['Publication/Origination Info %d' % num], n)
-                num += 1
-        except:
-            pass
+
+        num = 1
+        while 'Publication/Origination Info %d' % num in row.keys():
+            csv2dict.set_publication_origination(row['Publication/Origination Info %d' % num], n)
+            num += 1
+
 
         num = 1
         while 'Creator %d Name' % num in row.keys():
@@ -143,23 +136,17 @@ def process_rows( csv2dict):
         except:
             pass 
             
-        try:
-            num = 1
-            while 'Language %d' % num in row.keys():
-                csv2dict.set_language(row['Language %d' % num],
-                                         row['Language %d Code' % num], n)
-                num += 1
-        except:
-            pass
-
-        try:
-            num = 1
-            while 'Temporal Coverage %d' % num in row.keys():
-                csv2dict.set_temporal_coverage(row['Temporal Coverage %d' % num], n)
-                num += 1    
-        except:
-            pass
-
+        num = 1
+        while 'Language %d' % num in row.keys():
+            csv2dict.set_language(row['Language %d' % num],
+                                row['Language %d Code' % num], n)
+            num += 1
+        
+        num = 1
+        while 'Temporal Coverage %d' % num in row.keys():
+            csv2dict.set_temporal_coverage(row['Temporal Coverage %d' % num], n)
+            num += 1    
+        
         try:
             csv2dict.set_transcription(row['Transcription'], n)
         except:
@@ -176,6 +163,7 @@ def process_rows( csv2dict):
             csv2dict.set_rights_status(row['Copyright Status'], n)
         except:
             pass
+            
         num = 1
         while 'Copyright Holder %d Name' % num in row.keys():
             if 'Copyright Holder %d Name Type' % num not in row.keys():
@@ -219,20 +207,16 @@ def process_rows( csv2dict):
         except:
             pass
             
-        try:
-            num = 1
-            while 'Collection %d' % num in row.keys():
-                csv2dict.set_collection(row['Collection %d' % num], n)
-                num += 1
-        except:
-            pass
-        try:
-            num = 1
-            while 'Related Resource %d' % num in row.keys():
-                csv2dict.set_related_resource(row['Related Resource %d' % num], n)
-                num += 1
-        except:
-            pass
+        num = 1
+        while 'Collection %d' % num in row.keys():
+            csv2dict.set_collection(row['Collection %d' % num], n)
+            num += 1
+
+        num = 1
+        while 'Related Resource %d' % num in row.keys():
+            csv2dict.set_related_resource(row['Related Resource %d' % num], n)
+            num += 1
+
         try:
             csv2dict.set_source(row['Source'], n)
         except:
@@ -295,13 +279,11 @@ def process_rows( csv2dict):
                                     row['Form/Genre %d Authority ID' % num], n)
             num += 1
 
-        try:
-            num = 1
-            while 'Provenance %d' % num in row.keys():
-                csv2dict.set_provenance(row['Provenance %d' % num], n)
-                num += 1
-        except:
-            pass
+        num = 1
+        while 'Provenance %d' % num in row.keys():
+            csv2dict.set_provenance(row['Provenance %d' % num], n)
+            num += 1
+
         try:
             csv2dict.set_physical_location(row['Physical Location'], n)
         except:
