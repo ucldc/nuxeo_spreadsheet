@@ -61,6 +61,8 @@ def process_rows( csv2dict):
 
         num = 1
         while 'Date %d' % num in row.keys():
+        	if 'Date %d' % num not in row.keys():
+                row['Date %d' % num] = ''
             if 'Date %d Type' % num not in row.keys():
                 row['Date %d Type' % num] = ''
             if 'Date %d Inclusive Start' % num not in row.keys():
@@ -84,7 +86,9 @@ def process_rows( csv2dict):
 
 
         num = 1
-        while 'Creator %d Name' % num in row.keys():
+        while 'Creator %d ' % num in row.keys():
+        	if 'Creator %d Name' % num not in row.keys():
+                row['Creator %d Name' % num] = ''
             if 'Creator %d Name Type' % num not in row.keys():
                 row['Creator %d Name Type' % num] = ''
             if 'Creator %d Role' % num not in row.keys():   
@@ -102,7 +106,9 @@ def process_rows( csv2dict):
             num += 1
 
         num = 1
-        while 'Contributor %d Name' % num in row.keys():
+        while 'Contributor %d ' % num in row.keys():
+        	if 'Contributor %d Name' % num not in row.keys():
+                row['Contributor %d Name' % num] = ''
             if 'Contributor %d Name Type' % num not in row.keys():
                 row['Contributor %d Name Type' % num] = ''
             if 'Contributor %d Role' % num not in row.keys():   
@@ -124,7 +130,9 @@ def process_rows( csv2dict):
             pass
             
         num = 1
-        while 'Description %d Note' % num in row.keys():
+        while 'Description %d ' % num in row.keys():
+        	if 'Description %d Note' % num not in row.keys():
+                row['Description %d Type' % num] = ''
             if 'Description %d Type' % num not in row.keys():
                 row['Description %d Type' % num] = ''
             csv2dict.set_description(row['Description %d Note' % num],
@@ -169,7 +177,9 @@ def process_rows( csv2dict):
             pass
             
         num = 1
-        while 'Copyright Holder %d Name' % num in row.keys():
+        while 'Copyright Holder %d ' % num in row.keys():
+        	if 'Copyright Holder %d Name' % num not in row.keys():
+                 row['Copyright Holder %d Name' % num] = ''
             if 'Copyright Holder %d Name Type' % num not in row.keys():
                  row['Copyright Holder %d Name Type' % num] = ''
             if 'Copyright Holder %d Source' % num not in row.keys():
@@ -227,7 +237,9 @@ def process_rows( csv2dict):
             pass
             
         num = 1
-        while 'Subject (Name) %d Name' % num in row.keys():
+        while 'Subject (Name) %d ' % num in row.keys():
+        	if 'Subject (Name) %d Name' not in row.keys():
+                row['Subject (Name) %d Name' % num] = ''
             if 'Subject (Name) %d Name Type' not in row.keys():
                 row['Subject (Name) %d Name Type' % num] = ''
             if 'Subject (Name) %d Role' % num not in row.keys():
@@ -244,7 +256,9 @@ def process_rows( csv2dict):
             num += 1
 
         num = 1
-        while 'Place %d Name' % num in row.keys():
+        while 'Place %d ' % num in row.keys():
+        	if 'Place %d Name' % num not in row.keys():
+                row['Place %d Name' % num] = ''
             if 'Place %d Source' % num not in row.keys():
                 row['Place %d Source' % num] = ''
             if 'Place %d Coordinates' % num not in row.keys():
@@ -258,8 +272,10 @@ def process_rows( csv2dict):
             num += 1
 
         num = 1
-        while 'Subject (Topic) %d Heading' % num in row.keys():
+        while 'Subject (Topic) %d ' % num in row.keys():
             print "Calling set_subject_topic with: %s" % 'Subject (Topic) %d Heading' % num
+            if 'Subject (Topic) %d Heading' % num not in row.keys():
+                row['Subject (Topic) %d Heading' % num] = ''
             if 'Subject (Topic) %d Heading Type' % num not in row.keys():
                 row['Subject (Topic) %d Heading Type' % num] = ''
             if 'Subject (Topic) %d Source' % num not in row.keys():
@@ -273,7 +289,9 @@ def process_rows( csv2dict):
             num += 1
 
         num = 1
-        while 'Form/Genre %d Heading' % num in row.keys():
+        while 'Form/Genre %d ' % num in row.keys():
+        	if 'Form/Genre %d Heading' % num not in row.keys():
+                row['Form/Genre %d Heading' % num] = ''
             if 'Form/Genre %d Source' % num not in row.keys():
                 row['Form/Genre %d Source' % num] = ''
             if 'Form/Genre %d Authority ID' not in row.keys():
