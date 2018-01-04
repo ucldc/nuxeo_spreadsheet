@@ -28,8 +28,11 @@ def process_rows( csv2dict):
         '''
         n = csv2dict.new_dict(row['File path'])
 
-        csv2dict.set_title(row['Title'], n)
-
+        try:
+            csv2dict.set_title(row['Title'], n)
+        except:
+            pass
+            
         try:
             num = 1
             while 'Alternative Title %d' % num in row.keys():
@@ -44,13 +47,10 @@ def process_rows( csv2dict):
             pass
             
         
-        try:
-            num = 1
-            while 'Local Identifier %d' % num in row.keys():
-                csv2dict.set_local_id(row['Local Identifier %d' % num], n)
-                num += 1
-        except:
-            pass
+        num = 1
+        while 'Local Identifier %d' % num in row.keys():
+            csv2dict.set_local_id(row['Local Identifier %d' % num], n)
+            num += 1
 
         try:
             csv2dict.set_type(row['Type'], n)

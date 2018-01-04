@@ -151,7 +151,7 @@ class Csv2Dict:
 
     def set_local_id(self, local_id, n):
         if self.verify_local_id(local_id):
-            if not 'ucldc_schema:localitendifier' in self.meta_dicts[n]['properties'].keys():
+            if not 'ucldc_schema:localidentifier' in self.meta_dicts[n]['properties'].keys():
                 print "Making localidentifier element, %s" % local_id
                 self.meta_dicts[n]['properties']['ucldc_schema:localidentifier'] = ["%s" % local_id]
             else:
