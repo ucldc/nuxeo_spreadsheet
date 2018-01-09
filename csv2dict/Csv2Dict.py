@@ -116,14 +116,18 @@ class Csv2Dict:
     def set_title(self, title, n):
         if self.verify_title(title):
             self.meta_dicts[n]['properties']['dc:title'] = "%s" % title
-    
+            
+    def verify_title(self, title):
+        print "Verifying title: %s" % title
+        return True if title else False
+        
     def get_existing_data(self, filepath, metadata_path):
         nx = utils.Nuxeo()
         data = nx.get_metadata(path=filepath)
         return data['properties']['ucldc_schema:{}'.format(metadata_path)]
     
     def set_list_element(self, metadata_path, row_title, row, n):
-    	filepath = row['File path']
+        filepath = row['File path']
         element_list = self.get_existing_data(filepath, metadata_path)
         if row_title in str(row.keys()):
             for key in sorted(row.keys()):
@@ -133,12 +137,12 @@ class Csv2Dict:
                         element_list[numb-1] = row[key]
                     except:
                         element_list.insert(numb-1, row[key])
-        element_list = self.verify_list(element_list)
+        element_list = self.verify_list(element_list, metadata_path)
         print "Making %s item: %s" % (metadata_path, element_list)
         self.meta_dicts[n]['properties']['ucldc_schema:{}'.format(metadata_path)] = element_list
     
     def set_dict_element(self, metadata_path, row_title, row, n):
-    	filepath = row['File path']
+        filepath = row['File path']
         element_list = self.get_existing_data(filepath, metadata_path)
         if row_title in str(row.keys()):
             for key in sorted(row.keys()):
@@ -154,7 +158,7 @@ class Csv2Dict:
                     elif elem[-1] == 'Note':
                         elem = 'item'
                     else:
-                    	elem = elem[-1].lower()
+                        elem = elem[-1].lower()
                     try:
                         element_list[numb-1][elem] = row[key]
                     except:
@@ -165,19 +169,19 @@ class Csv2Dict:
     
     
     def set_single_element(self, metadata_path, element, n):
-        if self.verify_single(element):
+        if self.verify_single(element, metadata_path):
             print "Making %s item: %s" % (metadata_path, element)
             self.meta_dicts[n]['properties']['ucldc_schema:{}'.format(metadata_path)] = element
     
     def verify_single(self, element, metadata_path):
-    	print('Verifying {}: {}'.format(metadata_path, element))
+        print('Verifying {}: {}'.format(metadata_path, element))
         if element != None and element != '':
             return True
         else:
             return False
     
     def verify_list(self, element_list, metadata_path):
-    	print('Verifying {}: {}'.format(metadata_path, element_list))
+        print('Verifying {}: {}'.format(metadata_path, element_list))
         for i, item in enumerate(element_list):
             if type(item) == dict:
                 if all(value == '' for value in item.values()) and all(value == None for value in item.values()):
@@ -186,4 +190,4 @@ class Csv2Dict:
                 if item == '' and item == 'None':
                     del element_list[i]
         return element_list
-	
+    

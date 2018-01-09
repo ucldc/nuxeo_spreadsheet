@@ -50,29 +50,29 @@ def process_rows( csv2dict):
             csv2dict.set_list_element('campusunit', 'Campus/Unit', 
         						row, n)
 
-        if 'Date' in str(row.keys()):
-            csv2dict.set_dict_element('date', 'Date', row, n)
+        if 'Date ' in str(row.keys()):
+            csv2dict.set_dict_element('date', 'Date ', row, n)
 
         if 'Publication/Origination Info' in str(row.keys()):     
             csv2dict.set_list_element('publisher', 'Publication/Origination Info', row, n)
 
-        if 'Creator' in str(row.keys()):
-            csv2dict.set_dict_element('creator', 'Creator', row, n)
+        if 'Creator ' in str(row.keys()):
+            csv2dict.set_dict_element('creator', 'Creator ', row, n)
 
-        if 'Contributor' in str(row.keys()):
-            csv2dict.set_dict_element('contributor', 'Contributor', row, n)
+        if 'Contributor ' in str(row.keys()):
+            csv2dict.set_dict_element('contributor', 'Contributor ', row, n)
 
         if 'Format/Physical Description' in row.keys():
             csv2dict.set_single_element('physdesc', row['Format/Physical Description'], n)
         
-        if 'Description' in str(row.keys()):
-            csv2dict.set_dict_element('description', 'Description', row, n)
+        if 'Description ' in str(row.keys()):
+            csv2dict.set_dict_element('description', 'Description ', row, n)
 
         if 'Extent' in row.keys():
             csv2dict.set_single_element('extent', row['Extent'], n)
             
         if 'Language' in str(row.keys()):
-            csv2dict.set_dict_element('language', 'Language', row, n)
+            csv2dict.set_dict_element('language', 'Language ', row, n)
          
         if 'Temporal Coverage' in str(row.keys()):
             csv2dict.set_list_element('temporalcoverage', 'Temporal Coverage', row, n)
@@ -90,7 +90,7 @@ def process_rows( csv2dict):
             csv2dict.set_single_element('rightsstatus', row['Copyright Status'], n)
         
         if 'Copyright Holder' in str(row.keys()):
-            csv2dict.set_dict_element('rightsholder', 'Copyright Holder', row, n)
+            csv2dict.set_dict_element('rightsholder', 'Copyright Holder ', row, n)
 
         if 'Copyright Contact' in row.keys():
             csv2dict.set_single_element('rightscontact', row['Copyright Contact'], n)
@@ -122,20 +122,20 @@ def process_rows( csv2dict):
         if 'Source' in row.keys():
             csv2dict.set_single_element('source', row['Source'], n)
         
-        if 'Subject (Name)' in str(row.keys()):
-            csv2dict.set_dict_element('subjectname', 'Subject (Name)', row, n)
+        if 'Subject (Name) ' in str(row.keys()):
+            csv2dict.set_dict_element('subjectname', 'Subject (Name) ', row, n)
 
-        if 'Place' in str(row.keys()):
-            csv2dict.set_dict_element('place', 'Place', row, n)
+        if 'Place ' in str(row.keys()):
+            csv2dict.set_dict_element('place', 'Place ', row, n)
 
-        if 'Subject (Topic)' in str(row.keys()):
-            csv2dict.set_dict_element('subjecttopic', 'Subject (Topic)', row, n)
+        if 'Subject (Topic) ' in str(row.keys()):
+            csv2dict.set_dict_element('subjecttopic', 'Subject (Topic) ', row, n)
 
-        if 'Form/Genre' in str(row.keys()):
-            csv2dict.set_dict_element('formgenre', 'Form/Genre', row, n)
+        if 'Form/Genre ' in str(row.keys()):
+            csv2dict.set_dict_element('formgenre', 'Form/Genre ', row, n)
             
         if 'Provenance' in str(row.keys()):
-            sv2dict.set_list_element('provenance', 'Provenance', row, n)
+            csv2dict.set_list_element('provenance', 'Provenance', row, n)
 
         if 'Physical Location' in row.keys():
             csv2dict.set_single_element('physlocation', row['Physical Location'], n)
