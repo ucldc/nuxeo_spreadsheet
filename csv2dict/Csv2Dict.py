@@ -117,32 +117,32 @@ class Csv2Dict:
             self.meta_dicts[n]['properties']['dc:title'] = "%s" % title
     
     def get_existing_data(self, filepath, metadata_path):
-    	nx = utils.Nuxeo()
+        nx = utils.Nuxeo()
         data = nx.get_metadata(path=filepath)
         return data['properties']['ucldc_schema:{}'.format(metadata_path)]
     
     def set_element(self, metadata_path, element_list, n):
-    	element_list = self.verify_list(element_list)
-    	print "Making %s item: %s" % (metadata_path, element_list)
-    	self.meta_dicts[n]['properties']['ucldc_schema:{}'.format(metadata_path)] = element_list
+        element_list = self.verify_list(element_list)
+        print "Making %s item: %s" % (metadata_path, element_list)
+        self.meta_dicts[n]['properties']['ucldc_schema:{}'.format(metadata_path)] = element_list
     
     def set_single_element(self, metadata_path, element, n):
-    	if self.verify_single(element):
-			print "Making %s item: %s" % (metadata_path, element)
-			self.meta_dicts[n]['properties']['ucldc_schema:{}'.format(metadata_path)] = element
+        if self.verify_single(element):
+            print "Making %s item: %s" % (metadata_path, element)
+            self.meta_dicts[n]['properties']['ucldc_schema:{}'.format(metadata_path)] = element
     
     def verify_single(self, element):
-    	if element != None and element != '':
-    		return True
-    	else:
-    		return False
+        if element != None and element != '':
+            return True
+        else:
+            return False
     
     def verify_list(self, element_list):
-    	for i, item in enumerate(element_list):
-    		if type(item) == item:
-				if all(value == '' for value in item.values()) and all(value == None for value in item.values()):
-					del element_list[i]
-			else:
-				if item == '' and item == 'None':
-					del element_list[i]
+        for i, item in enumerate(element_list):
+            if type(item) == item:
+                if all(value == '' for value in item.values()) and all(value == None for value in item.values()):
+                    del element_list[i]
+            else:
+                if item == '' and item == 'None':
+                    del element_list[i]
         return element_list

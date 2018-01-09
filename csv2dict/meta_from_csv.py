@@ -261,7 +261,7 @@ def process_rows( csv2dict):
         if 'Copyright Note' in row.keys():    
             csv2dict.set_single_element('rightsnote', row['Copyright Note'], n)
         
-		collection_data = csv2dict.get_existing_data(filepath, 'collection')
+        collection_data = csv2dict.get_existing_data(filepath, 'collection')
         if 'Collection' in str(row.keys()):
             for key in sorted(row.keys()):
                 if 'Collection' in key:
