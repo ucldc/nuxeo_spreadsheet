@@ -35,6 +35,7 @@ class Csv2Dict:
         self.status = 0
         self.row_dicts = []
         self.meta_dicts = []
+        self.blankout = blankout
 
         self.meta_dict_properties_template = {}
 
@@ -122,10 +123,13 @@ class Csv2Dict:
         return True if title else False
         
     def get_existing_data(self, filepath, metadata_path):
-        nx = utils.Nuxeo()
-        data = nx.get_metadata(path=filepath)
-        return data['properties']['ucldc_schema:{}'.format(metadata_path)]
-    
+    	if self.blankout == True:
+    		return []
+    	else:
+			nx = utils.Nuxeo()
+			data = nx.get_metadata(path=filepath)
+			return data['properties']['ucldc_schema:{}'.format(metadata_path)]
+	
     def set_list_element(self, metadata_path, row_title, row, n):
         filepath = row['File path']
         element_list = self.get_existing_data(filepath, metadata_path)
