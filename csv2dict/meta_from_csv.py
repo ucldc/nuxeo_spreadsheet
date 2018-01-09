@@ -33,49 +33,54 @@ def process_rows( csv2dict):
         if 'Title' in row.keys():
             csv2dict.set_title(row['Title'], n)
             
-        num = 1
-        while 'Alternative Title %d' % num in row.keys():
-            csv2dict.set_alt_title(row['Alternative Title %d' % num], n)
-            num += 1
+        alttitle_data = csv2dict.get_existing_data(filepath, 'localidentifier')
+        if 'Alternative Title' in str(row.keys()):
+            for key in sorted(row.keys()):
+                if 'Alternative Title' in key:
+                    numb = int(re.findall(r'\d+', key)[0])
+                    elem = 'localidentifier'
+                    try:
+                        alttitle_data[numb-1][elem] = row[key]
+                    except:
+                        alttitle_data.insert(numb-1, {elem: row[key]})
+            
+            csv2dict.set_element('localidentifier', alttitle_data, n)
+        
 
         if 'Identifier' in row.keys():
             csv2dict.set_id(row['Identifier'], n)
             
-        
-        num = 1
-        while 'Local Identifier %d' % num in row.keys():
-            csv2dict.set_local_id(row['Local Identifier %d' % num], n)
-            num += 1
+        locid_data = csv2dict.get_existing_data(filepath, 'localidentifier')
+        if 'Local Identifier' in str(row.keys()):
+            for key in sorted(row.keys()):
+                if 'Local Identifier' in key:
+                    numb = int(re.findall(r'\d+', key)[0])
+                    elem = 'localidentifier'
+                    try:
+                        locid_data[numb-1][elem] = row[key]
+                    except:
+                        locid_data.insert(numb-1, {elem: row[key]})
+            
+            csv2dict.set_element('localidentifier', locid_data, n)
 
         if 'Type' in row.keys():
             csv2dict.set_type(row['Type'], n)
         
-        
-        num = 1
-        while 'Campus/Unit %d' % num in row.keys():
-            csv2dict.set_campus_unit(row['Campus/Unit %d' % num], n)
-            num += 1
+        campusunit_data = csv2dict.get_existing_data(filepath, 'campusunit')
+        if 'Campus/Unit' in str(row.keys()):
+            for key in sorted(row.keys()):
+                if 'Campus/Unit' in key:
+                    numb = int(re.findall(r'\d+', key)[0])
+                    elem = 'campusunit'
+                    try:
+                        campusunit_data[numb-1][elem] = row[key]
+                    except:
+                        campusunit_data.insert(numb-1, {elem: row[key]})
+            
+            csv2dict.set_element('campusunit', campusunit_data, n)
 
         num = 1
         date_data = csv2dict.get_existing_data(filepath, 'date')
-        '''while 'Date %d' % num in str(row.keys()):
-            if 'Date %d' % num not in row.keys():
-                row['Date %d' % num] = date_data[num-1]['date']
-            if 'Date %d Type' % num not in row.keys():
-                row['Date %d Type' % num] = date_data[num-1]['datetype']
-            if 'Date %d Inclusive Start' % num not in row.keys():
-                row['Date %d Inclusive Start' % num] = date_data[num-1]['inclusivestart']
-            if 'Date %d Inclusive End' % num not in row.keys():
-                row['Date %d Inclusive End' % num] = date_data[num-1]['inclusiveend']
-            if 'Date %d Single' % num not in row.keys():
-                row['Date %d Single' % num] = date_data[num-1]['single']
-            csv2dict.set_date(row['Date %d' % num],
-                                 row['Date %d Type' % num],
-                                 row['Date %d Inclusive Start' % num],
-                                 row['Date %d Inclusive End' % num],
-                                 row['Date %d Single' % num], n)
-            num += 1'''
-
         if 'Date' in str(row.keys()):
             for key in sorted(row.keys()):
                 if 'Date' in key:
@@ -95,32 +100,22 @@ def process_rows( csv2dict):
             csv2dict.set_element('date', date_data, n)
 
 
-        num = 1
-        while 'Publication/Origination Info %d' % num in row.keys():
-            csv2dict.set_publication_origination(row['Publication/Origination Info %d' % num], n)
-            num += 1
+        publisher_data = csv2dict.get_existing_data(filepath, 'publisher')
+        if 'Publication/Origination Info' in str(row.keys()):
+            for key in sorted(row.keys()):
+                if 'Publication/Origination Info' in key:
+                    numb = int(re.findall(r'\d+', key)[0])
+                    elem = 'publisher'
+                    try:
+                        publisher_data[numb-1][elem] = row[key]
+                    except:
+                        publisher_data.insert(numb-1, {elem: row[key]})
+            
+            csv2dict.set_element('publisher', publisher_data, n)
 
 
         num = 1
         creator_data = csv2dict.get_existing_data(filepath, 'creator')
-        '''while 'Creator %d ' % num in str(row.keys()):
-            if 'Creator %d Name' % num not in row.keys():
-                row['Creator %d Name' % num] = creator_data[num-1]['name']
-            if 'Creator %d Name Type' % num not in row.keys():
-                row['Creator %d Name Type' % num] = creator_data[num-1]['nametype']
-            if 'Creator %d Role' % num not in row.keys():   
-                row['Creator %d Role' % num] = creator_data[num-1]['role']
-            if 'Creator %d Source' % num not in row.keys():
-                row['Creator %d Source' % num] = creator_data[num-1]['source']
-            if 'Creator %d Authority ID' % num not in row.keys():
-                row['Creator %d Authority ID' % num] = creator_data[num-1]['authorityid']
-                
-            csv2dict.set_creator(row['Creator %d Name' % num],
-                                 row['Creator %d Name Type' % num],
-                                 row['Creator %d Role' % num],
-                                 row['Creator %d Source' % num],
-                                 row['Creator %d Authority ID' % num], n)
-            num += 1'''
         if 'Creator' in str(row.keys()):
             for key in sorted(row.keys()):
                 if 'Creator' in key:
@@ -139,24 +134,6 @@ def process_rows( csv2dict):
 
         num = 1
         contributor_data = csv2dict.get_existing_data(filepath, 'creator')
-        '''while 'Contributor %d ' % num in str(row.keys()):
-            if 'Contributor %d Name' % num not in row.keys():
-                row['Contributor %d Name' % num] = contributor_data[num-1]['name']
-            if 'Contributor %d Name Type' % num not in row.keys():
-                row['Contributor %d Name Type' % num] = contributor_data[num-1]['nametype']
-            if 'Contributor %d Role' % num not in row.keys():   
-                row['Contributor %d Role' % num] = contributor_data[num-1]['role']
-            if 'Contributor %d Source' % num not in row.keys():
-                row['Contributor %d Source' % num] = contributor_data[num-1]['source']
-            if 'Contributor %d Authority ID' % num not in row.keys():
-                row['Contributor %d Authority ID' % num] = contributor_data[num-1]['authorityid']
-            csv2dict.set_contributor(row['Contributor %d Name' % num],
-                                 row['Contributor %d Name Type' % num],
-                                 row['Contributor %d Role' % num],
-                                 row['Contributor %d Source' % num],
-                                 row['Contributor %d Authority ID' % num], n)
-            num += 1'''
-        
         if 'Contributor' in str(row.keys()):
             for key in sorted(row.keys()):
                 if 'Contributor' in key:
@@ -178,16 +155,6 @@ def process_rows( csv2dict):
         
         
         description_data = csv2dict.get_existing_data(filepath, 'description')
-        '''num = 1
-        while 'Description %d ' % num in str(row.keys()):
-            if 'Description %d Note' % num not in row.keys():
-                row['Description %d Note' % num] = description_data[num-1]['item']
-            if 'Description %d Type' % num not in row.keys():
-                row['Description %d Type' % num] = description_data[num-1]['type']
-            csv2dict.set_description(row['Description %d Note' % num],
-                                     row['Description %d Type' % num], n)
-            num += 1'''
-            
         if 'Description' in str(row.keys()):
             for key in sorted(row.keys()):
                 if 'Description' in key:
@@ -209,15 +176,6 @@ def process_rows( csv2dict):
          
             
         language_data = csv2dict.get_existing_data(filepath, 'language')
-        '''num = 1
-        while 'Language %d' % num in str(row.keys()):
-            if 'Language %d' % num not in row.keys():
-                row['Language %d' % num] = language_data[num-1]['language']
-            if 'Language %d Code' % num not in row.keys():
-                row['Language %d Code' % num] = language_data[num-1]['code']
-            csv2dict.set_language(row['Language %d' % num],
-                                row['Language %d Code' % num], n)
-            num += 1'''
         if 'Language' in str(row.keys()):
             for key in sorted(row.keys()):
                 if 'Language' in key:
@@ -253,21 +211,6 @@ def process_rows( csv2dict):
         
             
         copyright_holder_data = csv2dict.get_existing_data(filepath, 'rightsholder')
-        num = 1
-        '''while 'Copyright Holder %d ' % num in str(row.keys()):
-            if 'Copyright Holder %d Name' % num not in row.keys():
-                 row['Copyright Holder %d Name' % num] = copyright_holder_data[num-1]['name']
-            if 'Copyright Holder %d Name Type' % num not in row.keys():
-                 row['Copyright Holder %d Name Type' % num] = copyright_holder_data[num-1]['nametype']
-            if 'Copyright Holder %d Source' % num not in row.keys():
-                row['Copyright Holder %d Source' % num] = copyright_holder_data[num-1]['source']
-            if 'Copyright Holder %d Authority ID' % num not in row.keys():
-                row['Copyright Holder %d Authority ID' % num] = copyright_holder_data[num-1]['authorityid']
-            csv2dict.set_rights_holder(row['Copyright Holder %d Name' % num],
-                                   row['Copyright Holder %d Name Type' % num],
-                                   row['Copyright Holder %d Source' % num],
-                                   row['Copyright Holder %d Authority ID' % num], n)
-            num += 1'''
         if 'Copyright Holder' in str(row.keys()):
             for key in sorted(row.keys()):
                 if 'Copyright Holder' in key:
@@ -306,41 +249,37 @@ def process_rows( csv2dict):
         if 'Copyright Note' in row.keys():    
             csv2dict.set_rights_note(row['Copyright Note'], n)
         
+		collection_data = csv2dict.get_existing_data(filepath, 'collection')
+        if 'Collection' in str(row.keys()):
+            for key in sorted(row.keys()):
+                if 'Collection' in key:
+                    numb = int(re.findall(r'\d+', key)[0])
+                    elem = 'collection'
+                    try:
+                        collection_data[numb-1][elem] = row[key]
+                    except:
+                        collection_data.insert(numb-1, {elem: row[key]})
             
-        num = 1
-        while 'Collection %d' % num in row.keys():
-            csv2dict.set_collection(row['Collection %d' % num], n)
-            num += 1
+            csv2dict.set_element('collection', collection_data, n)
 
-        num = 1
-        while 'Related Resource %d' % num in row.keys():
-            csv2dict.set_related_resource(row['Related Resource %d' % num], n)
-            num += 1
+        relatedresource_data = csv2dict.get_existing_data(filepath, 'relatedresource')
+        if 'Related Resource' in str(row.keys()):
+            for key in sorted(row.keys()):
+                if 'Related Resource' in key:
+                    numb = int(re.findall(r'\d+', key)[0])
+                    elem = 'relatedresource'
+                    try:
+                        relatedresource_data[numb-1][elem] = row[key]
+                    except:
+                        relatedresource_data.insert(numb-1, {elem: row[key]})
+            
+            csv2dict.set_element('relatedresource', relatedresource_data, n)
 
         if 'Source' in row.keys():
             csv2dict.set_source(row['Source'], n)
         
             
         subject_name_data = csv2dict.get_existing_data(filepath, 'subjectname')
-        '''num = 1 
-        while 'Subject (Name) %d' % num in str(row.keys()):
-            if 'Subject (Name) %d Name'% num not in row.keys():
-                row['Subject (Name) %d Name' % num] = subject_name_data[num-1]['name']
-            if 'Subject (Name) %d Name Type' % num not in row.keys():
-                row['Subject (Name) %d Name Type' % num] = subject_name_data[num-1]['nametype']
-            if 'Subject (Name) %d Role' % num not in row.keys():
-                row['Subject (Name) %d Role' % num] = subject_name_data[num-1]['role']
-            if 'Subject (Name) %d Source' % num not in row.keys():
-                row['Subject (Name) %d Source' % num] = subject_name_data[num-1]['source']
-            if 'Subject (Name) %d Authority ID' % num not in row.keys():
-                row['Subject (Name) %d Authority ID' % num] = subject_name_data[num-1]['authorityid']
-            
-            csv2dict.set_subject_name(row['Subject (Name) %d Name' % num],
-                                      row['Subject (Name) %d Name Type' % num],
-                                      row['Subject (Name) %d Role' % num],
-                                      row['Subject (Name) %d Source' % num],
-                                      row['Subject (Name) %d Authority ID' % num], n)
-            num += 1'''
         if 'Subject (Name)' in str(row.keys()):
             for key in sorted(row.keys()):
                 if 'Subject (Name)' in key:
@@ -359,21 +298,6 @@ def process_rows( csv2dict):
             csv2dict.set_element('subjectname', subject_name_data, n)
 
         place_data = csv2dict.get_existing_data(filepath, 'place')
-        '''num = 1
-        while 'Place %d ' % num in str(row.keys()):
-            if 'Place %d Name' % num not in row.keys():
-                row['Place %d Name' % num] = place_data[num-1]['name']
-            if 'Place %d Source' % num not in row.keys():
-                row['Place %d Source' % num] = place_data[num-1]['source']
-            if 'Place %d Coordinates' % num not in row.keys():
-                row['Place %d Coordinates' % num] = place_data[num-1]['coordinates']
-            if 'Place %d Authority ID' % num not in row.keys():
-                row['Place %d Authority ID' % num] = place_data[num-1]['authorityid']
-            csv2dict.set_place(row['Place %d Name' % num],
-                               row['Place %d Source' % num],
-                               row['Place %d Coordinates' % num],
-                               row['Place %d Authority ID' % num], n)
-            num += 1'''
         if 'Place' in str(row.keys()):
             for key in sorted(row.keys()):
                 if 'Place' in key:
@@ -391,25 +315,10 @@ def process_rows( csv2dict):
             
             csv2dict.set_element('place', place_data, n)
 
-        form_genre_data = csv2dict.get_existing_data(filepath, 'subjecttopic')
-        '''num = 1
-        while 'Form/Genre %d ' % num in str(row.keys()):
-            if 'Form/Genre %d Heading' % num not in row.keys():
-                row['Form/Genre %d Heading' % num] = form_genre_data[num-1]['heading']
-            if 'Form/Genre %d Heading Type' % num not in row.keys():
-                row['Form/Genre %d Heading Type' % num] = form_genre_data[num-1]['headingtype']
-            if 'Form/Genre %d Source' % num not in row.keys():
-                row['Form/Genre %d Source' % num] = form_genre_data[num-1]['source']
-            if 'Form/Genre %d Authority ID' not in row.keys():
-                row['Form/Genre %d Authority ID' % num] = form_genre_data[num-1]['authorityid']
-            csv2dict.set_form_genre(row['Form/Genre %d Heading' % num],
-                                       row['Form/Genre %d Heading Type' % num],
-                                       row['Form/Genre %d Source' % num],
-                                       row['Form/Genre %d Authority ID' % num], n)
-            num += 1'''
-        if 'Form/Genre' in str(row.keys()):
+        subject_topic_data = csv2dict.get_existing_data(filepath, 'subjecttopic')
+        if 'Subject (Topic)' in str(row.keys()):
             for key in sorted(row.keys()):
-                if 'Form/Genre' in key:
+                if 'Subject (Topic)' in key:
                     numb = int(re.findall(r'\d+', key)[0])
                     
                     elem = key.split(' ')
@@ -418,26 +327,13 @@ def process_rows( csv2dict):
                     else:
                         elem = elem[-1].lower()
                     try:
-                        form_genre_data[numb-1][elem] = row[key]
+                        subject_topic_data[numb-1][elem] = row[key]
                     except:
-                        form_genre_data.insert(numb-1, {elem: row[key]})
+                        subject_topic_data.insert(numb-1, {elem: row[key]})
             
-            csv2dict.set_element('subjecttopic', form_genre_data, n)
+            csv2dict.set_element('subjecttopic', subject_topic_data, n)
 
-        num = 1
         form_genre_data = csv2dict.get_existing_data(filepath, 'formgenre')
-        '''while 'Form/Genre %d ' % num in str(row.keys()):
-            if 'Form/Genre %d Heading' % num not in row.keys():
-                row['Form/Genre %d Heading' % num] = form_genre_data[num-1]['heading']
-            if 'Form/Genre %d Source' % num not in row.keys():
-                row['Form/Genre %d Source' % num] = form_genre_data[num-1]['source']
-            if 'Form/Genre %d Authority ID' not in row.keys():
-                row['Form/Genre %d Authority ID' % num] = form_genre_data[num-1]['authorityid']
-            csv2dict.set_form_genre(row['Form/Genre %d Heading' % num],
-                                    row['Form/Genre %d Source' % num],
-                                    row['Form/Genre %d Authority ID' % num], n)
-            num += 1'''
-                
         if 'Form/Genre' in str(row.keys()):
             for key in sorted(row.keys()):
                 if 'Form/Genre' in key:
