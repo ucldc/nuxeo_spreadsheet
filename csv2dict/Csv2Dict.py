@@ -8,6 +8,7 @@ import json
 import copy
 
 from time import localtime, strftime
+from pynux import utils
 
 import valid_columns
 
@@ -585,3 +586,20 @@ class Csv2Dict:
     def verify_physical_location(self, location):
         print "Verifying phyical location: %s" % location
         return True if location else False
+    
+    def get_existing_data(self, filepath, metadata_path):
+    	nx = utils.Nuxeo()
+        data = nx.get_metadata(path=filepath)
+        return data['properties']['ucldc_schema:{}'.format(metadata_path)]
+    
+    def set_element(self, metadata_path, dict_list, n):
+    	dict_list = self.verify_list(dict_list)
+    	print(dict_list)
+    	print "Making %s item: %s" % (metadata_path, dict_list)
+    	self.meta_dicts[n]['properties']['ucldc_schema:{}'.format(metadata_path)] = dict_list
+    
+    def verify_list(self, dict_list):
+    	for i, dict in enumerate(dict_list):
+            if all(value == '' for value in dict.values()) or all(value == None for value in dict.values()):
+                del dict_list[i]
+        return dict_list
