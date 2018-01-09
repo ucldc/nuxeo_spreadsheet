@@ -11,7 +11,6 @@ import argparse
 import os.path
 from Csv2Dict import Csv2Dict
 from pynux import utils
-import re
 
 def process_rows( csv2dict):
     row_dicts = csv2dict.get_row_dicts()
@@ -32,182 +31,51 @@ def process_rows( csv2dict):
 
         if 'Title' in row.keys():
             csv2dict.set_title(row['Title'], n)
-            
-        alttitle_data = csv2dict.get_existing_data(filepath, 'localidentifier')
-        if 'Alternative Title' in str(row.keys()):
-            for key in sorted(row.keys()):
-                if 'Alternative Title' in key:
-                    numb = int(re.findall(r'\d+', key)[0])
-                    elem = 'alternativetitle'
-                    try:
-                        alttitle_data[numb-1] = row[key]
-                    except:
-                        alttitle_data.insert(numb-1, row[key])
-            
-            csv2dict.set_element('alternativetitle', alttitle_data, n)
         
+        if 'Alternative Title' in str(row.keys()):
+        	csv2dict.set_list_element('alternativetitle', 'Alternative Title', 
+        						row, n)
 
         if 'Identifier' in row.keys():
             csv2dict.set_single_element('identifier', row['Identifier'], n)
             
-        locid_data = csv2dict.get_existing_data(filepath, 'localidentifier')
         if 'Local Identifier' in str(row.keys()):
-            for key in sorted(row.keys()):
-                if 'Local Identifier' in key:
-                    numb = int(re.findall(r'\d+', key)[0])
-                    elem = 'localidentifier'
-                    try:
-                        locid_data[numb-1][elem] = row[key]
-                    except:
-                        locid_data.insert(numb-1, {elem: row[key]})
-            
-            csv2dict.set_element('localidentifier', locid_data, n)
-
+        	csv2dict.set_list_element('localidentifier', 'Local Identifier', 
+        						row, n)
+        						
         if 'Type' in row.keys():
             csv2dict.set_single_element('type', row['Type'], n)
         
-        campusunit_data = csv2dict.get_existing_data(filepath, 'campusunit')
         if 'Campus/Unit' in str(row.keys()):
-            for key in sorted(row.keys()):
-                if 'Campus/Unit' in key:
-                    numb = int(re.findall(r'\d+', key)[0])
-                    elem = 'campusunit'
-                    try:
-                        campusunit_data[numb-1][elem] = row[key]
-                    except:
-                        campusunit_data.insert(numb-1, {elem: row[key]})
-            
-            csv2dict.set_element('campusunit', campusunit_data, n)
+            csv2dict.set_list_element('campusunit', 'Campus/Unit', 
+        						row, n)
 
-        num = 1
-        date_data = csv2dict.get_existing_data(filepath, 'date')
         if 'Date' in str(row.keys()):
-            for key in sorted(row.keys()):
-                if 'Date' in key:
-                    numb = int(re.findall(r'\d+', key)[0])
-                    elem = key.split(' ')
-                    if elem[-1].isdigit() == True:
-                        elem = elem[0].lower()
-                    elif elem[-1] == 'Start' or elem[-1] == 'End':
-                        elem = 'inclusive{}'.format(elem[-1].lower())
-                    else:
-                        elem = elem[-1].lower()
-                    try:
-                        date_data[numb-1][elem] = row[key]
-                    except:
-                        date_data.insert(numb-1, {elem: row[key]})
-            
-            csv2dict.set_element('date', date_data, n)
+            csv2dict.set_dict_element('date', 'Date', row, n)
 
+        if 'Publication/Origination Info' in str(row.keys()):     
+            csv2dict.set_list_element('publisher', 'Publication/Origination Info', row, n)
 
-        publisher_data = csv2dict.get_existing_data(filepath, 'publisher')
-        if 'Publication/Origination Info' in str(row.keys()):
-            for key in sorted(row.keys()):
-                if 'Publication/Origination Info' in key:
-                    numb = int(re.findall(r'\d+', key)[0])
-                    elem = 'publisher'
-                    try:
-                        publisher_data[numb-1][elem] = row[key]
-                    except:
-                        publisher_data.insert(numb-1, {elem: row[key]})
-            
-            csv2dict.set_element('publisher', publisher_data, n)
-
-
-        num = 1
-        creator_data = csv2dict.get_existing_data(filepath, 'creator')
         if 'Creator' in str(row.keys()):
-            for key in sorted(row.keys()):
-                if 'Creator' in key:
-                    numb = int(re.findall(r'\d+', key)[0])
-                    elem = key.split(' ')
-                    if elem[-1] == 'ID' or elem[-1] == 'Type':
-                        elem = '{}{}'.format(elem[-2].lower(), elem[-1].lower())
-                    else:
-                        elem = elem[-1].lower()
-                    try:
-                        creator_data[numb-1][elem] = row[key]
-                    except:
-                        creator_data.insert(numb-1, {elem: row[key]})
-            
-            csv2dict.set_element('creator', creator_data, n)
+            csv2dict.set_dict_element('creator', 'Creator', row, n)
 
-        num = 1
-        contributor_data = csv2dict.get_existing_data(filepath, 'creator')
         if 'Contributor' in str(row.keys()):
-            for key in sorted(row.keys()):
-                if 'Contributor' in key:
-                    numb = int(re.findall(r'\d+', key)[0])
-                    elem = key.split(' ')
-                    if elem[-1] == 'ID' or elem[-1] == 'Type':
-                        elem = '{}{}'.format(elem[-2].lower(), elem[-1].lower())
-                    else:
-                        elem = elem[-1].lower()
-                    try:
-                        contributor_data[numb-1][elem] = row[key]
-                    except:
-                        contributor_data.insert(numb-1, {elem: row[key]})
-            
-            csv2dict.set_element('contributor', contributor_data, n)
+            csv2dict.set_dict_element('contributor', 'Contributor', row, n)
 
         if 'Format/Physical Description' in row.keys():
             csv2dict.set_single_element('physdesc', row['Format/Physical Description'], n)
         
-        
-        description_data = csv2dict.get_existing_data(filepath, 'description')
         if 'Description' in str(row.keys()):
-            for key in sorted(row.keys()):
-                if 'Description' in key:
-                    numb = int(re.findall(r'\d+', key)[0])
-                    elem = key.split(' ')
-                    if elem[-1] == 'note':
-                        elem = 'item'
-                    else:
-                        elem = elem[-1].lower()
-                    try:
-                        description_data[numb-1][elem] = row[key]
-                    except:
-                        description_data.insert(numb-1, {elem: row[key]})
-            
-            csv2dict.set_element('description', description_data, n)
+            csv2dict.set_dict_element('description', 'Description', row, n)
 
         if 'Extent' in row.keys():
             csv2dict.set_single_element('extent', row['Extent'], n)
-         
             
-        language_data = csv2dict.get_existing_data(filepath, 'language')
         if 'Language' in str(row.keys()):
-            for key in sorted(row.keys()):
-                if 'Language' in key:
-                    numb = int(re.findall(r'\d+', key)[0])
-                    elem = key.split(' ')
-                    if elem[-1].isdigit() == True:
-                        elem = elem[0].lower()
-                    else:
-                        elem = elem[-1].lower()
-                    try:
-                        language_data[numb-1][elem] = row[key]
-                    except:
-                        language_data.insert(numb-1, {elem: row[key]})
-            
-            csv2dict.set_element('language', language_data, n)
+            csv2dict.set_dict_element('language', 'Language', row, n)
          
-        temporalcoverage_data = csv2dict.get_existing_data(filepath, 'temporalcoverage')
         if 'Temporal Coverage' in str(row.keys()):
-            for key in sorted(row.keys()):
-                if 'Temporal Coverage' in key:
-                    numb = int(re.findall(r'\d+', key)[0])
-                    elem = key.split(' ')
-                    if elem[-1].isdigit() == True:
-                        elem = elem[0].lower()
-                    else:
-                        elem = elem[-1].lower()
-                    try:
-                        temporalcoverage_data[numb-1][elem] = row[key]
-                    except:
-                        temporalcoverage_data.insert(numb-1, {elem: row[key]})
-            
-            csv2dict.set_element('temporalcoverage', temporalcoverage_data, n)
+            csv2dict.set_list_element('temporalcoverage', 'Temporal Coverage', row, n)
             
         if 'Transcription' in row.keys():
             csv2dict.set_single_element('transcription', row['Transcription'], n)
@@ -221,24 +89,8 @@ def process_rows( csv2dict):
         if 'Copyright Status' in row.keys():
             csv2dict.set_single_element('rightsstatus', row['Copyright Status'], n)
         
-            
-        copyright_holder_data = csv2dict.get_existing_data(filepath, 'rightsholder')
         if 'Copyright Holder' in str(row.keys()):
-            for key in sorted(row.keys()):
-                if 'Copyright Holder' in key:
-                    numb = int(re.findall(r'\d+', key)[0])
-                    
-                    elem = key.split(' ')
-                    if elem[-1] == 'ID' or elem[-1] == 'Type':
-                        elem = '{}{}'.format(elem[-2].lower(), elem[-1].lower())
-                    else:
-                        elem = elem[-1].lower()
-                    try:
-                        copyright_holder_data[numb-1][elem] = row[key]
-                    except:
-                        copyright_holder_data.insert(numb-1, {elem: row[key]})
-            
-            csv2dict.set_element('rightsholder', copyright_holder_data, n)
+            csv2dict.set_dict_element('rightsholder', 'Copyright Holder', row, n)
 
         if 'Copyright Contact' in row.keys():
             csv2dict.set_single_element('rightscontact', row['Copyright Contact'], n)
@@ -261,123 +113,29 @@ def process_rows( csv2dict):
         if 'Copyright Note' in row.keys():    
             csv2dict.set_single_element('rightsnote', row['Copyright Note'], n)
         
-        collection_data = csv2dict.get_existing_data(filepath, 'collection')
         if 'Collection' in str(row.keys()):
-            for key in sorted(row.keys()):
-                if 'Collection' in key:
-                    numb = int(re.findall(r'\d+', key)[0])
-                    elem = 'collection'
-                    try:
-                        collection_data[numb-1][elem] = row[key]
-                    except:
-                        collection_data.insert(numb-1, {elem: row[key]})
-            
-            csv2dict.set_element('collection', collection_data, n)
+            csv2dict.set_list_element('collection', 'Collection', row, n)
 
-        relatedresource_data = csv2dict.get_existing_data(filepath, 'relatedresource')
         if 'Related Resource' in str(row.keys()):
-            for key in sorted(row.keys()):
-                if 'Related Resource' in key:
-                    numb = int(re.findall(r'\d+', key)[0])
-                    elem = 'relatedresource'
-                    try:
-                        relatedresource_data[numb-1][elem] = row[key]
-                    except:
-                        relatedresource_data.insert(numb-1, {elem: row[key]})
-            
-            csv2dict.set_element('relatedresource', relatedresource_data, n)
+            csv2dict.set_list_element('relatedresource', 'Related Resource', row, n)
 
         if 'Source' in row.keys():
             csv2dict.set_single_element('source', row['Source'], n)
         
-            
-        subject_name_data = csv2dict.get_existing_data(filepath, 'subjectname')
         if 'Subject (Name)' in str(row.keys()):
-            for key in sorted(row.keys()):
-                if 'Subject (Name)' in key:
-                    numb = int(re.findall(r'\d+', key)[0])
-                    
-                    elem = key.split(' ')
-                    if elem[-1] == 'ID' or elem[-1] == 'Type':
-                        elem = '{}{}'.format(elem[-2].lower(), elem[-1].lower())
-                    else:
-                        elem = elem[-1].lower()
-                    try:
-                        subject_name_data[numb-1][elem] = row[key]
-                    except:
-                        subject_name_data.insert(numb-1, {elem: row[key]})
-            
-            csv2dict.set_element('subjectname', subject_name_data, n)
+            csv2dict.set_dict_element('subjectname', 'Subject (Name)', row, n)
 
-        place_data = csv2dict.get_existing_data(filepath, 'place')
         if 'Place' in str(row.keys()):
-            for key in sorted(row.keys()):
-                if 'Place' in key:
-                    numb = int(re.findall(r'\d+', key)[0])
-                    
-                    elem = key.split(' ')
-                    if elem[-1] == 'ID' or elem[-1] == 'Type':
-                        elem = '{}{}'.format(elem[-2].lower(), elem[-1].lower())
-                    else:
-                        elem = elem[-1].lower()
-                    try:
-                        place_data[numb-1][elem] = row[key]
-                    except:
-                        place_data.insert(numb-1, {elem: row[key]})
-            
-            csv2dict.set_element('place', place_data, n)
+            csv2dict.set_dict_element('place', 'Place', row, n)
 
-        subject_topic_data = csv2dict.get_existing_data(filepath, 'subjecttopic')
         if 'Subject (Topic)' in str(row.keys()):
-            for key in sorted(row.keys()):
-                if 'Subject (Topic)' in key:
-                    numb = int(re.findall(r'\d+', key)[0])
-                    
-                    elem = key.split(' ')
-                    if elem[-1] == 'ID' or elem[-1] == 'Type':
-                        elem = '{}{}'.format(elem[-2].lower(), elem[-1].lower())
-                    else:
-                        elem = elem[-1].lower()
-                    try:
-                        subject_topic_data[numb-1][elem] = row[key]
-                    except:
-                        subject_topic_data.insert(numb-1, {elem: row[key]})
-            
-            csv2dict.set_element('subjecttopic', subject_topic_data, n)
+            csv2dict.set_dict_element('subjecttopic', 'Subject (Topic)', row, n)
 
-        form_genre_data = csv2dict.get_existing_data(filepath, 'formgenre')
         if 'Form/Genre' in str(row.keys()):
-            for key in sorted(row.keys()):
-                if 'Form/Genre' in key:
-                    numb = int(re.findall(r'\d+', key)[0])
-                    elem = key.split(' ')
-                    if elem[-1] == 'ID' or elem[-1] == 'Type':
-                        elem = '{}{}'.format(elem[-2].lower(), elem[-1].lower())
-                    else:
-                        elem = elem[-1].lower()
-                    try:
-                        form_genre_data[numb-1][elem] = row[key]
-                    except:
-                        form_genre_data.insert(numb-1, {elem: row[key]})
+            csv2dict.set_dict_element('formgenre', 'Form/Genre', row, n)
             
-            csv2dict.set_element('formgenre', form_genre_data, n)
-            
-        provenance_data = csv2dict.get_existing_data(filepath, 'provenance')
         if 'Provenance' in str(row.keys()):
-            for key in sorted(row.keys()):
-                if 'Provenance' in key:
-                    numb = int(re.findall(r'\d+', key)[0])
-                    elem = key.split(' ')
-                    if elem[-1].isdigit() == True:
-                        elem = elem[0].lower()
-                    else:
-                        elem = elem[-1].lower()
-                    try:
-                        provenance_data[numb-1][elem] = row[key]
-                    except:
-                        provenance_data.insert(numb-1, {elem: row[key]})
-            
-            csv2dict.set_element('provenance', provenance_data, n)
+            sv2dict.set_list_element('provenance', 'Provenance', row, n)
 
         if 'Physical Location' in row.keys():
             csv2dict.set_single_element('physlocation', row['Physical Location'], n)

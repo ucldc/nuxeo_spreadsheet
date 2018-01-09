@@ -6,6 +6,7 @@ import csv
 import unicodecsv
 import json
 import copy
+import re
 
 from time import localtime, strftime
 from pynux import utils
@@ -121,28 +122,68 @@ class Csv2Dict:
         data = nx.get_metadata(path=filepath)
         return data['properties']['ucldc_schema:{}'.format(metadata_path)]
     
-    def set_element(self, metadata_path, element_list, n):
+    def set_list_element(self, metadata_path, row_title, row, n):
+    	filepath = row['File path']
+        element_list = self.get_existing_data(filepath, metadata_path)
+        if row_title in str(row.keys()):
+            for key in sorted(row.keys()):
+                if row_title in key:
+                    numb = int(re.findall(r'\d+', key)[0])
+                    try:
+                        element_list[numb-1] = row[key]
+                    except:
+                        element_list.insert(numb-1, row[key])
         element_list = self.verify_list(element_list)
         print "Making %s item: %s" % (metadata_path, element_list)
         self.meta_dicts[n]['properties']['ucldc_schema:{}'.format(metadata_path)] = element_list
+    
+    def set_dict_element(self, metadata_path, row_title, row, n):
+    	filepath = row['File path']
+        element_list = self.get_existing_data(filepath, metadata_path)
+        if row_title in str(row.keys()):
+            for key in sorted(row.keys()):
+                if row_title in key:
+                    numb = int(re.findall(r'\d+', key)[0])
+                    elem = key.split(' ')
+                    if elem[-1].isdigit() == True:
+                        elem = elem[0].lower()
+                    elif elem[-1] == 'ID' and elem[-2] == 'Authority' or elem[-1] == 'Type' and elem[-2] == 'Name':
+                        elem = '{}{}'.format(elem[-2].lower(), elem[-1].lower())
+                    elif elem[-1] == 'Start' or elem[-1] == 'End':
+                        elem = 'inclusive{}'.format(elem[-1].lower())
+                    elif elem[-1] == 'Note':
+                        elem = 'item'
+                    else:
+                    	elem = elem[-1].lower()
+                    try:
+                        element_list[numb-1][elem] = row[key]
+                    except:
+                        element_list.insert(numb-1, {elem: row[key]})
+        element_list = self.verify_list(element_list, metadata_path)
+        print "Making %s item: %s" % (metadata_path, element_list)
+        self.meta_dicts[n]['properties']['ucldc_schema:{}'.format(metadata_path)] = element_list
+    
     
     def set_single_element(self, metadata_path, element, n):
         if self.verify_single(element):
             print "Making %s item: %s" % (metadata_path, element)
             self.meta_dicts[n]['properties']['ucldc_schema:{}'.format(metadata_path)] = element
     
-    def verify_single(self, element):
+    def verify_single(self, element, metadata_path):
+    	print('Verifying {}: {}'.format(metadata_path, element))
         if element != None and element != '':
             return True
         else:
             return False
     
-    def verify_list(self, element_list):
+    def verify_list(self, element_list, metadata_path):
+    	print('Verifying {}: {}'.format(metadata_path, element_list))
         for i, item in enumerate(element_list):
-            if type(item) == item:
+            if type(item) == dict:
                 if all(value == '' for value in item.values()) and all(value == None for value in item.values()):
                     del element_list[i]
             else:
                 if item == '' and item == 'None':
                     del element_list[i]
         return element_list
+	
