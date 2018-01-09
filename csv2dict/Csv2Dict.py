@@ -188,10 +188,10 @@ class Csv2Dict:
         print('Verifying {}: {}'.format(metadata_path, element_list))
         for i, item in enumerate(element_list):
             if type(item) == dict:
-                if all(value == '' for value in item.values()) and all(value == None for value in item.values()):
+                if all(value == '' for value in item.values()) or all(value == None for value in item.values()):
                     del element_list[i]
             else:
-                if item == '' and item == 'None':
+                if item == '' or item == 'None':
                     del element_list[i]
         return element_list
     
