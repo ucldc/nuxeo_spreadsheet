@@ -38,17 +38,17 @@ def process_rows( csv2dict):
             for key in sorted(row.keys()):
                 if 'Alternative Title' in key:
                     numb = int(re.findall(r'\d+', key)[0])
-                    elem = 'localidentifier'
+                    elem = 'alternativetitle'
                     try:
-                        alttitle_data[numb-1][elem] = row[key]
+                        alttitle_data[numb-1] = row[key]
                     except:
-                        alttitle_data.insert(numb-1, {elem: row[key]})
+                        alttitle_data.insert(numb-1, row[key])
             
-            csv2dict.set_element('localidentifier', alttitle_data, n)
+            csv2dict.set_element('alternativetitle', alttitle_data, n)
         
 
         if 'Identifier' in row.keys():
-            csv2dict.set_id(row['Identifier'], n)
+            csv2dict.set_single_element('identifier', row['Identifier'], n)
             
         locid_data = csv2dict.get_existing_data(filepath, 'localidentifier')
         if 'Local Identifier' in str(row.keys()):
@@ -64,7 +64,7 @@ def process_rows( csv2dict):
             csv2dict.set_element('localidentifier', locid_data, n)
 
         if 'Type' in row.keys():
-            csv2dict.set_type(row['Type'], n)
+            csv2dict.set_single_element('type', row['Type'], n)
         
         campusunit_data = csv2dict.get_existing_data(filepath, 'campusunit')
         if 'Campus/Unit' in str(row.keys()):
@@ -151,7 +151,7 @@ def process_rows( csv2dict):
             csv2dict.set_element('contributor', contributor_data, n)
 
         if 'Format/Physical Description' in row.keys():
-            csv2dict.set_physdesc(row['Format/Physical Description'], n)
+            csv2dict.set_single_element('physdesc', row['Format/Physical Description'], n)
         
         
         description_data = csv2dict.get_existing_data(filepath, 'description')
@@ -172,7 +172,7 @@ def process_rows( csv2dict):
             csv2dict.set_element('description', description_data, n)
 
         if 'Extent' in row.keys():
-            csv2dict.set_extent(row['Extent'], n)
+            csv2dict.set_single_element('extent', row['Extent'], n)
          
             
         language_data = csv2dict.get_existing_data(filepath, 'language')
@@ -191,23 +191,35 @@ def process_rows( csv2dict):
                         language_data.insert(numb-1, {elem: row[key]})
             
             csv2dict.set_element('language', language_data, n)
-        
-        num = 1
-        while 'Temporal Coverage %d' % num in row.keys():
-            csv2dict.set_temporal_coverage(row['Temporal Coverage %d' % num], n)
-            num += 1    
-        
+         
+        temporalcoverage_data = csv2dict.get_existing_data(filepath, 'temporalcoverage')
+        if 'Temporal Coverage' in str(row.keys()):
+            for key in sorted(row.keys()):
+                if 'Temporal Coverage' in key:
+                    numb = int(re.findall(r'\d+', key)[0])
+                    elem = key.split(' ')
+                    if elem[-1].isdigit() == True:
+                        elem = elem[0].lower()
+                    else:
+                        elem = elem[-1].lower()
+                    try:
+                        temporalcoverage_data[numb-1][elem] = row[key]
+                    except:
+                        temporalcoverage_data.insert(numb-1, {elem: row[key]})
+            
+            csv2dict.set_element('temporalcoverage', temporalcoverage_data, n)
+            
         if 'Transcription' in row.keys():
-            csv2dict.set_transcription(row['Transcription'], n)
+            csv2dict.set_single_element('transcription', row['Transcription'], n)
         
         if 'Access Restrictions' in row.keys():
-            csv2dict.set_access_restrictions(row['Access Restrictions'], n)
+            csv2dict.set_single_element('accessrestrict', row['Access Restrictions'], n)
         
         if 'Copyright Statement' in row.keys():
-            csv2dict.set_rights_statement(row['Copyright Statement'], n)
+            csv2dict.set_single_element('rightsstatement', row['Copyright Statement'], n)
         
         if 'Copyright Status' in row.keys():
-            csv2dict.set_rights_status(row['Copyright Status'], n)
+            csv2dict.set_single_element('rightsstatus', row['Copyright Status'], n)
         
             
         copyright_holder_data = csv2dict.get_existing_data(filepath, 'rightsholder')
@@ -229,25 +241,25 @@ def process_rows( csv2dict):
             csv2dict.set_element('rightsholder', copyright_holder_data, n)
 
         if 'Copyright Contact' in row.keys():
-            csv2dict.set_rights_contact(row['Copyright Contact'], n)
+            csv2dict.set_single_element('rightscontact', row['Copyright Contact'], n)
         
         if 'Copyright Notice' in row.keys():
-            csv2dict.set_rights_notice(row['Copyright Notice'], n)
+            csv2dict.set_single_element('rightsnotice', row['Copyright Notice'], n)
         
         if 'Copyright Determination Date' in row.keys():    
-            csv2dict.set_rights_determination_date(row['Copyright Determination Date'], n)
+            csv2dict.set_single_element('rightsdeterminationdate', row['Copyright Determination Date'], n)
         
         if 'Copyright Start Date' in row.keys():
-            csv2dict.set_rights_start_date(row['Copyright Start Date'], n)
+            csv2dict.set_single_element('rightsstartdate', row['Copyright Start Date'], n)
         
         if 'Copyright End Date' in row.keys():
-            csv2dict.set_rights_end_date(row['Copyright End Date'], n)
+            csv2dict.set_single_element('rightsenddate', row['Copyright End Date'], n)
         
         if 'Copyright Jurisdiction' in row.keys():
-            csv2dict.set_rights_jurisdiction(row['Copyright Jurisdiction'], n)
+            csv2dict.set_single_element('rightsjurisdiction', row['Copyright Jurisdiction'], n)
         
         if 'Copyright Note' in row.keys():    
-            csv2dict.set_rights_note(row['Copyright Note'], n)
+            csv2dict.set_single_element('rightsnote', row['Copyright Note'], n)
         
 		collection_data = csv2dict.get_existing_data(filepath, 'collection')
         if 'Collection' in str(row.keys()):
@@ -276,7 +288,7 @@ def process_rows( csv2dict):
             csv2dict.set_element('relatedresource', relatedresource_data, n)
 
         if 'Source' in row.keys():
-            csv2dict.set_source(row['Source'], n)
+            csv2dict.set_single_element('source', row['Source'], n)
         
             
         subject_name_data = csv2dict.get_existing_data(filepath, 'subjectname')
@@ -350,13 +362,25 @@ def process_rows( csv2dict):
             
             csv2dict.set_element('formgenre', form_genre_data, n)
             
-        num = 1
-        while 'Provenance %d' % num in row.keys():
-            csv2dict.set_provenance(row['Provenance %d' % num], n)
-            num += 1
+        provenance_data = csv2dict.get_existing_data(filepath, 'provenance')
+        if 'Provenance' in str(row.keys()):
+            for key in sorted(row.keys()):
+                if 'Provenance' in key:
+                    numb = int(re.findall(r'\d+', key)[0])
+                    elem = key.split(' ')
+                    if elem[-1].isdigit() == True:
+                        elem = elem[0].lower()
+                    else:
+                        elem = elem[-1].lower()
+                    try:
+                        provenance_data[numb-1][elem] = row[key]
+                    except:
+                        provenance_data.insert(numb-1, {elem: row[key]})
+            
+            csv2dict.set_element('provenance', provenance_data, n)
 
         if 'Physical Location' in row.keys():
-            csv2dict.set_physical_location(row['Physical Location'], n)
+            csv2dict.set_single_element('physlocation', row['Physical Location'], n)
         
     
 
