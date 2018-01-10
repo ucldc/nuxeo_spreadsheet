@@ -14,6 +14,50 @@ from pynux import utils
 
 def process_rows( csv2dict):
     row_dicts = csv2dict.get_row_dicts()
+    element_data = {
+    "list_elements":[
+    {'metadata_path':'alternativetitle', 'row_title':'Alternative Title'},
+    {'metadata_path':'localidentifier', 'row_title':'Local Identifier'},
+    {'metadata_path':'campusunit', 'row_title':'Campus/Unit'},
+    {'metadata_path':'publisher', 'row_title':'Publication/Origination Info'},
+    {'metadata_path':'temporalcoverage', 'row_title':'Temporal Coverage'} ,
+    {'metadata_path':'collection', 'row_title':'Collection'},
+    {'metadata_path':'relatedresource', 'row_title':'Related Resource'},
+    {'metadata_path':'provenance', 'row_title':'Provenance'}
+     ],
+    "single_elements":[
+    {'metadata_path':'identifier', 'row_title':'Identifier'},
+    {'metadata_path':'type', 'row_title':'Type'},
+    {'metadata_path':'physdesc', 'row_title':'Format/Physical Description'},
+    {'metadata_path':'extent', 'row_title':'Extent'},
+    {'metadata_path':'transcription', 'row_title':'Transcription'},
+    {'metadata_path':'accessrestrict', 'row_title':'Access Restrictions'},
+    {'metadata_path':'rightsstatement', 'row_title':'Copyright Statement'},
+    {'metadata_path':'rightsstatus', 'row_title':'Copyright Status'},
+    {'metadata_path':'rightsholder', 'row_title':'Copyright Holder '},
+    {'metadata_path':'rightscontact', 'row_title':'Copyright Contact'},
+    {'metadata_path':'rightsnotice', 'row_title':'Copyright Notice'},
+    {'metadata_path':'rightsdeterminationdate', 'row_title':'Copyright Determination Date'},
+    {'metadata_path':'rightsstartdate', 'row_title':'Copyright Start Date'},
+    {'metadata_path':'rightsenddate', 'row_title':'Copyright End Date'},
+    {'metadata_path':'rightsjurisdiction', 'row_title':'Copyright Jurisdiction'},     
+    {'metadata_path':'rightsnote', 'row_title':'Copyright Note'},
+    {'metadata_path':'source', 'row_title':'Source'},
+    {'metadata_path':'physlocation', 'row_title':'Physical Location'}
+    ],     
+    "dict_elements":[
+    {'metadata_path':'date', 'row_title':'Date'},
+    {'metadata_path':'creator', 'row_title':'Creator'},
+    {'metadata_path':'contributor', 'row_title':'Contributor'},
+    {'metadata_path':'description', 'row_title':'Description'},
+    {'metadata_path':'language', 'row_title':'Language'},
+    {'metadata_path':'subjectname', 'row_title':'Subject (Name)'},
+    {'metadata_path':'place', 'row_title':'Place'},
+    {'metadata_path':'subjecttopic', 'row_title':'Subject (Topic)'},
+    {'metadata_path':'formgenre', 'row_title':'Form/Genre'}
+    ]
+    }
+
 
     for n in range(len(row_dicts)):
         print 'Metarow%3d) %s' % (n, str(row_dicts[n]))
@@ -31,116 +75,21 @@ def process_rows( csv2dict):
 
         if 'Title' in row.keys():
             csv2dict.set_title(row['Title'], n)
-        
-        if 'Alternative Title' in str(row.keys()):
-        	csv2dict.set_list_element('alternativetitle', 'Alternative Title', 
-        						row, n)
 
-        if 'Identifier' in row.keys():
-            csv2dict.set_single_element('identifier', row['Identifier'], n)
-            
-        if 'Local Identifier' in str(row.keys()):
-        	csv2dict.set_list_element('localidentifier', 'Local Identifier', 
-        						row, n)
-        						
-        if 'Type' in row.keys():
-            csv2dict.set_single_element('type', row['Type'], n)
-        
-        if 'Campus/Unit' in str(row.keys()):
-            csv2dict.set_list_element('campusunit', 'Campus/Unit', 
-        						row, n)
+        for key, value in element_data.items():
+            print(key)
+            for list_data in value:
+                if key == 'list_elements':
+                    if list_data['row_title'] in str(row.keys()):
+                        csv2dict.set_list_element(list_data['metadata_path'], list_data['row_title'], row, n)
+                if key == 'single_elements':
+                    if list_data['row_title'] in row.keys():
+                        csv2dict.set_single_element(list_data['metadata_path'], row[list_data['row_title']], n)
+                if key == 'dict_elements':
+                    formatted_row_title = '%s '%list_data['row_title']
+                    if formatted_row_title in str(row.keys()):
+                        csv2dict.set_dict_element(list_data['metadata_path'], formatted_row_title, row, n)
 
-        if 'Date ' in str(row.keys()):
-            csv2dict.set_dict_element('date', 'Date ', row, n)
-
-        if 'Publication/Origination Info' in str(row.keys()):     
-            csv2dict.set_list_element('publisher', 'Publication/Origination Info', row, n)
-
-        if 'Creator ' in str(row.keys()):
-            csv2dict.set_dict_element('creator', 'Creator ', row, n)
-
-        if 'Contributor ' in str(row.keys()):
-            csv2dict.set_dict_element('contributor', 'Contributor ', row, n)
-
-        if 'Format/Physical Description' in row.keys():
-            csv2dict.set_single_element('physdesc', row['Format/Physical Description'], n)
-        
-        if 'Description ' in str(row.keys()):
-            csv2dict.set_dict_element('description', 'Description ', row, n)
-
-        if 'Extent' in row.keys():
-            csv2dict.set_single_element('extent', row['Extent'], n)
-            
-        if 'Language' in str(row.keys()):
-            csv2dict.set_dict_element('language', 'Language ', row, n)
-         
-        if 'Temporal Coverage' in str(row.keys()):
-            csv2dict.set_list_element('temporalcoverage', 'Temporal Coverage', row, n)
-            
-        if 'Transcription' in row.keys():
-            csv2dict.set_single_element('transcription', row['Transcription'], n)
-        
-        if 'Access Restrictions' in row.keys():
-            csv2dict.set_single_element('accessrestrict', row['Access Restrictions'], n)
-        
-        if 'Copyright Statement' in row.keys():
-            csv2dict.set_single_element('rightsstatement', row['Copyright Statement'], n)
-        
-        if 'Copyright Status' in row.keys():
-            csv2dict.set_single_element('rightsstatus', row['Copyright Status'], n)
-        
-        if 'Copyright Holder' in str(row.keys()):
-            csv2dict.set_dict_element('rightsholder', 'Copyright Holder ', row, n)
-
-        if 'Copyright Contact' in row.keys():
-            csv2dict.set_single_element('rightscontact', row['Copyright Contact'], n)
-        
-        if 'Copyright Notice' in row.keys():
-            csv2dict.set_single_element('rightsnotice', row['Copyright Notice'], n)
-        
-        if 'Copyright Determination Date' in row.keys():    
-            csv2dict.set_single_element('rightsdeterminationdate', row['Copyright Determination Date'], n)
-        
-        if 'Copyright Start Date' in row.keys():
-            csv2dict.set_single_element('rightsstartdate', row['Copyright Start Date'], n)
-        
-        if 'Copyright End Date' in row.keys():
-            csv2dict.set_single_element('rightsenddate', row['Copyright End Date'], n)
-        
-        if 'Copyright Jurisdiction' in row.keys():
-            csv2dict.set_single_element('rightsjurisdiction', row['Copyright Jurisdiction'], n)
-        
-        if 'Copyright Note' in row.keys():    
-            csv2dict.set_single_element('rightsnote', row['Copyright Note'], n)
-        
-        if 'Collection' in str(row.keys()):
-            csv2dict.set_list_element('collection', 'Collection', row, n)
-
-        if 'Related Resource' in str(row.keys()):
-            csv2dict.set_list_element('relatedresource', 'Related Resource', row, n)
-
-        if 'Source' in row.keys():
-            csv2dict.set_single_element('source', row['Source'], n)
-        
-        if 'Subject (Name) ' in str(row.keys()):
-            csv2dict.set_dict_element('subjectname', 'Subject (Name) ', row, n)
-
-        if 'Place ' in str(row.keys()):
-            csv2dict.set_dict_element('place', 'Place ', row, n)
-
-        if 'Subject (Topic) ' in str(row.keys()):
-            csv2dict.set_dict_element('subjecttopic', 'Subject (Topic) ', row, n)
-
-        if 'Form/Genre ' in str(row.keys()):
-            csv2dict.set_dict_element('formgenre', 'Form/Genre ', row, n)
-            
-        if 'Provenance' in str(row.keys()):
-            csv2dict.set_list_element('provenance', 'Provenance', row, n)
-
-        if 'Physical Location' in row.keys():
-            csv2dict.set_single_element('physlocation', row['Physical Location'], n)
-        
-    
 
 def main(argv):
     parser = argparse.ArgumentParser()
