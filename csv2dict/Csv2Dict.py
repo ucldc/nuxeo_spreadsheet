@@ -54,13 +54,13 @@ class Csv2Dict:
             csv_reader = unicodecsv.reader(infile, delimiter=('\t'), quotechar='|', encoding='utf-8')
             fields = next(csv_reader)
 
-            print "Fields: %s" % fields
+            print("Fields: %s" % fields)
             valid_columns.validate(fields)
 
             # The rest of the rows contain data
             for row in csv_reader:
                 if len(fields) == len(row):
-                    print "Another row: %s" % row
+                    print("Another row: %s" % row)
 
                     #row_dict = OrderedDict()
                     row_dict = {}
@@ -69,7 +69,7 @@ class Csv2Dict:
                         row_dict[fields[i]] = row[i]
                     self.row_dicts.append(row_dict)
                 else:
-                    print "Incorrect number of fields in row!"
+                    print("Incorrect number of fields in row!")
                     self.status += 1
 
     # format_string is probably not needed for a csv file,
@@ -119,17 +119,17 @@ class Csv2Dict:
             self.meta_dicts[n]['properties']['dc:title'] = "%s" % title
             
     def verify_title(self, title):
-        print "Verifying title: %s" % title
+        print("Verifying title: %s" % title)
         return True if title else False
         
     def get_existing_data(self, filepath, metadata_path):
-    	if self.blankout == True:
-    		return []
-    	else:
-			nx = utils.Nuxeo()
-			data = nx.get_metadata(path=filepath)
-			return data['properties']['ucldc_schema:{}'.format(metadata_path)]
-	
+        if self.blankout == True:
+            return []
+        else:
+            nx = utils.Nuxeo()
+            data = nx.get_metadata(path=filepath)
+            return data['properties']['ucldc_schema:{}'.format(metadata_path)]
+    
     def set_list_element(self, metadata_path, row_title, row, n):
         filepath = row['File path']
         element_list = self.get_existing_data(filepath, metadata_path)
@@ -142,7 +142,7 @@ class Csv2Dict:
                     except:
                         element_list.insert(numb-1, row[key])
         element_list = self.verify_list(element_list, metadata_path)
-        print "Making %s item: %s" % (metadata_path, element_list)
+        print("Making %s item: %s" % (metadata_path, element_list))
         self.meta_dicts[n]['properties']['ucldc_schema:{}'.format(metadata_path)] = element_list
     
     def set_dict_element(self, metadata_path, row_title, row, n):
@@ -168,13 +168,13 @@ class Csv2Dict:
                     except:
                         element_list.insert(numb-1, {elem: row[key]})
         element_list = self.verify_list(element_list, metadata_path)
-        print "Making %s item: %s" % (metadata_path, element_list)
+        print("Making %s item: %s" % (metadata_path, element_list))
         self.meta_dicts[n]['properties']['ucldc_schema:{}'.format(metadata_path)] = element_list
     
     
     def set_single_element(self, metadata_path, element, n):
         if self.verify_single(element, metadata_path):
-            print "Making %s item: %s" % (metadata_path, element)
+            print("Making %s item: %s" % (metadata_path, element))
             self.meta_dicts[n]['properties']['ucldc_schema:{}'.format(metadata_path)] = element
     
     def verify_single(self, element, metadata_path):

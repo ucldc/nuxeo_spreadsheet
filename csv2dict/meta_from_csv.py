@@ -3,16 +3,19 @@
 __author__ = 'glen'
 
 import sys
-reload(sys)
-sys.setdefaultencoding("utf8")
-
+try:
+    reload(sys)
+    sys.setdefaultencoding("utf8")
+except:
+    from importlib import reload
+    reload(sys)
 
 import argparse
 import os.path
 from Csv2Dict import Csv2Dict
 from pynux import utils
 
-def process_rows( csv2dict):
+def process_rows(csv2dict):
     row_dicts = csv2dict.get_row_dicts()
     element_data = {
     "list_elements":[
@@ -60,7 +63,7 @@ def process_rows( csv2dict):
 
 
     for n in range(len(row_dicts)):
-        print 'Metarow%3d) %s' % (n, str(row_dicts[n]))
+        print('Metarow%3d) %s' % (n, str(row_dicts[n])))
 
     for row in row_dicts:
         '''
@@ -77,7 +80,6 @@ def process_rows( csv2dict):
             csv2dict.set_title(row['Title'], n)
 
         for key, value in element_data.items():
-            print(key)
             for list_data in value:
                 if key == 'list_elements':
                     if list_data['row_title'] in str(row.keys()):
@@ -110,13 +112,13 @@ def main(argv):
     try:
         assert os.path.isfile( args.datafile )
     except AssertionError:
-        print "Not a file: ", args.datafile
+        print("Not a file: ", args.datafile)
         sys.exit(2)
 
     csv_data_file = args.datafile
-    print csv_data_file
-    print args.rcfile
-    print args.loglevel
+    print(csv_data_file)
+    print(args.rcfile)
+    print(args.loglevel)
 
     nx = utils.Nuxeo(rcfile=args.rcfile, loglevel=args.loglevel.upper())
     nuxeo_limit = 24
@@ -127,19 +129,19 @@ def main(argv):
     csv2dict = Csv2Dict(csv_data_file, blankout=args.blankout)
 
     if csv2dict.status != 0:
-        print 'The Csv2Dict constructor reported and error (%d).' % csv2dict.status
+        print('The Csv2Dict constructor reported and error (%d).' % csv2dict.status)
         sys.exit(csv2dict.status)
 
     process_rows(csv2dict)
 
     for n in range(csv2dict.get_meta_dict_length()):
-        print "Loading payload %d" % n
+        print("Loading payload %d" % n)
         payload = csv2dict.get_meta_dict(n)
-        print payload
-        print payload['path']
+        print(payload)
+        print(payload['path'])
         if not args.dry_run:
             uid = nx.get_uid(payload['path'])
-            print "Returned UID: %d) %s." % (n, uid)
+            print("Returned UID: %d) %s." % (n, uid))
             nx.update_nuxeo_properties(payload, path=payload['path'])
             
     # csv2dict.print_meta_dicts('LOGS/latest_output.txt')
