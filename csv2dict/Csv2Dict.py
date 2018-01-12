@@ -69,7 +69,6 @@ class Csv2Dict:
 
                 # The rest of the rows contain data
                 for row in csv_reader:
-                    print(row)
                     if len(fields) == len(row):
                         print("Another row: %s" % row)
                         self.row_dicts.append(row)
