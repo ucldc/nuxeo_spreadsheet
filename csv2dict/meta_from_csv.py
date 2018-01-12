@@ -37,7 +37,6 @@ def process_rows(csv2dict):
     {'metadata_path':'accessrestrict', 'row_title':'Access Restrictions'},
     {'metadata_path':'rightsstatement', 'row_title':'Copyright Statement'},
     {'metadata_path':'rightsstatus', 'row_title':'Copyright Status'},
-    {'metadata_path':'rightsholder', 'row_title':'Copyright Holder '},
     {'metadata_path':'rightscontact', 'row_title':'Copyright Contact'},
     {'metadata_path':'rightsnotice', 'row_title':'Copyright Notice'},
     {'metadata_path':'rightsdeterminationdate', 'row_title':'Copyright Determination Date'},
@@ -57,7 +56,8 @@ def process_rows(csv2dict):
     {'metadata_path':'subjectname', 'row_title':'Subject (Name)'},
     {'metadata_path':'place', 'row_title':'Place'},
     {'metadata_path':'subjecttopic', 'row_title':'Subject (Topic)'},
-    {'metadata_path':'formgenre', 'row_title':'Form/Genre'}
+    {'metadata_path':'formgenre', 'row_title':'Form/Genre'},
+    {'metadata_path':'rightsholder', 'row_title':'Copyright Holder'}
     ]
     }
 
