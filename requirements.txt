@@ -1,0 +1,4 @@
+https://github.com/ucldc/pynux/archive/master.zip
+unicodecsv
+gspread
+oauth2client

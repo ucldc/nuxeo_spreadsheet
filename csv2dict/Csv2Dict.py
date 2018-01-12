@@ -10,6 +10,8 @@ import re
 
 from time import localtime, strftime
 from pynux import utils
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 
 import valid_columns
 
@@ -46,31 +48,35 @@ class Csv2Dict:
             )
             with open(blankout_ucldc_file_name, 'r') as blankout_ucldc_file:
                 self.meta_dict_properties_template = json.load(blankout_ucldc_file).get('properties', {})
-
-
-        with open(data_file, 'rb') as infile:
-
-            # First row contains the column names
-            csv_reader = unicodecsv.reader(infile, delimiter=('\t'), quotechar='|', encoding='utf-8')
-            fields = next(csv_reader)
-
-            print("Fields: %s" % fields)
+        
+        if 'google' in data_file:
+            scope = ['https://spreadsheets.google.com/feeds']
+            creds = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', scope)
+            client = gspread.authorize(creds)
+            spreadsheet = client.open_by_url(data_file)
+            sheet = client.open(spreadsheet.title).sheet1
+            fields = sheet.row_values(1)
             valid_columns.validate(fields)
+            self.row_dicts = sheet.get_all_records()
+        else:
+            with open(data_file, 'rb') as infile:
+                # First row contains the column names
+                csv_reader = unicodecsv.DictReader(infile, delimiter=('\t'), quotechar='|', encoding='utf-8')
+                fields = csv_reader.fieldnames
+            
+                print("Fields: %s" % fields)
+                valid_columns.validate(fields)
 
-            # The rest of the rows contain data
-            for row in csv_reader:
-                if len(fields) == len(row):
-                    print("Another row: %s" % row)
-
-                    #row_dict = OrderedDict()
-                    row_dict = {}
-
-                    for i in range(len(fields)):
-                        row_dict[fields[i]] = row[i]
-                    self.row_dicts.append(row_dict)
-                else:
-                    print("Incorrect number of fields in row!")
-                    self.status += 1
+                # The rest of the rows contain data
+                for row in csv_reader:
+                    print(row)
+                    if len(fields) == len(row):
+                        print("Another row: %s" % row)
+                        self.row_dicts.append(row)
+                        
+                    else:
+                        print("Incorrect number of fields in row!")
+                        self.status += 1
 
     # format_string is probably not needed for a csv file,
     def format_string(self, value_str):
@@ -158,7 +164,7 @@ class Csv2Dict:
                     elif elem[-1] == 'ID' and elem[-2] == 'Authority':
                         elem = '{}{}'.format(elem[-2].lower(), elem[-1].lower())
                     elif elem[-1] == 'Type' and elem[-2] == 'Name' or elem[-2] == 'Heading':
-                    	elem = '{}{}'.format(elem[-2].lower(), elem[-1].lower())
+                        elem = '{}{}'.format(elem[-2].lower(), elem[-1].lower())
                     elif elem[-1] == 'Start' or elem[-1] == 'End':
                         elem = 'inclusive{}'.format(elem[-1].lower())
                     elif elem[-1] == 'Type' and 'Date' in elem:

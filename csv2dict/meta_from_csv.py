@@ -112,8 +112,11 @@ def main(argv):
     try:
         assert os.path.isfile( args.datafile )
     except AssertionError:
-        print("Not a file: ", args.datafile)
-        sys.exit(2)
+        if 'google' in args.datafile:
+            pass
+        else:
+            print("Not a file: ", args.datafile)
+            sys.exit(2)
 
     csv_data_file = args.datafile
     print(csv_data_file)
