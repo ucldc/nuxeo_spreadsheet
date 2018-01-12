@@ -155,10 +155,14 @@ class Csv2Dict:
                     elem = key.split(' ')
                     if elem[-1].isdigit() == True:
                         elem = elem[0].lower()
-                    elif elem[-1] == 'ID' and elem[-2] == 'Authority' or elem[-1] == 'Type' and elem[-2] == 'Name':
+                    elif elem[-1] == 'ID' and elem[-2] == 'Authority':
                         elem = '{}{}'.format(elem[-2].lower(), elem[-1].lower())
+                    elif elem[-1] == 'Type' and elem[-2] == 'Name' or elem[-2] == 'Heading':
+                    	elem = '{}{}'.format(elem[-2].lower(), elem[-1].lower())
                     elif elem[-1] == 'Start' or elem[-1] == 'End':
                         elem = 'inclusive{}'.format(elem[-1].lower())
+                    elif elem[-1] == 'Type' and 'Date' in elem:
+                        elem = 'date{}'.format(elem[-1].lower())
                     elif elem[-1] == 'Note':
                         elem = 'item'
                     else:
