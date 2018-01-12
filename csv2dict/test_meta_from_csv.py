@@ -6,7 +6,7 @@ import os
 
 class Test_CSVtoDict(unittest.TestCase):
     def setUp(self):
-        self.datafile = "data/test_tsv.tsv"
+        self.datafile = "unittest_data/test_tsv.tsv"
         self.csv2dict = Csv2Dict(self.datafile)
         self.row_dicts = self.csv2dict.get_row_dicts()
         self.n = self.csv2dict.new_dict(self.row_dicts[0]['File path'])
