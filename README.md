@@ -109,8 +109,10 @@ or edit the shebang. If you're using miniconda within Windows, here's an overvie
 * Activate your python environment.  In this example, we're activating a python environment named "venv": `activate venv`
 * Go to nuxeo_spreadsheet\csv2dict in your home directory, e.g.: `cd C:\Users\yourname\nuxeo_spreadsheet\csv2dict`
 * Run the command.  In this example, the DATAFILE is the location of a tab-delimited file (named "tab-delimited-metadata.txt") that's on our Desktop. `python meta_from_csv.py --datafile https://docs.google.com/spreadsheets/d/12345`
+     
      **IMPORTANT** If the sheet you want to ingest is not the first sheet in the spreadsheet you will need to run the command differently. `python meta_from_csv.py --datafile https://docs.google.com/spreadsheets/d/12345 --sheet 'Sheet Name'`
-     If there are not spaces in the sheet name (i.e. SheetName), there does not need to be quotes. However if the sheet has spaces in the name (i.e. Sheet Name), quotes need to enclose the name when running.
+     
+     If there are not spaces in the sheet name (i.e. SheetName), there does not need to be quotes. However if the sheet has spaces in the name (i.e. Sheet Name), quotes need to enclose the name when running the script.
 
 
 # `mets_example`
