@@ -5,5 +5,5 @@
 *.bak
 venv
 
-csv2dict/client_secret.json
+client_secret.json
 .DS_Store
