@@ -25,7 +25,7 @@ class Csv2Dict:
 
 
 
-    def __init__(self, data_file, blankout=False):
+    def __init__(self, data_file, sheet, blankout=False):
         '''
         The Csv2Dict class reads a csv data file, the first line of which contains column names. Succeeding
         lines represent rows of data. Initially the column names are used as the keys to a list of dicts, one
@@ -38,6 +38,7 @@ class Csv2Dict:
         self.row_dicts = []
         self.meta_dicts = []
         self.blankout = blankout
+        self.sheet = sheet
 
         self.meta_dict_properties_template = {}
 
@@ -54,7 +55,10 @@ class Csv2Dict:
             creds = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', scope)
             client = gspread.authorize(creds)
             spreadsheet = client.open_by_url(data_file)
-            sheet = client.open(spreadsheet.title).sheet1
+            if sheet == None:
+                sheet = client.open(spreadsheet.title).sheet1
+            else:
+                sheet = client.open(spreadsheet.title).worksheet(sheet)
             fields = sheet.row_values(1)
             valid_columns.validate(fields)
             self.row_dicts = sheet.get_all_records()

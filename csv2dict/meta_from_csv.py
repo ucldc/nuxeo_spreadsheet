@@ -105,6 +105,9 @@ def main(argv):
     parser.add_argument('--blankout', action='store_true',
                          help='blank out all fields not set in sheet')
 
+    parser.add_argument('--sheet', type=str, required=False,
+                         help='Gets sheet from google spreadsheet using the sheet Title')
+
     utils.get_common_options(parser)
 
     args = parser.parse_args()
@@ -129,7 +132,7 @@ def main(argv):
     # get and instance of the Csv2Dict class which must be initialized
     # with the name of an input data (csv) file
 
-    csv2dict = Csv2Dict(csv_data_file, blankout=args.blankout)
+    csv2dict = Csv2Dict(csv_data_file, blankout=args.blankout, sheet=args.sheet)
 
     if csv2dict.status != 0:
         print('The Csv2Dict constructor reported and error (%d).' % csv2dict.status)
