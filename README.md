@@ -51,9 +51,10 @@ Note with the following considerations:
 If using Google Sheets, download as tab separated value:
 
 <img width="642" alt="screen shot 2016-06-01 at 9 59 58 pm" src="https://cloud.githubusercontent.com/assets/227374/15734442/9421a0c8-2844-11e6-8179-27e4397e8c4d.png">
- 
 
-## 4. Import metadata in tab-delimited spreadsheet into Nuxeo 
+
+## 4. Import metadata into Nuxeo 
+### Import Metadata into Nuxeo using Tab-Delimited Spreadsheet (see below to import using Google Sheet)
 Load with `meta_from_csv.py`. This process will convert the metadata from the spreadsheet into Python dict outputs, and call pynux to import the Python dict outputs directly into Nuxeo.
 
 ```
@@ -65,7 +66,8 @@ optional arguments:
   --datafile DATAFILE  tab-delimited spreadsheet input file -- required
   -d, --dry-run        dry run
   --blankout           blank out all fields not set in sheet
-
+  --sheet SHEET        importants a specific named sheet from google spreadsheet
+  
 common options for pynux commands:
   --loglevel LOGLEVEL  CRITICAL ERROR WARNING INFO DEBUG NOTSET, default is
                        ERROR
@@ -79,6 +81,38 @@ or edit the shebang. If you're using miniconda within Windows, here's an overvie
 * Activate your python environment.  In this example, we're activating a python environment named "venv": `activate venv`
 * Go to nuxeo_spreadsheet\csv2dict in your home directory, e.g.: `cd C:\Users\yourname\nuxeo_spreadsheet\csv2dict`
 * Run the command.  In this example, the DATAFILE is the location of a tab-delimited file (named "tab-delimited-metadata.txt") that's on our Desktop. `python meta_from_csv.py --datafile C:\Users\yourname\Desktop\tab-delimited-metadata.txt`
+
+### Import Metadata into Nuxeo using Google Sheet
+Load with `meta_from_csv.py`. This process will convert the metadata from the spreadsheet into Python dict outputs, and call pynux to import the Python dict outputs directly into Nuxeo.
+
+```
+usage: meta_from_csv.py [-h] --datafile DATAFILE [-d] [--loglevel LOGLEVEL]
+                        [--rcfile RCFILE]
+
+optional arguments:
+  -h, --help           show this help message and exit
+  --datafile DATAFILE  tab-delimited spreadsheet input file -- required
+  -d, --dry-run        dry run
+  --blankout           blank out all fields not set in sheet
+  --sheet SHEET        importants a specific named sheet from google spreadsheet
+  
+common options for pynux commands:
+  --loglevel LOGLEVEL  CRITICAL ERROR WARNING INFO DEBUG NOTSET, default is
+                       ERROR
+  --rcfile RCFILE      path to ConfigParser compatible ini file
+```
+
+Note for Windows: you may need to run `python meta_from_csv.py ...`
+or edit the shebang. If you're using miniconda within Windows, here's an overview of the process:
+
+* Open the Command Prompt from the Start menu
+* Activate your python environment.  In this example, we're activating a python environment named "venv": `activate venv`
+* Go to nuxeo_spreadsheet\csv2dict in your home directory, e.g.: `cd C:\Users\yourname\nuxeo_spreadsheet\csv2dict`
+* Run the command.  In this example, the DATAFILE is the url of the Google Sheet. This command assumes that the first sheet (tab) in the spreadsheet is to be ingested. If there is another sheet (i.e. Sheet 2) which is the ingest sheet, skip this step and see note below. `python meta_from_csv.py --datafile https://docs.google.com/spreadsheets/d/12345`
+     
+     **IMPORTANT** If the sheet you want to ingest is not the first sheet in the spreadsheet you will need to run the command differently. `python meta_from_csv.py --datafile https://docs.google.com/spreadsheets/d/12345 --sheet 'Sheet Name'`
+     
+     If there are not spaces in the sheet name (i.e. SheetName), there does not need to be quotes surrounding the name. However if the sheet has spaces in the name (i.e. Sheet Name), quotes need to enclose the name when running the script.
 
 
 # `mets_example`
