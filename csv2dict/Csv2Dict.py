@@ -39,6 +39,7 @@ class Csv2Dict:
         self.meta_dicts = []
         self.blankout = blankout
         self.sheet = sheet
+        self.data = None
 
         self.meta_dict_properties_template = {}
 
@@ -135,9 +136,10 @@ class Csv2Dict:
         if self.blankout == True:
             return []
         else:
-            nx = utils.Nuxeo()
-            data = nx.get_metadata(path=filepath)
-            return data['properties']['ucldc_schema:{}'.format(metadata_path)]
+            if self.data == None:
+                nx = utils.Nuxeo()
+                self.data = nx.get_metadata(path=filepath)
+            return self.data['properties']['ucldc_schema:{}'.format(metadata_path)]
 
     def set_list_element(self, metadata_path, row_title, row, n):
         filepath = row['File path']
