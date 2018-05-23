@@ -138,7 +138,7 @@ class Csv2Dict:
             return []
         else:
             if self.data.get(filepath, None) == None:
-                self.data[filepath] = nx.get_metadata(path=filepath)
+                self.data[filepath] = self.nx.get_metadata(path=filepath)
             return self.data[filepath]['properties']['ucldc_schema:{}'.format(metadata_path)]
 
     def set_list_element(self, metadata_path, row_title, row, n):
