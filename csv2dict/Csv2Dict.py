@@ -25,7 +25,7 @@ class Csv2Dict:
 
 
 
-    def __init__(self, data_file, sheet, blankout=False):
+    def __init__(self, data_file, sheet, nx, blankout=False):
         '''
         The Csv2Dict class reads a csv data file, the first line of which contains column names. Succeeding
         lines represent rows of data. Initially the column names are used as the keys to a list of dicts, one
@@ -39,7 +39,8 @@ class Csv2Dict:
         self.meta_dicts = []
         self.blankout = blankout
         self.sheet = sheet
-        self.data = None
+        self.nx = nx
+        self.data = {}
 
         self.meta_dict_properties_template = {}
 
@@ -136,10 +137,9 @@ class Csv2Dict:
         if self.blankout == True:
             return []
         else:
-            if self.data == None:
-                nx = utils.Nuxeo()
-                self.data = nx.get_metadata(path=filepath)
-            return self.data['properties']['ucldc_schema:{}'.format(metadata_path)]
+            if self.data.get(filepath, None) == None:
+                self.data[filepath] = nx.get_metadata(path=filepath)
+            return self.data[filepath]['properties']['ucldc_schema:{}'.format(metadata_path)]
 
     def set_list_element(self, metadata_path, row_title, row, n):
         filepath = row['File path']

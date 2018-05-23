@@ -132,7 +132,7 @@ def main(argv):
     # get and instance of the Csv2Dict class which must be initialized
     # with the name of an input data (csv) file
 
-    csv2dict = Csv2Dict(csv_data_file, blankout=args.blankout, sheet=args.sheet)
+    csv2dict = Csv2Dict(csv_data_file, blankout=args.blankout, sheet=args.sheet, nx=nx)
 
     if csv2dict.status != 0:
         print('The Csv2Dict constructor reported and error (%d).' % csv2dict.status)
