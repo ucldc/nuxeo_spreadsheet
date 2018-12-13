@@ -2,7 +2,7 @@ This script gets all metadata from Nuxeo. It requires the prerequisite instructi
 
 1. run script
 
-        $ python nuxeo_get_metadata.py
+        $ python export_nuxeo.py
 
 1. Enter the filepath of nuxeo assets (i.e. /asset-library/UCLA/)
 
