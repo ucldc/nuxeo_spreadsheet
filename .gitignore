@@ -4,6 +4,3 @@
 **/.idea/*
 *.bak
 venv
-
-client_secret.json
-.DS_Store
