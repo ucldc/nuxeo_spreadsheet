@@ -15,13 +15,13 @@ class Test_CSVtoDict(unittest.TestCase):
         self.csv2dict.set_list_element('alternativetitle', 'Alternative Title', self.row_dicts[0], self.n)
         meta_dict = self.csv2dict.get_meta_dict(self.n)
         self.assertEqual(meta_dict['properties']['ucldc_schema:alternativetitle'], 
-            [u'Test Alternative Title 1', u'Alternative Title 2', u'Alternative Title 3'])
+            ['Test Alternative Title 1', 'Alternative Title 2', 'Alternative Title 3'])
     
     def test_loc_id(self):
         self.csv2dict.set_list_element('localidentifier', 'Local Identifier', self.row_dicts[0], self.n)
         meta_dict = self.csv2dict.get_meta_dict(self.n)
         self.assertEqual(meta_dict['properties']['ucldc_schema:localidentifier'], 
-            [u'Local Identifier 1'])
+            ['Local Identifier 1'])
     
     def test_campus_unit(self):
         self.csv2dict.set_list_element('campusunit', 'Campus/Unit', self.row_dicts[0], self.n)
@@ -32,41 +32,41 @@ class Test_CSVtoDict(unittest.TestCase):
         self.csv2dict.set_list_element('publisher', 'Publication/Origination Info', self.row_dicts[0], self.n)
         meta_dict = self.csv2dict.get_meta_dict(self.n)
         self.assertEqual(meta_dict['properties']['ucldc_schema:publisher'], 
-            [u'Publisher:Publication Location'])
+            ['Publisher:Publication Location'])
             
     def test_temporal_coverage(self):
         self.csv2dict.set_list_element('temporalcoverage', 'Temporal Coverage', self.row_dicts[0], self.n)
         meta_dict = self.csv2dict.get_meta_dict(self.n)
         self.assertEqual(meta_dict['properties']['ucldc_schema:temporalcoverage'], 
-            [u'(34.052234, -118.243685)'])
+            ['(34.052234, -118.243685)'])
     
     def test_collection(self):
         self.csv2dict.set_list_element('collection', 'Collection', self.row_dicts[0], self.n)
         meta_dict = self.csv2dict.get_meta_dict(self.n)
         self.assertEqual(meta_dict['properties']['ucldc_schema:collection'], 
-            [u'Collection 2'])
+            ['Collection 2'])
      
     def test_related_resource(self):
         self.csv2dict.set_list_element('relatedresource', 'Related Resource', self.row_dicts[0], self.n)
         meta_dict = self.csv2dict.get_meta_dict(self.n)
         self.assertEqual(meta_dict['properties']['ucldc_schema:relatedresource'], 
-            [u'Related Resource 1', u'Related Resource 2', u'Related Resource 23']) 
+            ['Related Resource 1', 'Related Resource 2', 'Related Resource 23']) 
     
     def test_provenance(self):
         self.csv2dict.set_list_element('provenance', 'Provenance', self.row_dicts[0], self.n)
         meta_dict = self.csv2dict.get_meta_dict(self.n)
         self.assertEqual(meta_dict['properties']['ucldc_schema:provenance'], 
-            [u'https://provenance.test']) 
+            ['https://provenance.test']) 
    
     def test_date(self):
         self.csv2dict.set_dict_element('date', 'Date ', self.row_dicts[0], self.n)
         meta_dict = self.csv2dict.get_meta_dict(self.n)
         self.assertEqual(meta_dict['properties']['ucldc_schema:date'], 
-            [{'date': u"1990",
-            'datetype': u"Date 1 Type",
-            'inclusivestart': u"1990",
-            'inclusiveend': u"",
-            'single': u""}]) 
+            [{'date': "1990",
+            'datetype': "Date 1 Type",
+            'inclusivestart': "1990",
+            'inclusiveend': "",
+            'single': ""}]) 
     
     def test_creator(self):
         self.csv2dict.set_dict_element('creator', 'Creator ', self.row_dicts[0], self.n)
@@ -108,7 +108,7 @@ class Test_CSVtoDict(unittest.TestCase):
         self.csv2dict.set_dict_element('subjectname', 'Subject (Name) ', self.row_dicts[0], self.n)
         meta_dict = self.csv2dict.get_meta_dict(self.n)
         self.assertEqual(meta_dict['properties']['ucldc_schema:subjectname'], 
-            [{u'name': '',
+            [{'name': '',
             'nametype': 'Subject (Name) 1 Name Type',
             'role': 'Subject (Name) 1 Role',
             'source': '',
@@ -126,7 +126,7 @@ class Test_CSVtoDict(unittest.TestCase):
             ]) 
     
     def test_form_genre(self):
-        print(self.n)
+        print((self.n))
         self.csv2dict.set_dict_element('formgenre', 'Form/Genre ', self.row_dicts[0], self.n)
         meta_dict = self.csv2dict.get_meta_dict(self.n)
         #print(meta_dict['properties'])
@@ -152,7 +152,7 @@ class Test_CSVtoDict(unittest.TestCase):
             ])
     
     def test_rights_holder(self):
-        print(self.n)
+        print((self.n))
         self.csv2dict.set_dict_element('rightsholder', 'Copyright Holder ', self.row_dicts[0], self.n)
         meta_dict = self.csv2dict.get_meta_dict(self.n)
         #print(meta_dict['properties'])
