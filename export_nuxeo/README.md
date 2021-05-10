@@ -1,3 +1,5 @@
+python 2
+
 This script gets all metadata from Nuxeo. It requires the prerequisite instructions from nuxeo_spreadsheet to be followed: https://github.com/ucldc/nuxeo_spreadsheet/wiki. If writing to a Google sheet, make sure to follow step 3.
 
 1. run script
