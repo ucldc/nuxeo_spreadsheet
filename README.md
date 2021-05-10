@@ -1,6 +1,8 @@
 # Prerequisites
 [Follow these instructions first](https://github.com/ucldc/nuxeo_spreadsheet/wiki), to install the prerequisites to run `nuxeo_spreadsheet`. 
 
+**Python 3** version
+
 
 # Using `nuxeo_spreadsheet`
 `nuxeo_spreadsheet` constitutes a set of prototype Python scripts ("csv2dict"), which can be used to import metadata in a tab-delimited spreadsheet into  Nuxeo. Note that comma separated value-based spreadsheets (CSV) are not supported ("csv2dict" is a misnomer).

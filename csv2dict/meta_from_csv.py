@@ -3,8 +3,9 @@
 __author__ = 'glen'
 
 import sys
-reload(sys)
-sys.setdefaultencoding("utf8")
+import importlib
+#importlib.reload(sys)
+#sys.setdefaultencoding("utf8")
 
 
 import argparse
@@ -17,7 +18,7 @@ def process_rows( csv2dict):
     row_dicts = csv2dict.get_row_dicts()
 
     for n in range(len(row_dicts)):
-        print 'Metarow%3d) %s' % (n, str(row_dicts[n]))
+        print('Metarow%3d) %s' % (n, str(row_dicts[n])))
 
     for row in row_dicts:
         '''
@@ -32,26 +33,26 @@ def process_rows( csv2dict):
         csv2dict.set_title(row['Title'], n)
 
         num = 1
-        while 'Alternative Title %d' % num in row.keys():
+        while 'Alternative Title %d' % num in list(row.keys()):
             csv2dict.set_alt_title(row['Alternative Title %d' % num], n)
             num += 1
 
         csv2dict.set_id(row['Identifier'], n)
 
         num = 1
-        while 'Local Identifier %d' % num in row.keys():
+        while 'Local Identifier %d' % num in list(row.keys()):
             csv2dict.set_local_id(row['Local Identifier %d' % num], n)
             num += 1
 
         csv2dict.set_type(row['Type'], n)
 
         num = 1
-        while 'Campus/Unit %d' % num in row.keys():
+        while 'Campus/Unit %d' % num in list(row.keys()):
             csv2dict.set_campus_unit(row['Campus/Unit %d' % num], n)
             num += 1
 
         num = 1
-        while 'Date %d' % num in row.keys():
+        while 'Date %d' % num in list(row.keys()):
             csv2dict.set_date(row['Date %d' % num],
                                  row['Date %d Type' % num],
                                  row['Date %d Inclusive Start' % num],
@@ -60,12 +61,12 @@ def process_rows( csv2dict):
             num += 1
 
         num = 1
-        while 'Publication/Origination Info %d' % num in row.keys():
+        while 'Publication/Origination Info %d' % num in list(row.keys()):
             csv2dict.set_publication_origination(row['Publication/Origination Info %d' % num], n)
             num += 1
 
         num = 1
-        while 'Creator %d Name' % num in row.keys():
+        while 'Creator %d Name' % num in list(row.keys()):
             csv2dict.set_creator(row['Creator %d Name' % num],
                                  row['Creator %d Name Type' % num],
                                  row['Creator %d Role' % num],
@@ -74,7 +75,7 @@ def process_rows( csv2dict):
             num += 1
 
         num = 1
-        while 'Contributor %d Name' % num in row.keys():
+        while 'Contributor %d Name' % num in list(row.keys()):
             csv2dict.set_contributor(row['Contributor %d Name' % num],
                                  row['Contributor %d Name Type' % num],
                                  row['Contributor %d Role' % num],
@@ -85,7 +86,7 @@ def process_rows( csv2dict):
         csv2dict.set_physdesc(row['Format/Physical Description'], n)
 
         num = 1
-        while 'Description %d Note' % num in row.keys():
+        while 'Description %d Note' % num in list(row.keys()):
             csv2dict.set_description(row['Description %d Note' % num],
                                      row['Description %d Type' % num], n)
             num += 1
@@ -93,13 +94,13 @@ def process_rows( csv2dict):
         csv2dict.set_extent(row['Extent'], n)
 
         num = 1
-        while 'Language %d' % num in row.keys():
+        while 'Language %d' % num in list(row.keys()):
             csv2dict.set_language(row['Language %d' % num],
                                      row['Language %d Code' % num], n)
             num += 1
 
         num = 1
-        while 'Temporal Coverage %d' % num in row.keys():
+        while 'Temporal Coverage %d' % num in list(row.keys()):
             csv2dict.set_temporal_coverage(row['Temporal Coverage %d' % num], n)
             num += 1
 
@@ -109,7 +110,7 @@ def process_rows( csv2dict):
         csv2dict.set_rights_status(row['Copyright Status'], n)
 
         num = 1
-        while 'Copyright Holder %d Name' % num in row.keys():
+        while 'Copyright Holder %d Name' % num in list(row.keys()):
             csv2dict.set_rights_holder(row['Copyright Holder %d Name' % num],
                                    row['Copyright Holder %d Name Type' % num],
                                    row['Copyright Holder %d Source' % num],
@@ -125,19 +126,19 @@ def process_rows( csv2dict):
         csv2dict.set_rights_note(row['Copyright Note'], n)
 
         num = 1
-        while 'Collection %d' % num in row.keys():
+        while 'Collection %d' % num in list(row.keys()):
             csv2dict.set_collection(row['Collection %d' % num], n)
             num += 1
 
         num = 1
-        while 'Related Resource %d' % num in row.keys():
+        while 'Related Resource %d' % num in list(row.keys()):
             csv2dict.set_related_resource(row['Related Resource %d' % num], n)
             num += 1
 
         csv2dict.set_source(row['Source'], n)
 
         num = 1
-        while 'Subject (Name) %d Name' % num in row.keys():
+        while 'Subject (Name) %d Name' % num in list(row.keys()):
             csv2dict.set_subject_name(row['Subject (Name) %d Name' % num],
                                       row['Subject (Name) %d Name Type' % num],
                                       row['Subject (Name) %d Role' % num],
@@ -146,7 +147,7 @@ def process_rows( csv2dict):
             num += 1
 
         num = 1
-        while 'Place %d Name' % num in row.keys():
+        while 'Place %d Name' % num in list(row.keys()):
             csv2dict.set_place(row['Place %d Name' % num],
                                row['Place %d Source' % num],
                                row['Place %d Coordinates' % num],
@@ -154,8 +155,8 @@ def process_rows( csv2dict):
             num += 1
 
         num = 1
-        while 'Subject (Topic) %d Heading' % num in row.keys():
-            print "Calling set_subject_topic with: %s" % 'Subject (Topic) %d Heading' % num
+        while 'Subject (Topic) %d Heading' % num in list(row.keys()):
+            print("Calling set_subject_topic with: %s" % 'Subject (Topic) %d Heading' % num)
             csv2dict.set_subject_topic(row['Subject (Topic) %d Heading' % num],
                                        row['Subject (Topic) %d Heading Type' % num],
                                        row['Subject (Topic) %d Source' % num],
@@ -163,14 +164,14 @@ def process_rows( csv2dict):
             num += 1
 
         num = 1
-        while 'Form/Genre %d Heading' % num in row.keys():
+        while 'Form/Genre %d Heading' % num in list(row.keys()):
             csv2dict.set_form_genre(row['Form/Genre %d Heading' % num],
                                     row['Form/Genre %d Source' % num],
                                     row['Form/Genre %d Authority ID' % num], n)
             num += 1
 
         num = 1
-        while 'Provenance %d' % num in row.keys():
+        while 'Provenance %d' % num in list(row.keys()):
             csv2dict.set_provenance(row['Provenance %d' % num], n)
             num += 1
 
@@ -195,13 +196,13 @@ def main(argv):
     try:
         assert os.path.isfile( args.datafile )
     except AssertionError:
-        print "Not a file: ", args.datafile
+        print("Not a file: ", args.datafile)
         sys.exit(2)
 
     csv_data_file = args.datafile
-    print csv_data_file
-    print args.rcfile
-    print args.loglevel
+    print(csv_data_file)
+    print(args.rcfile)
+    print(args.loglevel)
 
     nx = utils.Nuxeo(rcfile=args.rcfile, loglevel=args.loglevel.upper())
     nuxeo_limit = 24
@@ -212,19 +213,19 @@ def main(argv):
     csv2dict = Csv2Dict(csv_data_file, blankout=args.blankout)
 
     if csv2dict.status != 0:
-        print 'The Csv2Dict constructor reported and error (%d).' % csv2dict.status
+        print('The Csv2Dict constructor reported and error (%d).' % csv2dict.status)
         sys.exit(csv2dict.status)
 
     process_rows(csv2dict)
 
     for n in range(csv2dict.get_meta_dict_length()):
-        print "Loading payload %d" % n
+        print("Loading payload %d" % n)
         payload = csv2dict.get_meta_dict(n)
-        print payload
-        print payload['path']
+        print(payload)
+        print(payload['path'])
         if not args.dry_run:
             uid = nx.get_uid(payload['path'])
-            print "Returned UID: %d) %s." % (n, uid)
+            print("Returned UID: %d) %s." % (n, uid))
             nx.update_nuxeo_properties(payload, path=payload['path'])
 
     # csv2dict.print_meta_dicts('LOGS/latest_output.txt')
