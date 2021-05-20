@@ -291,8 +291,8 @@ def get_language(data2, x, all_headers):
                 pass
             try:
                 name = "Language %d Code" % numb
-                if x['properties']['ucldc_schema:language'][langnumb]['code'] != None and x['properties']['ucldc_schema:language'][langnumb]['code'] != '':
-                    data2[name] = x['properties']['ucldc_schema:language'][langnumb]['code']
+                if x['properties']['ucldc_schema:language'][langnumb]['languagecode'] != None and x['properties']['ucldc_schema:language'][langnumb]['languagecode'] != '':
+                    data2[name] = x['properties']['ucldc_schema:language'][langnumb]['languagecode']
                 elif all_headers == 'y' or all_headers == 'Y':
                     data2[name] = ''
             except:
