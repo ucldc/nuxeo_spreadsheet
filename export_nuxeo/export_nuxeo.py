@@ -54,7 +54,7 @@ def get_type(data2, x, all_headers):
     """gets type,
     inputs are dictionary (data2), nuxeo (x), all_headers input
     """
-    if x['properties']['ucldc_schema:type'] != None and x['properties'][
+    if x['properties']['ucldc_schema:type'] is not None and x['properties'][
             'ucldc_schema:type'] != '':
         data2['Type'] = x['properties']['ucldc_schema:type']
     elif all_headers == 'y':
@@ -77,8 +77,8 @@ def get_alt_title(data2, x, all_headers):
 
 
 def get_identifier(data2, x, all_headers):
-    if x['properties']['ucldc_schema:identifier'] != None and x['properties'][
-            'ucldc_schema:identifier'] != '':
+    if x['properties']['ucldc_schema:identifier'] is not None and x[
+            'properties']['ucldc_schema:identifier'] != '':
         data2['Identifier'] = x['properties']['ucldc_schema:identifier']
     elif all_headers == 'y':
         data2['Identifier'] = ''
@@ -122,7 +122,7 @@ def get_date(data2, x, all_headers):
             try:
                 name = 'Date %d' % numb
                 if x['properties']['ucldc_schema:date'][datenumb][
-                        'date'] != None and x['properties'][
+                        'date'] is not None and x['properties'][
                             'ucldc_schema:date'][datenumb]['date'] != '':
                     data2[name] = x['properties']['ucldc_schema:date'][
                         datenumb]['date']
@@ -133,7 +133,7 @@ def get_date(data2, x, all_headers):
             try:
                 name = 'Date %d Type' % numb
                 if x['properties']['ucldc_schema:date'][datenumb][
-                        'datetype'] != None and x['properties'][
+                        'datetype'] is not None and x['properties'][
                             'ucldc_schema:date'][datenumb]['datetype'] != '':
                     data2[name] = x['properties']['ucldc_schema:date'][
                         datenumb]['datetype']
@@ -144,7 +144,7 @@ def get_date(data2, x, all_headers):
             try:
                 name = 'Date %d Inclusive Start' % numb
                 if x['properties']['ucldc_schema:date'][datenumb][
-                        'inclusivestart'] != None and x['properties'][
+                        'inclusivestart'] is not None and x['properties'][
                             'ucldc_schema:date'][datenumb][
                                 'inclusivestart'] != '':
                     data2[name] = x['properties']['ucldc_schema:date'][
@@ -156,7 +156,7 @@ def get_date(data2, x, all_headers):
             try:
                 name = 'Date %d Inclusive End' % numb
                 if x['properties']['ucldc_schema:date'][datenumb][
-                        'inclusiveend'] != None and x['properties'][
+                        'inclusiveend'] is not None and x['properties'][
                             'ucldc_schema:date'][datenumb][
                                 'inclusiveend'] != '':
                     data2[name] = x['properties']['ucldc_schema:date'][
@@ -168,7 +168,7 @@ def get_date(data2, x, all_headers):
             try:
                 name = 'Date %d Single' % numb
                 if x['properties']['ucldc_schema:date'][datenumb][
-                        'single'] != None and x['properties'][
+                        'single'] is not None and x['properties'][
                             'ucldc_schema:date'][datenumb]['single'] != '':
                     data2[name] = x['properties']['ucldc_schema:date'][
                         datenumb]['single']
@@ -207,7 +207,7 @@ def get_creator(data2, x, all_headers):
             try:
                 name = 'Creator %d Name' % numb
                 if x['properties']['ucldc_schema:creator'][creatnumb][
-                        'name'] != None and x['properties'][
+                        'name'] is not None and x['properties'][
                             'ucldc_schema:creator'][creatnumb]['name'] != '':
                     data2[name] = x['properties']['ucldc_schema:creator'][
                         creatnumb]['name']
@@ -218,7 +218,7 @@ def get_creator(data2, x, all_headers):
             try:
                 name = 'Creator %d Name Type' % numb
                 if x['properties']['ucldc_schema:creator'][creatnumb][
-                        'nametype'] != None and x['properties'][
+                        'nametype'] is not None and x['properties'][
                             'ucldc_schema:creator'][creatnumb][
                                 'nametype'] != '':
                     data2[name] = x['properties']['ucldc_schema:creator'][
@@ -230,7 +230,7 @@ def get_creator(data2, x, all_headers):
             try:
                 name = 'Creator %d Role' % numb
                 if x['properties']['ucldc_schema:creator'][creatnumb][
-                        'role'] != None and x['properties'][
+                        'role'] is not None and x['properties'][
                             'ucldc_schema:creator'][creatnumb]['role'] != '':
                     data2[name] = x['properties']['ucldc_schema:creator'][
                         creatnumb]['role']
@@ -241,7 +241,7 @@ def get_creator(data2, x, all_headers):
             try:
                 name = 'Creator %d Source' % numb
                 if x['properties']['ucldc_schema:creator'][creatnumb][
-                        'source'] != None and x['properties'][
+                        'source'] is not None and x['properties'][
                             'ucldc_schema:creator'][creatnumb]['source'] != '':
                     data2[name] = x['properties']['ucldc_schema:creator'][
                         creatnumb]['source']
@@ -252,7 +252,7 @@ def get_creator(data2, x, all_headers):
             try:
                 name = 'Creator %d Authority ID' % numb
                 if x['properties']['ucldc_schema:creator'][creatnumb][
-                        'authorityid'] != None and x['properties'][
+                        'authorityid'] is not None and x['properties'][
                             'ucldc_schema:creator'][creatnumb][
                                 'authorityid'] != '':
                     data2[name] = x['properties']['ucldc_schema:creator'][
@@ -280,7 +280,7 @@ def get_contributor(data2, x, all_headers):
             try:
                 name = 'Contributor %d Name' % numb
                 if x['properties']['ucldc_schema:contributor'][contnumb][
-                        'name'] != None and x['properties'][
+                        'name'] is not None and x['properties'][
                             'ucldc_schema:contributor'][contnumb]['name'] != '':
                     data2[name] = x['properties']['ucldc_schema:contributor'][
                         contnumb]['name']
@@ -291,7 +291,7 @@ def get_contributor(data2, x, all_headers):
             try:
                 name = 'Contributor %d Name Type' % numb
                 if x['properties']['ucldc_schema:contributor'][contnumb][
-                        'nametype'] != None and x['properties'][
+                        'nametype'] is not None and x['properties'][
                             'ucldc_schema:contributor'][contnumb][
                                 'nametype'] != '':
                     data2[name] = x['properties']['ucldc_schema:contributor'][
@@ -303,7 +303,7 @@ def get_contributor(data2, x, all_headers):
             try:
                 name = 'Contributor %d Role' % numb
                 if x['properties']['ucldc_schema:contributor'][contnumb][
-                        'role'] != None and x['properties'][
+                        'role'] is not None and x['properties'][
                             'ucldc_schema:contributor'][contnumb]['role'] != '':
                     data2[name] = x['properties']['ucldc_schema:contributor'][
                         contnumb]['role']
@@ -314,7 +314,7 @@ def get_contributor(data2, x, all_headers):
             try:
                 name = 'Contributor %d Source' % numb
                 if x['properties']['ucldc_schema:contributor'][contnumb][
-                        'source'] != None and x['properties'][
+                        'source'] is not None and x['properties'][
                             'ucldc_schema:contributor'][contnumb][
                                 'source'] != '':
                     data2[name] = x['properties']['ucldc_schema:contributor'][
@@ -326,7 +326,7 @@ def get_contributor(data2, x, all_headers):
             try:
                 name = 'Contributor %d Authority ID' % numb
                 if x['properties']['ucldc_schema:contributor'][contnumb][
-                        'authorityid'] != None and x['properties'][
+                        'authorityid'] is not None and x['properties'][
                             'ucldc_schema:contributor'][contnumb][
                                 'authorityid'] != '':
                     data2[name] = x['properties']['ucldc_schema:contributor'][
@@ -345,8 +345,8 @@ def get_contributor(data2, x, all_headers):
 
 
 def get_format(data2, x, all_headers):
-    if x['properties']['ucldc_schema:physdesc'] != None and x['properties'][
-            'ucldc_schema:physdesc'] != '':
+    if x['properties']['ucldc_schema:physdesc'] is not None and x[
+            'properties']['ucldc_schema:physdesc'] != '':
         data2['Format/Physical Description'] = x['properties'][
             'ucldc_schema:physdesc']
     elif all_headers == 'y':
@@ -363,7 +363,7 @@ def get_description(data2, x, all_headers):
             try:
                 name = "Description %d Note" % numb
                 if x['properties']['ucldc_schema:description'][descnumb][
-                        'item'] != None and x['properties'][
+                        'item'] is not None and x['properties'][
                             'ucldc_schema:description'][descnumb]['item'] != '':
                     data2[name] = x['properties']['ucldc_schema:description'][
                         descnumb]['item']
@@ -374,7 +374,7 @@ def get_description(data2, x, all_headers):
             try:
                 name = "Description %d Type" % numb
                 if x['properties']['ucldc_schema:description'][descnumb][
-                        'type'] != None and x['properties'][
+                        'type'] is not None and x['properties'][
                             'ucldc_schema:description'][descnumb]['type'] != '':
                     data2[name] = x['properties']['ucldc_schema:description'][
                         descnumb]['type']
@@ -389,7 +389,7 @@ def get_description(data2, x, all_headers):
 
 
 def get_extent(data2, x, all_headers):
-    if x['properties']['ucldc_schema:extent'] != None and x['properties'][
+    if x['properties']['ucldc_schema:extent'] is not None and x['properties'][
             'ucldc_schema:extent'] != '':
         data2['Extent'] = x['properties']['ucldc_schema:extent']
     elif all_headers == 'y':
@@ -405,7 +405,7 @@ def get_language(data2, x, all_headers):
             try:
                 name = "Language %d" % numb
                 if x['properties']['ucldc_schema:language'][langnumb][
-                        'language'] != None and x['properties'][
+                        'language'] is not None and x['properties'][
                             'ucldc_schema:language'][langnumb][
                                 'language'] != '':
                     data2[name] = x['properties']['ucldc_schema:language'][
@@ -417,7 +417,7 @@ def get_language(data2, x, all_headers):
             try:
                 name = "Language %d Code" % numb
                 if x['properties']['ucldc_schema:language'][langnumb][
-                        'languagecode'] != None and x['properties'][
+                        'languagecode'] is not None and x['properties'][
                             'ucldc_schema:language'][langnumb][
                                 'languagecode'] != '':
                     data2[name] = x['properties']['ucldc_schema:language'][
@@ -448,7 +448,7 @@ def get_temporal_coverage(data2, x, all_headers):
 
 
 def get_transcription(data2, x, all_headers):
-    if x['properties']['ucldc_schema:transcription'] != None and x[
+    if x['properties']['ucldc_schema:transcription'] is not None and x[
             'properties']['ucldc_schema:transcription'] != '':
         data2['Transcription'] = x['properties']['ucldc_schema:transcription']
     elif all_headers == 'y':
@@ -456,7 +456,7 @@ def get_transcription(data2, x, all_headers):
 
 
 def get_access_restrictions(data2, x, all_headers):
-    if x['properties']['ucldc_schema:accessrestrict'] != None and x[
+    if x['properties']['ucldc_schema:accessrestrict'] is not None and x[
             'properties']['ucldc_schema:accessrestrict'] != '':
         data2['Access Restrictions'] = x['properties'][
             'ucldc_schema:accessrestrict']
@@ -465,7 +465,7 @@ def get_access_restrictions(data2, x, all_headers):
 
 
 def get_rights_statement(data2, x, all_headers):
-    if x['properties']['ucldc_schema:rightsstatement'] != None and x[
+    if x['properties']['ucldc_schema:rightsstatement'] is not None and x[
             'properties']['ucldc_schema:rightsstatement'] != '':
         data2['Copyright Statement'] = x['properties'][
             'ucldc_schema:rightsstatement']
@@ -474,7 +474,7 @@ def get_rights_statement(data2, x, all_headers):
 
 
 def get_rights_status(data2, x, all_headers):
-    if x['properties']['ucldc_schema:rightsstatus'] != None and x[
+    if x['properties']['ucldc_schema:rightsstatus'] is not None and x[
             'properties']['ucldc_schema:rightsstatus'] != '':
         data2['Copyright Status'] = x['properties'][
             'ucldc_schema:rightsstatus']
@@ -492,7 +492,7 @@ def get_copyright_holder(data2, x, all_headers):
             try:
                 name = 'Copyright Holder %d Name' % numb
                 if x['properties']['ucldc_schema:rightsholder'][rightsnumb][
-                        'name'] != None and x['properties'][
+                        'name'] is not None and x['properties'][
                             'ucldc_schema:rightsholder'][rightsnumb][
                                 'name'] != '':
                     data2[name] = x['properties']['ucldc_schema:rightsholder'][
@@ -504,7 +504,7 @@ def get_copyright_holder(data2, x, all_headers):
             try:
                 name = 'Copyright Holder %d Name Type' % numb
                 if x['properties']['ucldc_schema:rightsholder'][rightsnumb][
-                        'nametype'] != None and x['properties'][
+                        'nametype'] is not None and x['properties'][
                             'ucldc_schema:rightsholder'][rightsnumb][
                                 'nametype'] != '':
                     data2[name] = x['properties']['ucldc_schema:rightsholder'][
@@ -516,7 +516,7 @@ def get_copyright_holder(data2, x, all_headers):
             try:
                 name = 'Copyright Holder %d Source' % numb
                 if x['properties']['ucldc_schema:rightsholder'][rightsnumb][
-                        'source'] != None and x['properties'][
+                        'source'] is not None and x['properties'][
                             'ucldc_schema:rightsholder'][rightsnumb][
                                 'source'] != '':
                     data2[name] = x['properties']['ucldc_schema:rightsholder'][
@@ -528,7 +528,7 @@ def get_copyright_holder(data2, x, all_headers):
             try:
                 name = 'Copyright Holder %d Authority ID' % numb
                 if x['properties']['ucldc_schema:rightsholder'][rightsnumb][
-                        'authorityid'] != None and x['properties'][
+                        'authorityid'] is not None and x['properties'][
                             'ucldc_schema:rightsholder'][rightsnumb][
                                 'authorityid'] != '':
                     data2[name] = x['properties']['ucldc_schema:rightsholder'][
@@ -546,50 +546,51 @@ def get_copyright_holder(data2, x, all_headers):
 
 
 def get_copyright_info(data2, x, all_headers):
-    if x['properties']['ucldc_schema:rightscontact'] != None and x[
+    if x['properties']['ucldc_schema:rightscontact'] is not None and x[
             'properties']['ucldc_schema:rightscontact'] != '':
         data2['Copyright Contact'] = x['properties'][
             'ucldc_schema:rightscontact']
     elif all_headers == 'y':
         data2['Copyright Contact'] = ''
 
-    if x['properties']['ucldc_schema:rightsnotice'] != None and x[
+    if x['properties']['ucldc_schema:rightsnotice'] is not None and x[
             'properties']['ucldc_schema:rightsnotice'] != '':
         data2['Copyright Notice'] = x['properties'][
             'ucldc_schema:rightsnotice']
     elif all_headers == 'y':
         data2['Copyright Notice'] = ''
 
-    if x['properties']['ucldc_schema:rightsdeterminationdate'] != None and x[
-            'properties']['ucldc_schema:rightsdeterminationdate'] != '':
+    if x['properties'][
+            'ucldc_schema:rightsdeterminationdate'] is not None and x[
+                'properties']['ucldc_schema:rightsdeterminationdate'] != '':
         data2['Copyright Determination Date'] = x['properties'][
             'ucldc_schema:rightsdeterminationdate']
     elif all_headers == 'y':
         data2['Copyright Determination Date'] = ''
 
-    if x['properties']['ucldc_schema:rightsstartdate'] != None and x[
+    if x['properties']['ucldc_schema:rightsstartdate'] is not None and x[
             'properties']['ucldc_schema:rightsstartdate'] != '':
         data2['Copyright Start Date'] = x['properties'][
             'ucldc_schema:rightsstartdate']
     elif all_headers == 'y':
         data2['Copyright Start Date'] = ''
 
-    if x['properties']['ucldc_schema:rightsenddate'] != None and x[
+    if x['properties']['ucldc_schema:rightsenddate'] is not None and x[
             'properties']['ucldc_schema:rightsenddate'] != '':
         data2['Copyright End Date'] = x['properties'][
             'ucldc_schema:rightsenddate']
     elif all_headers == 'y':
         data2['Copyright End Date'] = ''
 
-    if x['properties']['ucldc_schema:rightsjurisdiction'] != None and x[
+    if x['properties']['ucldc_schema:rightsjurisdiction'] is not None and x[
             'properties']['ucldc_schema:rightsjurisdiction'] != '':
         data2['Copyright Jurisdiction'] = x['properties'][
             'ucldc_schema:rightsjurisdiction']
     elif all_headers == 'y':
         data2['Copyright Jurisdiction'] = ''
 
-    if x['properties']['ucldc_schema:rightsnote'] != None and x['properties'][
-            'ucldc_schema:rightsnote'] != '':
+    if x['properties']['ucldc_schema:rightsnote'] is not None and x[
+            'properties']['ucldc_schema:rightsnote'] != '':
         data2['Copyright Note'] = x['properties']['ucldc_schema:rightsnote']
     elif all_headers == 'y':
         data2['Copyright Note'] = ''
@@ -625,7 +626,7 @@ def get_related_resource(data2, x, all_headers):
 
 
 def get_source(data2, x, all_headers):
-    if x['properties']['ucldc_schema:source'] != None and x['properties'][
+    if x['properties']['ucldc_schema:source'] is not None and x['properties'][
             'ucldc_schema:source'] != '':
         data2['Source'] = x['properties']['ucldc_schema:source']
     elif all_headers == 'y':
@@ -642,7 +643,7 @@ def get_subject_name(data2, x, all_headers):
             try:
                 name = 'Subject (Name) %d Name' % numb
                 if x['properties']['ucldc_schema:subjectname'][subnumb][
-                        'name'] != None and x['properties'][
+                        'name'] is not None and x['properties'][
                             'ucldc_schema:subjectname'][subnumb]['name'] != '':
                     data2[name] = x['properties']['ucldc_schema:subjectname'][
                         subnumb]['name']
@@ -653,7 +654,7 @@ def get_subject_name(data2, x, all_headers):
             try:
                 name = 'Subject (Name) %d Name Type' % numb
                 if x['properties']['ucldc_schema:subjectname'][subnumb][
-                        'name_type'] != None and x['properties'][
+                        'name_type'] is not None and x['properties'][
                             'ucldc_schema:subjectname'][subnumb][
                                 'name_type'] != '':
                     data2[name] = x['properties']['ucldc_schema:subjectname'][
@@ -665,7 +666,7 @@ def get_subject_name(data2, x, all_headers):
             try:
                 name = 'Subject (Name) %d Role' % numb
                 if x['properties']['ucldc_schema:subjectname'][subnumb][
-                        'role'] != None and x['properties'][
+                        'role'] is not None and x['properties'][
                             'ucldc_schema:subjectname'][subnumb]['role'] != '':
                     data2[name] = x['properties']['ucldc_schema:subjectname'][
                         subnumb]['role']
@@ -676,7 +677,7 @@ def get_subject_name(data2, x, all_headers):
             try:
                 name = 'Subject (Name) %d Source' % numb
                 if x['properties']['ucldc_schema:subjectname'][subnumb][
-                        'source'] != None and x['properties'][
+                        'source'] is not None and x['properties'][
                             'ucldc_schema:subjectname'][subnumb][
                                 'source'] != '':
                     data2[name] = x['properties']['ucldc_schema:subjectname'][
@@ -688,7 +689,7 @@ def get_subject_name(data2, x, all_headers):
             try:
                 name = 'Subject (Name) %d Authority ID' % numb
                 if x['properties']['ucldc_schema:subjectname'][subnumb][
-                        'authorityid'] != None and x['properties'][
+                        'authorityid'] is not None and x['properties'][
                             'ucldc_schema:subjectname'][subnumb][
                                 'authorityid'] != '':
                     data2[name] = x['properties']['ucldc_schema:subjectname'][
@@ -715,7 +716,7 @@ def get_place(data2, x, all_headers):
             try:
                 name = 'Place %d Name' % numb
                 if x['properties']['ucldc_schema:place'][plcnumb][
-                        'name'] != None and x['properties'][
+                        'name'] is not None and x['properties'][
                             'ucldc_schema:place'][plcnumb]['name'] != '':
                     data2[name] = x['properties']['ucldc_schema:place'][
                         plcnumb]['name']
@@ -726,7 +727,7 @@ def get_place(data2, x, all_headers):
             try:
                 name = 'Place %d Coordinates' % numb
                 if x['properties']['ucldc_schema:place'][plcnumb][
-                        'coordinates'] != None and x['properties'][
+                        'coordinates'] is not None and x['properties'][
                             'ucldc_schema:place'][plcnumb]['coordinates'] != '':
                     data2[name] = x['properties']['ucldc_schema:place'][
                         plcnumb]['coordinates']
@@ -737,7 +738,7 @@ def get_place(data2, x, all_headers):
             try:
                 name = 'Place %d Source' % numb
                 if x['properties']['ucldc_schema:place'][plcnumb][
-                        'source'] != None and x['properties'][
+                        'source'] is not None and x['properties'][
                             'ucldc_schema:place'][plcnumb]['source'] != '':
                     data2[name] = x['properties']['ucldc_schema:place'][
                         plcnumb]['source']
@@ -748,7 +749,7 @@ def get_place(data2, x, all_headers):
             try:
                 name = 'Place %d Authority ID' % numb
                 if x['properties']['ucldc_schema:place'][plcnumb][
-                        'authorityid'] != None and x['properties'][
+                        'authorityid'] is not None and x['properties'][
                             'ucldc_schema:place'][plcnumb]['authorityid'] != '':
                     data2[name] = x['properties']['ucldc_schema:place'][
                         plcnumb]['authorityid']
@@ -774,7 +775,7 @@ def get_subject_topic(data2, x, all_headers):
             try:
                 name = 'Subject (Topic) %d Heading' % numb
                 if x['properties']['ucldc_schema:subjecttopic'][topnumb][
-                        'heading'] != None and x['properties'][
+                        'heading'] is not None and x['properties'][
                             'ucldc_schema:subjecttopic'][topnumb][
                                 'heading'] != '':
                     data2[name] = x['properties']['ucldc_schema:subjecttopic'][
@@ -786,7 +787,7 @@ def get_subject_topic(data2, x, all_headers):
             try:
                 name = 'Subject (Topic) %d Heading Type' % numb
                 if x['properties']['ucldc_schema:subjecttopic'][topnumb][
-                        'headingtype'] != None and x['properties'][
+                        'headingtype'] is not None and x['properties'][
                             'ucldc_schema:subjecttopic'][topnumb][
                                 'headingtype'] != '':
                     data2[name] = x['properties']['ucldc_schema:subjecttopic'][
@@ -798,7 +799,7 @@ def get_subject_topic(data2, x, all_headers):
             try:
                 name = 'Subject (Topic) %d Source' % numb
                 if x['properties']['ucldc_schema:subjecttopic'][topnumb][
-                        'source'] != None and x['properties'][
+                        'source'] is not None and x['properties'][
                             'ucldc_schema:subjecttopic'][topnumb][
                                 'source'] != '':
                     data2[name] = x['properties']['ucldc_schema:subjecttopic'][
@@ -810,7 +811,7 @@ def get_subject_topic(data2, x, all_headers):
             try:
                 name = 'Subject (Topic) %d Authority ID' % numb
                 if x['properties']['ucldc_schema:subjecttopic'][topnumb][
-                        'authorityid'] != None and x['properties'][
+                        'authorityid'] is not None and x['properties'][
                             'ucldc_schema:subjecttopic'][topnumb][
                                 'authorityid'] != '':
                     data2[name] = x['properties']['ucldc_schema:subjecttopic'][
@@ -836,7 +837,7 @@ def get_form_genre(data2, x, all_headers):
             try:
                 name = 'Form/Genre %d Heading' % numb
                 if x['properties']['ucldc_schema:formgenre'][formnumb][
-                        'heading'] != None and x['properties'][
+                        'heading'] is not None and x['properties'][
                             'ucldc_schema:formgenre'][formnumb][
                                 'heading'] != '':
                     data2[name] = x['properties']['ucldc_schema:formgenre'][
@@ -848,7 +849,7 @@ def get_form_genre(data2, x, all_headers):
             try:
                 name = 'Form/Genre %d Source' % numb
                 if x['properties']['ucldc_schema:formgenre'][formnumb][
-                        'source'] != None and x['properties'][
+                        'source'] is not None and x['properties'][
                             'ucldc_schema:formgenre'][formnumb]['source'] != '':
                     data2[name] = x['properties']['ucldc_schema:formgenre'][
                         formnumb]['source']
@@ -859,7 +860,7 @@ def get_form_genre(data2, x, all_headers):
             try:
                 name = 'Form/Genre %d Authority ID' % numb
                 if x['properties']['ucldc_schema:formgenre'][formnumb][
-                        'authorityid'] != None and x['properties'][
+                        'authorityid'] is not None and x['properties'][
                             'ucldc_schema:formgenre'][formnumb][
                                 'authorityid'] != '':
                     data2[name] = x['properties']['ucldc_schema:formgenre'][
@@ -890,7 +891,7 @@ def get_provenance(data2, x, all_headers):
 
 
 def get_physical_location(data2, x, all_headers):
-    if x['properties']['ucldc_schema:physlocation'] != None and x[
+    if x['properties']['ucldc_schema:physlocation'] is not None and x[
             'properties']['ucldc_schema:physlocation'] != '':
         data2['Physical Location'] = x['properties'][
             'ucldc_schema:physlocation']
