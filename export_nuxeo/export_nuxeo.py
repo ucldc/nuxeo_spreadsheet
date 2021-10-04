@@ -1,9 +1,16 @@
-#Written by Niqui O'Neill
-#This script requires unicodecsv to be installed
-#This script allows the users to download metadata from nuxeo and place it either in a google spreadsheet or tsv file
-#it also allows for metadata to be downloaded from the collection or item level
-#it also asks if all headers should be downloaded or if the empty items should not be downloaded
-#Nuxeo has to be installed for this script to work
+"""
+This script allows the users to download metadata from Nuxeo
+and save to either a Google Sheets spreadsheet or a local TSV file
+
+It allows for metadata to be downloaded at the object level
+(one spreadsheet row per parent-level digital object), or item level
+(one spreadsheet row per any item, including each component of a complex object)
+
+It also asks if all headers should be downloaded, or if properties with
+null values in Nuxeo should be excluded from the export.
+
+First written by Niqui O'Neill (UCLA Digital Library Program) in 2018.
+"""
 import os
 import unicodecsv as csv
 from pynux import utils
@@ -26,17 +33,22 @@ except:
     all_headers = input('All Headers? (Y/N): ')
 
 
-def get_title(data2, x):  #gets title
+def get_title(data2, x):
+    """gets title
+    """
     data2['Title'] = x['properties']['dc:title']
 
 
-def get_filepath(data2, x):  #gets filepath
+def get_filepath(data2, x):
+    """gets filepath
+    """
     data2['File path'] = x['path']
 
 
-def get_type(
-    data2, x, all_headers
-):  #gets type, inputs are dictionary (data2), nuxeo (x), all_headers input
+def get_type(data2, x, all_headers):
+    """gets type, 
+    inputs are dictionary (data2), nuxeo (x), all_headers input
+    """
     if x['properties']['ucldc_schema:type'] != None and x['properties'][
             'ucldc_schema:type'] != '':
         data2['Type'] = x['properties']['ucldc_schema:type']
