@@ -4,8 +4,10 @@
 #it also allows for metadata to be downloaded from the collection or item level
 #it also asks if all headers should be downloaded or if the empty items should not be downloaded
 #Nuxeo has to be installed for this script to work
-import unicodecsv as csv
 import os
+import unicodecsv as csv
+from pynux import utils
+
 try:
     filepath = raw_input('Enter Nuxeo File Path: ')
 except:
@@ -22,8 +24,6 @@ try:
     all_headers = raw_input('All Headers? (Y/N): ')
 except:
     all_headers = input('All Headers? (Y/N): ')
-
-from pynux import utils
 
 
 def get_title(data2, x):  #gets title
