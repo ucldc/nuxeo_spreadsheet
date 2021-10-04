@@ -46,7 +46,7 @@ def get_filepath(data2, x):
 
 
 def get_type(data2, x, all_headers):
-    """gets type, 
+    """gets type,
     inputs are dictionary (data2), nuxeo (x), all_headers input
     """
     if x['properties']['ucldc_schema:type'] != None and x['properties'][
@@ -998,7 +998,9 @@ def item_level(filepath):
     }
 
 
-#returns dictionary with fieldnames, data and filename; This is used for google functions and writing to tsv if google function not choosed
+# returns dictionary with fieldnames, data and filename;
+# This is used for google functions and writing to tsv
+# if google function not chosen
 
 
 def google_object(filepath, url):
@@ -1061,9 +1063,9 @@ if 'O' in choice or 'o' in choice:
         try:
             google_object(filepath, url)
         except:
-            print(
-                "\n*********\nWriting to Google document did not work. Make sure that Google document has been shared with API key email address"
-            )
+            print("\n*********\nWriting to Google document did not work."
+                  "Make sure that Google document has been shared "
+                  "with API key email address")
     else:
         obj = object_level(filepath)
         with open(obj['filename'], "wb") as csvfile:
@@ -1078,9 +1080,9 @@ if 'I' in choice or 'i' in choice:
         try:
             google_item(filepath, url)
         except:
-            print(
-                "\n*********\nWriting to Google document did not work. Make sure that Google document has been shared with API key email address"
-            )
+            print("\n*********\nWriting to Google document did not work."
+                  "Make sure that Google document has been shared "
+                  "with API key email address")
     else:
         item = item_level(filepath)
         with open(item['filename'], "wb") as csvfile:
