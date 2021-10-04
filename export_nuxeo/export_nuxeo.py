@@ -1063,7 +1063,7 @@ def google_item(filepath, url):
     os.remove("temp.csv")  #removes temporary csv
 
 
-if 'O' in choice or 'o' in choice:
+if choice == "o":
     if 'http' in url:
         try:
             google_object(filepath, url)
@@ -1080,7 +1080,7 @@ if 'O' in choice or 'o' in choice:
             writer.writeheader()
             for row in obj['data']:
                 writer.writerow(row)
-if 'I' in choice or 'i' in choice:
+elif choice == "i":
     if 'http' in url:
         try:
             google_item(filepath, url)
