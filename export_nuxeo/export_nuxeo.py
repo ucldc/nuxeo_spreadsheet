@@ -63,8 +63,9 @@ def get_type(data2, x, all_headers):
 
 def get_alt_title(data2, x, all_headers):
     altnumb = 0
-    if type(x['properties']['ucldc_schema:alternativetitle']) == list and len(
-            x['properties']['ucldc_schema:alternativetitle']) > 0:
+    if isinstance(x['properties']['ucldc_schema:alternativetitle'],
+                  list) and len(
+                      x['properties']['ucldc_schema:alternativetitle']) > 0:
         while altnumb < len(x['properties']['ucldc_schema:alternativetitle']):
             numb = altnumb + 1
             name = 'Alternative Title %d' % numb
@@ -85,8 +86,9 @@ def get_identifier(data2, x, all_headers):
 
 def get_local_identifier(data2, x, all_headers):
     locnumb = 0
-    if type(x['properties']['ucldc_schema:localidentifier']) == list and len(
-            x['properties']['ucldc_schema:localidentifier']) > 0:
+    if isinstance(
+            x['properties']['ucldc_schema:localidentifier'],
+            list) and len(x['properties']['ucldc_schema:localidentifier']) > 0:
         while locnumb < len(x['properties']['ucldc_schema:localidentifier']):
             numb = locnumb + 1
             name = 'Local Identifier %d' % numb
@@ -99,8 +101,9 @@ def get_local_identifier(data2, x, all_headers):
 
 def get_campus_unit(data2, x, all_headers):
     campnumb = 0
-    if type(x['properties']['ucldc_schema:campusunit']) == list and len(
-            x['properties']['ucldc_schema:campusunit']) > 0:
+    if isinstance(
+            x['properties']['ucldc_schema:campusunit'],
+            list) and len(x['properties']['ucldc_schema:campusunit']) > 0:
         while campnumb < len(x['properties']['ucldc_schema:campusunit']):
             numb = campnumb + 1
             name = 'Campus/Unit %d' % numb
@@ -112,8 +115,8 @@ def get_campus_unit(data2, x, all_headers):
 
 def get_date(data2, x, all_headers):
     datenumb = 0
-    if type(x['properties']['ucldc_schema:date']) == list and len(
-            x['properties']['ucldc_schema:date']) > 0:
+    if isinstance(x['properties']['ucldc_schema:date'],
+                  list) and len(x['properties']['ucldc_schema:date']) > 0:
         while datenumb < len(x['properties']['ucldc_schema:date']):
             numb = datenumb + 1
             try:
@@ -184,8 +187,8 @@ def get_date(data2, x, all_headers):
 
 def get_publication(data2, x, all_headers):
     pubnumb = 0
-    if type(x['properties']['ucldc_schema:publisher']) == list and len(
-            x['properties']['ucldc_schema:publisher']) > 0:
+    if isinstance(x['properties']['ucldc_schema:publisher'],
+                  list) and len(x['properties']['ucldc_schema:publisher']) > 0:
         while pubnumb < len(x['properties']['ucldc_schema:publisher']):
             numb = pubnumb + 1
             name = 'Publication/Origination Info %d' % numb
@@ -197,8 +200,8 @@ def get_publication(data2, x, all_headers):
 
 def get_creator(data2, x, all_headers):
     creatnumb = 0
-    if type(x['properties']['ucldc_schema:creator']) == list and len(
-            x['properties']['ucldc_schema:creator']) > 0:
+    if isinstance(x['properties']['ucldc_schema:creator'],
+                  list) and len(x['properties']['ucldc_schema:creator']) > 0:
         while creatnumb < len(x['properties']['ucldc_schema:creator']):
             numb = creatnumb + 1
             try:
@@ -269,8 +272,9 @@ def get_creator(data2, x, all_headers):
 
 def get_contributor(data2, x, all_headers):
     contnumb = 0
-    if type(x['properties']['ucldc_schema:contributor']) == list and len(
-            x['properties']['ucldc_schema:contributor']) > 0:
+    if isinstance(
+            x['properties']['ucldc_schema:contributor'],
+            list) and len(x['properties']['ucldc_schema:contributor']) > 0:
         while contnumb < len(x['properties']['ucldc_schema:contributor']):
             numb = contnumb + 1
             try:
@@ -351,8 +355,9 @@ def get_format(data2, x, all_headers):
 
 def get_description(data2, x, all_headers):
     descnumb = 0
-    if type(x['properties']['ucldc_schema:description']) == list and len(
-            x['properties']['ucldc_schema:description']) > 0:
+    if isinstance(
+            x['properties']['ucldc_schema:description'],
+            list) and len(x['properties']['ucldc_schema:description']) > 0:
         while descnumb < len(x['properties']['ucldc_schema:description']):
             numb = descnumb + 1
             try:
@@ -393,8 +398,8 @@ def get_extent(data2, x, all_headers):
 
 def get_language(data2, x, all_headers):
     langnumb = 0
-    if type(x['properties']['ucldc_schema:language']) == list and len(
-            x['properties']['ucldc_schema:language']) > 0:
+    if isinstance(x['properties']['ucldc_schema:language'],
+                  list) and len(x['properties']['ucldc_schema:language']) > 0:
         while langnumb < len(x['properties']['ucldc_schema:language']):
             numb = langnumb + 1
             try:
@@ -429,8 +434,9 @@ def get_language(data2, x, all_headers):
 
 def get_temporal_coverage(data2, x, all_headers):
     tempnumb = 0
-    if type(x['properties']['ucldc_schema:temporalcoverage']) == list and len(
-            x['properties']['ucldc_schema:temporalcoverage']) > 0:
+    if isinstance(x['properties']['ucldc_schema:temporalcoverage'],
+                  list) and len(
+                      x['properties']['ucldc_schema:temporalcoverage']) > 0:
         while tempnumb < len(x['properties']['ucldc_schema:temporalcoverage']):
             numb = tempnumb + 1
             name = 'Temporal Coverage %d' % numb
@@ -478,8 +484,9 @@ def get_rights_status(data2, x, all_headers):
 
 def get_copyright_holder(data2, x, all_headers):
     rightsnumb = 0
-    if type(x['properties']['ucldc_schema:rightsholder']) == list and len(
-            x['properties']['ucldc_schema:rightsholder']) > 0:
+    if isinstance(
+            x['properties']['ucldc_schema:rightsholder'],
+            list) and len(x['properties']['ucldc_schema:rightsholder']) > 0:
         while rightsnumb < len(x['properties']['ucldc_schema:rightsholder']):
             numb = rightsnumb + 1
             try:
@@ -590,8 +597,9 @@ def get_copyright_info(data2, x, all_headers):
 
 def get_collection(data2, x, all_headers):
     collnumb = 0
-    if type(x['properties']['ucldc_schema:collection']) == list and len(
-            x['properties']['ucldc_schema:collection']) > 0:
+    if isinstance(
+            x['properties']['ucldc_schema:collection'],
+            list) and len(x['properties']['ucldc_schema:collection']) > 0:
         while collnumb < len(x['properties']['ucldc_schema:collection']):
             numb = collnumb + 1
             name = 'Collection %d' % numb
@@ -603,8 +611,9 @@ def get_collection(data2, x, all_headers):
 
 def get_related_resource(data2, x, all_headers):
     relnumb = 0
-    if type(x['properties']['ucldc_schema:relatedresource']) == list and len(
-            x['properties']['ucldc_schema:relatedresource']) > 0:
+    if isinstance(
+            x['properties']['ucldc_schema:relatedresource'],
+            list) and len(x['properties']['ucldc_schema:relatedresource']) > 0:
         while relnumb < len(x['properties']['ucldc_schema:relatedresource']):
             numb = relnumb + 1
             name = 'Related Resource %d' % numb
@@ -625,8 +634,9 @@ def get_source(data2, x, all_headers):
 
 def get_subject_name(data2, x, all_headers):
     subnumb = 0
-    if type(x['properties']['ucldc_schema:subjectname']) == list and len(
-            x['properties']['ucldc_schema:subjectname']) > 0:
+    if isinstance(
+            x['properties']['ucldc_schema:subjectname'],
+            list) and len(x['properties']['ucldc_schema:subjectname']) > 0:
         while subnumb < len(x['properties']['ucldc_schema:subjectname']):
             numb = subnumb + 1
             try:
@@ -698,8 +708,8 @@ def get_subject_name(data2, x, all_headers):
 
 def get_place(data2, x, all_headers):
     plcnumb = 0
-    if type(x['properties']['ucldc_schema:place']) == list and len(
-            x['properties']['ucldc_schema:place']) > 0:
+    if isinstance(x['properties']['ucldc_schema:place'],
+                  list) and len(x['properties']['ucldc_schema:place']) > 0:
         while plcnumb < len(x['properties']['ucldc_schema:place']):
             numb = plcnumb + 1
             try:
@@ -756,8 +766,9 @@ def get_place(data2, x, all_headers):
 
 def get_subject_topic(data2, x, all_headers):
     topnumb = 0
-    if type(x['properties']['ucldc_schema:subjecttopic']) == list and len(
-            x['properties']['ucldc_schema:subjecttopic']) > 0:
+    if isinstance(
+            x['properties']['ucldc_schema:subjecttopic'],
+            list) and len(x['properties']['ucldc_schema:subjecttopic']) > 0:
         while topnumb < len(x['properties']['ucldc_schema:subjecttopic']):
             numb = topnumb + 1
             try:
@@ -818,8 +829,8 @@ def get_subject_topic(data2, x, all_headers):
 
 def get_form_genre(data2, x, all_headers):
     formnumb = 0
-    if type(x['properties']['ucldc_schema:formgenre']) == list and len(
-            x['properties']['ucldc_schema:formgenre']) > 0:
+    if isinstance(x['properties']['ucldc_schema:formgenre'],
+                  list) and len(x['properties']['ucldc_schema:formgenre']) > 0:
         while formnumb < len(x['properties']['ucldc_schema:formgenre']):
             numb = formnumb + 1
             try:
@@ -866,8 +877,9 @@ def get_form_genre(data2, x, all_headers):
 
 def get_provenance(data2, x, all_headers):
     provnumb = 0
-    if type(x['properties']['ucldc_schema:provenance']) == list and len(
-            x['properties']['ucldc_schema:provenance']) > 0:
+    if isinstance(
+            x['properties']['ucldc_schema:provenance'],
+            list) and len(x['properties']['ucldc_schema:provenance']) > 0:
         while provnumb < len(x['properties']['ucldc_schema:provenance']):
             numb = provnumb + 1
             name = 'Provenance %d' % numb
