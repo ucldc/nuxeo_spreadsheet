@@ -90,20 +90,20 @@ def process_metadata(nxdoc):
     """ map Nuxeo JSON to flat data structure with human-readable labels
     """
 
-    data2 = {}
+    metadata_record = {}
 
-    get_single_string_fields(data2, nxdoc)
-    get_string_list_fields(data2, nxdoc)
-    get_dict_list_fields(data2, nxdoc)
+    get_single_string_fields(metadata_record, nxdoc)
+    get_string_list_fields(metadata_record, nxdoc)
+    get_dict_list_fields(metadata_record, nxdoc)
 
-    return data2
+    return metadata_record
 
 
-def get_single_string_fields(data2, nxdoc):
+def get_single_string_fields(metadata_record, nxdoc):
     """ map fields that are non-repeating string values
     """
 
-    data2["File path"] = nxdoc.get("path")
+    metadata_record["File path"] = nxdoc.get("path")
 
     property_map = {
         "Title": "dc:title",
@@ -126,10 +126,10 @@ def get_single_string_fields(data2, nxdoc):
     }
 
     for key, value in property_map.items():
-        data2[key] = nxdoc["properties"].get(value)
+        metadata_record[key] = nxdoc["properties"].get(value)
 
 
-def get_string_list_fields(data2, nxdoc):
+def get_string_list_fields(metadata_record, nxdoc):
     """ map fields that are flat lists of strings
     """
 
@@ -148,11 +148,11 @@ def get_string_list_fields(data2, nxdoc):
         num = 0
         while num < len(nxdoc["properties"].get(value)):
             field_label = key % (num + 1)
-            data2[field_label] = nxdoc["properties"].get(value)[num]
+            metadata_record[field_label] = nxdoc["properties"].get(value)[num]
             num += 1
 
 
-def get_dict_list_fields(data2, nxdoc):
+def get_dict_list_fields(metadata_record, nxdoc):
     """ map complex fields that are lists of dicts
     """
     complex_property_map = {
@@ -224,7 +224,7 @@ def get_dict_list_fields(data2, nxdoc):
         while num < len(field_data):
             for key, value in subfields.items():
                 field_label = key % (num + 1)
-                data2[field_label] = field_data[num].get(value)
+                metadata_record[field_label] = field_data[num].get(value)
             num += 1
 
 
@@ -258,8 +258,8 @@ def make_fieldnames(data, all_headers):
                 fieldnames.append(column)
     else:
         fieldnames = ["File path", "Title", "Type"]
-        for data2 in data:
-            for key in data2.keys():
+        for metadata_record in data:
+            for key in metadata_record.keys():
                 if key not in fieldnames:
                     fieldnames.append(key)
 
