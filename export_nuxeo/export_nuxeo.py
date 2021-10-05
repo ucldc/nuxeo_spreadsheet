@@ -24,6 +24,8 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 
 def main():
+    """ parse command-line args,
+    """
     parser = argparse.ArgumentParser()
 
     parser.add_argument("path",
@@ -58,67 +60,73 @@ def main():
     if gsheets_url:
         gsheets_url = gsheets_url.strip()
 
-    nx = utils.Nuxeo()
-
     # google_error_text = (
     #     "\n*********\nWriting to Google document did not work."
     #     "Make sure that Google document has been shared "
     #     "with API key email address")
 
-    data = []
-    if item_level:
-        for obj in nx.children(nuxeo_top_path):
-            for item in nx.children(obj["path"]):
-                metadata_row = process_metadata(item)
-                data.append(metadata_row)
-    else:
-        for obj in nx.children(nuxeo_top_path):
-            metadata_row = process_metadata(obj)
-            data.append(metadata_row)
-
-    fieldnames = make_fieldnames(data, all_headers)
+    metadata = get_metadata(nuxeo_top_path, item_level)
+    fieldnames = make_fieldnames(metadata, all_headers)
     sheet_name = nuxeo_top_path.split("/")[-1].lower()
 
     if gsheets_url:
-        write_gsheet(data, sheet_name, fieldnames, gsheets_url)
+        write_gsheet(metadata, sheet_name, fieldnames, gsheets_url)
 
     else:
         sheet_name += ".tsv"
-        write_csv(data, sheet_name, fieldnames, delimiter="\t")
+        write_csv(metadata, sheet_name, fieldnames, delimiter="\t")
 
 
-def process_metadata(nxdoc):
+def get_metadata(nuxeo_top_path, item_level=False):
+    """ authorize nuxeo client,
+        iterate over documents to retrieve and map metadata rows
+        return list of dicts (1 dict = 1 metadata row)
+    """
+
+    nx = utils.Nuxeo()
+
+    data = []
+    if item_level:
+        for doc in nx.children(nuxeo_top_path):
+            for item in nx.children(doc["path"]):
+                metadata_row = make_metadata_row(item)
+                data.append(metadata_row)
+    else:  # object level
+        for doc in nx.children(nuxeo_top_path):
+            metadata_row = make_metadata_row(doc)
+            data.append(metadata_row)
+
+    return data
+
+
+def make_metadata_row(nxdoc):
     """ map Nuxeo JSON to flat data structure with human-readable labels
+        (1 Nuxeo object = 1 metadata row)
+
+        input: metadata for one Nuxeo object ('nxdoc',
+            JSON document retrieved from Nuxeo)
+
+        returns: flat dict that will become one spreadsheet row
+            ('metadata_record')
+
+            keys: spreadsheet column label (string)
+            values: metadata value (string, list of strings, list of dicts)
     """
 
     metadata_record = {}
 
-    # json file maps property names to the human-readable labels
-    # used in the spreadsheet template, groups fields by datatype
+    # this json file groups fields by datatype,
+    # matches spreadsheet labels to nuxeo properties
     with open("simple_ucldc.json", "r") as infile:
         ucldc_map = json.load(infile)
 
-    get_single_string_fields(metadata_record, nxdoc, ucldc_map)
-    get_string_list_fields(metadata_record, nxdoc, ucldc_map)
-    get_dict_list_fields(metadata_record, nxdoc, ucldc_map)
-
-    return metadata_record
-
-
-def get_single_string_fields(metadata_record, nxdoc, ucldc_map):
-    """ map fields that are non-repeating string values
-    """
-
     metadata_record["File path"] = nxdoc.get("path")
 
+    # single-value string fields
     for key, value in ucldc_map["string"].items():
         metadata_record[key] = nxdoc["properties"].get(value)
 
-
-def get_string_list_fields(metadata_record, nxdoc, ucldc_map):
-    """ map fields that are flat lists of strings
-    """
-
+    # lists of strings
     for key, value in ucldc_map["string_list"].items():
         num = 0
         while num < len(nxdoc["properties"].get(value)):
@@ -126,10 +134,7 @@ def get_string_list_fields(metadata_record, nxdoc, ucldc_map):
             metadata_record[field_label] = nxdoc["properties"].get(value)[num]
             num += 1
 
-
-def get_dict_list_fields(metadata_record, nxdoc, ucldc_map):
-    """ map complex fields that are lists of dicts
-    """
+    # lists of dicts
     for field, subfields in ucldc_map["complex_list"].items():
         num = 0
         field_data = nxdoc["properties"].get(field)
@@ -138,6 +143,8 @@ def get_dict_list_fields(metadata_record, nxdoc, ucldc_map):
                 field_label = key % (num + 1)
                 metadata_record[field_label] = field_data[num].get(value)
             num += 1
+
+    return metadata_record
 
 
 def make_fieldnames(data, all_headers):
@@ -179,6 +186,8 @@ def make_fieldnames(data, all_headers):
 
 
 def write_csv(data, filename, fieldnames, delimiter=","):
+    """ write out to csv/tsv file
+    """
     with open(filename, "wb") as outfile:
         writer = csv.DictWriter(outfile,
                                 delimiter=delimiter,
@@ -189,7 +198,8 @@ def write_csv(data, filename, fieldnames, delimiter=","):
 
 
 def write_gsheet(data, sheet_name, fieldnames, gsheets_url):
-
+    """ create temp. csv, import to google sheets
+    """
     temp = "temp.csv"
     write_csv(data, temp, fieldnames)
     scope = [
