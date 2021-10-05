@@ -15,6 +15,7 @@ individual component of a complex object), or include all headers
 First written by Niqui O'Neill (UCLA Digital Library Program) in 2018.
 """
 import os
+import json
 import argparse
 import unicodecsv as csv
 from pynux import utils
@@ -92,59 +93,33 @@ def process_metadata(nxdoc):
 
     metadata_record = {}
 
-    get_single_string_fields(metadata_record, nxdoc)
-    get_string_list_fields(metadata_record, nxdoc)
-    get_dict_list_fields(metadata_record, nxdoc)
+    # json file maps property names to the human-readable labels
+    # used in the spreadsheet template, groups fields by datatype
+    with open("simple_ucldc.json", "r") as infile:
+        ucldc_map = json.load(infile)
+
+    get_single_string_fields(metadata_record, nxdoc, ucldc_map)
+    get_string_list_fields(metadata_record, nxdoc, ucldc_map)
+    get_dict_list_fields(metadata_record, nxdoc, ucldc_map)
 
     return metadata_record
 
 
-def get_single_string_fields(metadata_record, nxdoc):
+def get_single_string_fields(metadata_record, nxdoc, ucldc_map):
     """ map fields that are non-repeating string values
     """
 
     metadata_record["File path"] = nxdoc.get("path")
 
-    property_map = {
-        "Title": "dc:title",
-        "Identifier": "ucldc_schema:identifier",
-        "Type": "ucldc_schema:type",
-        "Format/Physical Description": "ucldc_schema:physdesc",
-        "Extent": "ucldc_schema:extent",
-        "Transcription": "ucldc_schema:transcription",
-        "Access Restrictions": "ucldc_schema:accessrestrict",
-        "Copyright Statement": "ucldc_schema:rightsstatement",
-        "Copyright Status": "ucldc_schema:rightsstatus",
-        "Copyright Contact": "ucldc_schema:rightscontact",
-        "Copyright Notice": "ucldc_schema:rightsnotice",
-        "Copyright Determination Date": "ucldc_schema:rightsdeterminationdate",
-        "Copyright End Date": "ucldc_schema:rightsstartdate",
-        "Copyright Jurisdiction": "ucldc_schema:rightsjurisdiction",
-        "Copyright Note": "ucldc_schema:rightsnote",
-        "Source": "ucldc_schema:source",
-        "Physical Location": "ucldc_schema:physlocation"
-    }
-
-    for key, value in property_map.items():
+    for key, value in ucldc_map["string"].items():
         metadata_record[key] = nxdoc["properties"].get(value)
 
 
-def get_string_list_fields(metadata_record, nxdoc):
+def get_string_list_fields(metadata_record, nxdoc, ucldc_map):
     """ map fields that are flat lists of strings
     """
 
-    property_map = {
-        "Alternative Title %d": "ucldc_schema:alternativetitle",
-        "Local Identifier %d": "ucldc_schema:localidentifier",
-        "Campus/Unit %d": "ucldc_schema:campusunit",
-        "Publication/Origination Info %d": "ucldc_schema:publisher",
-        "Temporal Coverage %d": "ucldc_schema:temporalcoverage",
-        "Collection %d": "ucldc_schema:collection",
-        "Related Resource %d": "ucldc_schema:relatedresource",
-        "Provenance %d": "ucldc_schema:provenance"
-    }
-
-    for key, value in property_map.items():
+    for key, value in ucldc_map["string_list"].items():
         num = 0
         while num < len(nxdoc["properties"].get(value)):
             field_label = key % (num + 1)
@@ -152,73 +127,10 @@ def get_string_list_fields(metadata_record, nxdoc):
             num += 1
 
 
-def get_dict_list_fields(metadata_record, nxdoc):
+def get_dict_list_fields(metadata_record, nxdoc, ucldc_map):
     """ map complex fields that are lists of dicts
     """
-    complex_property_map = {
-        "ucldc_schema:date": {
-            "Date %d": "date",
-            "Date %d Type": "datetype",
-            "Date %d Inclusive Start": "inclusivestart",
-            "Date %d Inclusive End": "inclusiveend",
-            "Date %d Single": "single"
-        },
-        "ucldc_schema:creator": {
-            "Creator %d Name": "name",
-            "Creator %d Name Type": "nametype",
-            "Creator %d Role": "role",
-            "Creator %d Source": "source",
-            "Creator %d Authority ID": "authorityid"
-        },
-        "ucldc_schema:contributor": {
-            "Contributor %d Name": "name",
-            "Contributor %d Name Type": "nametype",
-            "Contributor %d Role": "role",
-            "Contributor %d Source": "source",
-            "Contributor %d Authority ID": "authorityid"
-        },
-        "ucldc_schema:description": {
-            "Description %d Note": "item",
-            "Description %d Type": "type"
-        },
-        "ucldc_schema:language": {
-            "Language %d": "language",
-            "Language %d Code": "languagecode"
-        },
-        "ucldc_schema:rightsholder": {
-            "Copyright Holder %d Name": "name",
-            "Copyright Holder %d Name Type": "nametype",
-            "Copyright Holder %d Role": "role",
-            "Copyright Holder %d Source": "source",
-            "Copyright Holder %d Authority ID": "authorityid"
-        },
-        "ucldc_schema:subjectname": {
-            "Contributor %d Name": "name",
-            "Contributor %d Name Type": "nametype",
-            "Contributor %d Role": "role",
-            "Contributor %d Source": "source",
-            "Contributor %d Authority ID": "authorityid"
-        },
-        "ucldc_schema:place": {
-            "Place %d Name": "name",
-            "Place %d Source": "source",
-            "Place %d Coordinates": "coordinates",
-            "Place %d Authority ID": "authorityid"
-        },
-        "ucldc_schema:subjecttopic": {
-            "Subject (Topic) %d Heading": "heading",
-            "Subject (Topic) %d Heading Type": "headingtype",
-            "Subject (Topic) %d Source": "source",
-            "Subject (Topic) %d Authority ID": "authorityid"
-        },
-        "ucldc_schema:formgenre": {
-            "Form/Genre %d Heading": "heading",
-            "Form/Genre %d Source": "source",
-            "Form/Genre %d Authority ID": "authorityid"
-        }
-    }
-
-    for field, subfields in complex_property_map.items():
+    for field, subfields in ucldc_map["complex_list"].items():
         num = 0
         field_data = nxdoc["properties"].get(field)
         while num < len(field_data):
