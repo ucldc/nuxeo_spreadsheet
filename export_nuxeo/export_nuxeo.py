@@ -92,62 +92,58 @@ def process_metadata(nxdoc, all_headers):
 
     data2 = {}
 
-    get_title(data2, nxdoc)
-    get_filepath(data2, nxdoc)
-    get_type(data2, nxdoc, all_headers)
+    get_simple_fields(data2, nxdoc)
+
     get_alt_title(data2, nxdoc, all_headers)
-    get_identifier(data2, nxdoc, all_headers)
     get_local_identifier(data2, nxdoc, all_headers)
     get_campus_unit(data2, nxdoc, all_headers)
     get_date(data2, nxdoc, all_headers)
     get_publication(data2, nxdoc, all_headers)
     get_creator(data2, nxdoc, all_headers)
     get_contributor(data2, nxdoc, all_headers)
-    get_format(data2, nxdoc, all_headers)
     get_description(data2, nxdoc, all_headers)
-    get_extent(data2, nxdoc, all_headers)
     get_language(data2, nxdoc, all_headers)
     get_temporal_coverage(data2, nxdoc, all_headers)
-    get_transcription(data2, nxdoc, all_headers)
-    get_access_restrictions(data2, nxdoc, all_headers)
-    get_rights_statement(data2, nxdoc, all_headers)
-    get_rights_status(data2, nxdoc, all_headers)
     get_copyright_holder(data2, nxdoc, all_headers)
-    get_copyright_info(data2, nxdoc, all_headers)
     get_collection(data2, nxdoc, all_headers)
     get_related_resource(data2, nxdoc, all_headers)
-    get_source(data2, nxdoc, all_headers)
     get_subject_name(data2, nxdoc, all_headers)
     get_place(data2, nxdoc, all_headers)
     get_subject_topic(data2, nxdoc, all_headers)
     get_form_genre(data2, nxdoc, all_headers)
     get_provenance(data2, nxdoc, all_headers)
-    get_physical_location(data2, nxdoc, all_headers)
 
     return data2
 
 
-def get_title(data2, nxdoc):
-    """gets title
+def get_simple_fields(data2, nxdoc):
+    """ map fields that are non-repeating string values
     """
-    data2["Title"] = nxdoc["properties"]["dc:title"]
 
+    data2["File path"] = nxdoc.get("path")
 
-def get_filepath(data2, nxdoc):
-    """gets filepath
-    """
-    data2["File path"] = nxdoc["path"]
+    property_map = {
+        "Title": "dc:title",
+        "Identifier": "ucldc_schema:identifier",
+        "Type": "ucldc_schema:type",
+        "Format/Physical Description": "ucldc_schema:physdesc",
+        "Extent": "ucldc_schema:extent",
+        "Transcription": "ucldc_schema:transcription",
+        "Access Restrictions": "ucldc_schema:accessrestrict",
+        "Copyright Statement": "ucldc_schema:rightsstatement",
+        "Copyright Status": "ucldc_schema:rightsstatus",
+        "Copyright Contact": "ucldc_schema:rightscontact",
+        "Copyright Notice": "ucldc_schema:rightsnotice",
+        "Copyright Determination Date": "ucldc_schema:rightsdeterminationdate",
+        "Copyright End Date": "ucldc_schema:rightsstartdate",
+        "Copyright Jurisdiction": "ucldc_schema:rightsjurisdiction",
+        "Copyright Note": "ucldc_schema:rightsnote",
+        "Source": "ucldc_schema:source",
+        "Physical Location": "ucldc_schema:physloc"
+    }
 
-
-def get_type(data2, nxdoc, all_headers):
-    """gets type,
-    inputs are dictionary (data2), nuxeo (nxdoc), all_headers input
-    """
-    if nxdoc["properties"]["ucldc_schema:type"] is not None and nxdoc[
-            "properties"]["ucldc_schema:type"] != "":
-        data2["Type"] = nxdoc["properties"]["ucldc_schema:type"]
-    elif all_headers:
-        data2["Type"] = ""
+    for key, value in property_map.items():
+        data2[key] = nxdoc["properties"][value]
 
 
 def get_alt_title(data2, nxdoc, all_headers):
@@ -165,14 +161,6 @@ def get_alt_title(data2, nxdoc, all_headers):
             altnumb += 1
     elif all_headers:
         data2["Alternative Title 1"] = ""
-
-
-def get_identifier(data2, nxdoc, all_headers):
-    if nxdoc["properties"]["ucldc_schema:identifier"] is not None and nxdoc[
-            "properties"]["ucldc_schema:identifier"] != "":
-        data2["Identifier"] = nxdoc["properties"]["ucldc_schema:identifier"]
-    elif all_headers:
-        data2["Identifier"] = ""
 
 
 def get_local_identifier(data2, nxdoc, all_headers):
@@ -440,15 +428,6 @@ def get_contributor(data2, nxdoc, all_headers):
         data2["Contributor 1 Authority ID"] = ""
 
 
-def get_format(data2, nxdoc, all_headers):
-    if nxdoc["properties"]["ucldc_schema:physdesc"] is not None and nxdoc[
-            "properties"]["ucldc_schema:physdesc"] != "":
-        data2["Format/Physical Description"] = nxdoc["properties"][
-            "ucldc_schema:physdesc"]
-    elif all_headers:
-        data2["Format/Physical Description"] = ""
-
-
 def get_description(data2, nxdoc, all_headers):
     descnumb = 0
     if isinstance(
@@ -482,14 +461,6 @@ def get_description(data2, nxdoc, all_headers):
     elif all_headers:
         data2["Description 1 Note"] = ""
         data2["Description 1 Type"] = ""
-
-
-def get_extent(data2, nxdoc, all_headers):
-    if nxdoc["properties"]["ucldc_schema:extent"] is not None and nxdoc[
-            "properties"]["ucldc_schema:extent"] != "":
-        data2["Extent"] = nxdoc["properties"]["ucldc_schema:extent"]
-    elif all_headers:
-        data2["Extent"] = ""
 
 
 def get_language(data2, nxdoc, all_headers):
@@ -544,43 +515,6 @@ def get_temporal_coverage(data2, nxdoc, all_headers):
             tempnumb += 1
     elif all_headers:
         data2["Temporal Coverage 1"] = ""
-
-
-def get_transcription(data2, nxdoc, all_headers):
-    if nxdoc["properties"]["ucldc_schema:transcription"] is not None and nxdoc[
-            "properties"]["ucldc_schema:transcription"] != "":
-        data2["Transcription"] = nxdoc["properties"][
-            "ucldc_schema:transcription"]
-    elif all_headers:
-        data2["Transcription"] = ""
-
-
-def get_access_restrictions(data2, nxdoc, all_headers):
-    if nxdoc["properties"]["ucldc_schema:accessrestrict"] is not None and nxdoc[
-            "properties"]["ucldc_schema:accessrestrict"] != "":
-        data2["Access Restrictions"] = nxdoc["properties"][
-            "ucldc_schema:accessrestrict"]
-    elif all_headers:
-        data2["Access Restrictions"] = ""
-
-
-def get_rights_statement(data2, nxdoc, all_headers):
-    if nxdoc["properties"][
-            "ucldc_schema:rightsstatement"] is not None and nxdoc[
-                "properties"]["ucldc_schema:rightsstatement"] != "":
-        data2["Copyright Statement"] = nxdoc["properties"][
-            "ucldc_schema:rightsstatement"]
-    elif all_headers:
-        data2["Copyright Statement"] = ""
-
-
-def get_rights_status(data2, nxdoc, all_headers):
-    if nxdoc["properties"]["ucldc_schema:rightsstatus"] is not None and nxdoc[
-            "properties"]["ucldc_schema:rightsstatus"] != "":
-        data2["Copyright Status"] = nxdoc["properties"][
-            "ucldc_schema:rightsstatus"]
-    elif all_headers:
-        data2["Copyright Status"] = ""
 
 
 def get_copyright_holder(data2, nxdoc, all_headers):
@@ -647,60 +581,6 @@ def get_copyright_holder(data2, nxdoc, all_headers):
         data2["Copyright Holder 1 Authority ID"] = ""
 
 
-def get_copyright_info(data2, nxdoc, all_headers):
-    if nxdoc["properties"]["ucldc_schema:rightscontact"] is not None and nxdoc[
-            "properties"]["ucldc_schema:rightscontact"] != "":
-        data2["Copyright Contact"] = nxdoc["properties"][
-            "ucldc_schema:rightscontact"]
-    elif all_headers:
-        data2["Copyright Contact"] = ""
-
-    if nxdoc["properties"]["ucldc_schema:rightsnotice"] is not None and nxdoc[
-            "properties"]["ucldc_schema:rightsnotice"] != "":
-        data2["Copyright Notice"] = nxdoc["properties"][
-            "ucldc_schema:rightsnotice"]
-    elif all_headers:
-        data2["Copyright Notice"] = ""
-
-    if nxdoc["properties"][
-            "ucldc_schema:rightsdeterminationdate"] is not None and nxdoc[
-                "properties"]["ucldc_schema:rightsdeterminationdate"] != "":
-        data2["Copyright Determination Date"] = nxdoc["properties"][
-            "ucldc_schema:rightsdeterminationdate"]
-    elif all_headers:
-        data2["Copyright Determination Date"] = ""
-
-    if nxdoc["properties"][
-            "ucldc_schema:rightsstartdate"] is not None and nxdoc[
-                "properties"]["ucldc_schema:rightsstartdate"] != "":
-        data2["Copyright Start Date"] = nxdoc["properties"][
-            "ucldc_schema:rightsstartdate"]
-    elif all_headers:
-        data2["Copyright Start Date"] = ""
-
-    if nxdoc["properties"]["ucldc_schema:rightsenddate"] is not None and nxdoc[
-            "properties"]["ucldc_schema:rightsenddate"] != "":
-        data2["Copyright End Date"] = nxdoc["properties"][
-            "ucldc_schema:rightsenddate"]
-    elif all_headers:
-        data2["Copyright End Date"] = ""
-
-    if nxdoc["properties"][
-            "ucldc_schema:rightsjurisdiction"] is not None and nxdoc[
-                "properties"]["ucldc_schema:rightsjurisdiction"] != "":
-        data2["Copyright Jurisdiction"] = nxdoc["properties"][
-            "ucldc_schema:rightsjurisdiction"]
-    elif all_headers:
-        data2["Copyright Jurisdiction"] = ""
-
-    if nxdoc["properties"]["ucldc_schema:rightsnote"] is not None and nxdoc[
-            "properties"]["ucldc_schema:rightsnote"] != "":
-        data2["Copyright Note"] = nxdoc["properties"][
-            "ucldc_schema:rightsnote"]
-    elif all_headers:
-        data2["Copyright Note"] = ""
-
-
 def get_collection(data2, nxdoc, all_headers):
     collnumb = 0
     if isinstance(
@@ -730,14 +610,6 @@ def get_related_resource(data2, nxdoc, all_headers):
             relnumb += 1
     elif all_headers:
         data2["Related Resource 1"] = ""
-
-
-def get_source(data2, nxdoc, all_headers):
-    if nxdoc["properties"]["ucldc_schema:source"] is not None and nxdoc[
-            "properties"]["ucldc_schema:source"] != "":
-        data2["Source"] = nxdoc["properties"]["ucldc_schema:source"]
-    elif all_headers:
-        data2["Source"] = ""
 
 
 def get_subject_name(data2, nxdoc, all_headers):
@@ -997,15 +869,6 @@ def get_provenance(data2, nxdoc, all_headers):
             provnumb += 1
     elif all_headers:
         data2["Provenance 1"] = ""
-
-
-def get_physical_location(data2, nxdoc, all_headers):
-    if nxdoc["properties"]["ucldc_schema:physlocation"] is not None and nxdoc[
-            "properties"]["ucldc_schema:physlocation"] != "":
-        data2["Physical Location"] = nxdoc["properties"][
-            "ucldc_schema:physlocation"]
-    elif all_headers:
-        data2["Physical Location"] = ""
 
 
 def make_fieldnames(data, all_headers):
