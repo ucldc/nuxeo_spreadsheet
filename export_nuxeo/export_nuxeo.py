@@ -92,31 +92,25 @@ def process_metadata(nxdoc, all_headers):
 
     data2 = {}
 
-    get_simple_fields(data2, nxdoc)
+    get_single_string_fields(data2, nxdoc)
+    get_string_list_fields(data2, nxdoc)
 
-    get_alt_title(data2, nxdoc, all_headers)
-    get_local_identifier(data2, nxdoc, all_headers)
-    get_campus_unit(data2, nxdoc, all_headers)
     get_date(data2, nxdoc, all_headers)
-    get_publication(data2, nxdoc, all_headers)
+
     get_creator(data2, nxdoc, all_headers)
     get_contributor(data2, nxdoc, all_headers)
     get_description(data2, nxdoc, all_headers)
     get_language(data2, nxdoc, all_headers)
-    get_temporal_coverage(data2, nxdoc, all_headers)
     get_copyright_holder(data2, nxdoc, all_headers)
-    get_collection(data2, nxdoc, all_headers)
-    get_related_resource(data2, nxdoc, all_headers)
     get_subject_name(data2, nxdoc, all_headers)
     get_place(data2, nxdoc, all_headers)
     get_subject_topic(data2, nxdoc, all_headers)
     get_form_genre(data2, nxdoc, all_headers)
-    get_provenance(data2, nxdoc, all_headers)
 
     return data2
 
 
-def get_simple_fields(data2, nxdoc):
+def get_single_string_fields(data2, nxdoc):
     """ map fields that are non-repeating string values
     """
 
@@ -143,55 +137,30 @@ def get_simple_fields(data2, nxdoc):
     }
 
     for key, value in property_map.items():
-        data2[key] = nxdoc["properties"][value]
+        data2[key] = nxdoc["properties"].get(value)
 
 
-def get_alt_title(data2, nxdoc, all_headers):
-    altnumb = 0
-    if isinstance(
-            nxdoc["properties"]["ucldc_schema:alternativetitle"],
-            list) and len(
-                nxdoc["properties"]["ucldc_schema:alternativetitle"]) > 0:
-        while altnumb < len(
-                nxdoc["properties"]["ucldc_schema:alternativetitle"]):
-            num = altnumb + 1
-            name = "Alternative Title %d" % num
-            data2[name] = nxdoc["properties"]["ucldc_schema:alternativetitle"][
-                altnumb]
-            altnumb += 1
-    elif all_headers:
-        data2["Alternative Title 1"] = ""
+def get_string_list_fields(data2, nxdoc):
+    """ map fields that are flat lists of strings
+    """
 
+    property_map = {
+        "Alternative Title %d": "ucldc_schema:alternativetitle",
+        "Local Identifier %d": "ucldc_schema:localidentifier",
+        "Campus/Unit %d": "ucldc_schema:campusunit",
+        "Publication/Origination Info %d": "ucldc_schema:publisher",
+        "Temporal Coverage %d": "ucldc_schema:temporalcoverage",
+        "Collection %d": "ucldc_schema:collection",
+        "Related Resource %d": "ucldc_schema:relatedresource",
+        "Provenance %d": "ucldc_schema:provenance"
+    }
 
-def get_local_identifier(data2, nxdoc, all_headers):
-    locnumb = 0
-    if isinstance(nxdoc["properties"]["ucldc_schema:localidentifier"],
-                  list) and len(
-                      nxdoc["properties"]["ucldc_schema:localidentifier"]) > 0:
-        while locnumb < len(
-                nxdoc["properties"]["ucldc_schema:localidentifier"]):
-            num = locnumb + 1
-            name = "Local Identifier %d" % num
-            data2[name] = nxdoc["properties"]["ucldc_schema:localidentifier"][
-                locnumb]
-            locnumb += 1
-    elif all_headers:
-        data2["Local Identifier 1"] = ""
-
-
-def get_campus_unit(data2, nxdoc, all_headers):
-    campnumb = 0
-    if isinstance(
-            nxdoc["properties"]["ucldc_schema:campusunit"],
-            list) and len(nxdoc["properties"]["ucldc_schema:campusunit"]) > 0:
-        while campnumb < len(nxdoc["properties"]["ucldc_schema:campusunit"]):
-            num = campnumb + 1
-            name = "Campus/Unit %d" % num
-            data2[name] = nxdoc["properties"]["ucldc_schema:campusunit"][
-                campnumb]
-            campnumb += 1
-    elif all_headers:
-        data2["Campus/Unit 1"] = ""
+    for key, value in property_map.items():
+        num = 0
+        while num < len(nxdoc["properties"].get(value)):
+            field_label = key % (num + 1)
+            data2[field_label] = nxdoc["properties"].get(value)[num]
+            num += 1
 
 
 def get_date(data2, nxdoc, all_headers):
@@ -264,21 +233,6 @@ def get_date(data2, nxdoc, all_headers):
         data2["Date 1 Inclusive Start"] = ""
         data2["Date 1 Inclusive End"] = ""
         data2["Date 1 Single"] = ""
-
-
-def get_publication(data2, nxdoc, all_headers):
-    pubnumb = 0
-    if isinstance(
-            nxdoc["properties"]["ucldc_schema:publisher"],
-            list) and len(nxdoc["properties"]["ucldc_schema:publisher"]) > 0:
-        while pubnumb < len(nxdoc["properties"]["ucldc_schema:publisher"]):
-            num = pubnumb + 1
-            name = "Publication/Origination Info %d" % num
-            data2[name] = nxdoc["properties"]["ucldc_schema:publisher"][
-                pubnumb]
-            pubnumb += 1
-    elif all_headers:
-        data2["Publication/Origination Info 1"] = ""
 
 
 def get_creator(data2, nxdoc, all_headers):
@@ -500,23 +454,6 @@ def get_language(data2, nxdoc, all_headers):
         data2["Language 1 Code"] = ""
 
 
-def get_temporal_coverage(data2, nxdoc, all_headers):
-    tempnumb = 0
-    if isinstance(
-            nxdoc["properties"]["ucldc_schema:temporalcoverage"],
-            list) and len(
-                nxdoc["properties"]["ucldc_schema:temporalcoverage"]) > 0:
-        while tempnumb < len(
-                nxdoc["properties"]["ucldc_schema:temporalcoverage"]):
-            num = tempnumb + 1
-            name = "Temporal Coverage %d" % num
-            data2[name] = nxdoc["properties"]["ucldc_schema:temporalcoverage"][
-                tempnumb]
-            tempnumb += 1
-    elif all_headers:
-        data2["Temporal Coverage 1"] = ""
-
-
 def get_copyright_holder(data2, nxdoc, all_headers):
     rightsnumb = 0
     if isinstance(nxdoc["properties"]["ucldc_schema:rightsholder"],
@@ -579,37 +516,6 @@ def get_copyright_holder(data2, nxdoc, all_headers):
         data2["Copyright Holder 1 Name Type"] = ""
         data2["Copyright Holder 1 Source"] = ""
         data2["Copyright Holder 1 Authority ID"] = ""
-
-
-def get_collection(data2, nxdoc, all_headers):
-    collnumb = 0
-    if isinstance(
-            nxdoc["properties"]["ucldc_schema:collection"],
-            list) and len(nxdoc["properties"]["ucldc_schema:collection"]) > 0:
-        while collnumb < len(nxdoc["properties"]["ucldc_schema:collection"]):
-            num = collnumb + 1
-            name = "Collection %d" % num
-            data2[name] = nxdoc["properties"]["ucldc_schema:collection"][
-                collnumb]
-            collnumb += 1
-    elif all_headers:
-        data2["Collection 1"] = ""
-
-
-def get_related_resource(data2, nxdoc, all_headers):
-    relnumb = 0
-    if isinstance(nxdoc["properties"]["ucldc_schema:relatedresource"],
-                  list) and len(
-                      nxdoc["properties"]["ucldc_schema:relatedresource"]) > 0:
-        while relnumb < len(
-                nxdoc["properties"]["ucldc_schema:relatedresource"]):
-            num = relnumb + 1
-            name = "Related Resource %d" % num
-            data2[name] = nxdoc["properties"]["ucldc_schema:relatedresource"][
-                relnumb]
-            relnumb += 1
-    elif all_headers:
-        data2["Related Resource 1"] = ""
 
 
 def get_subject_name(data2, nxdoc, all_headers):
@@ -854,21 +760,6 @@ def get_form_genre(data2, nxdoc, all_headers):
         data2["Form/Genre 1 Heading"] = ""
         data2["Form/Genre 1 Source"] = ""
         data2["Form/Genre 1 Authority ID"] = ""
-
-
-def get_provenance(data2, nxdoc, all_headers):
-    provnumb = 0
-    if isinstance(
-            nxdoc["properties"]["ucldc_schema:provenance"],
-            list) and len(nxdoc["properties"]["ucldc_schema:provenance"]) > 0:
-        while provnumb < len(nxdoc["properties"]["ucldc_schema:provenance"]):
-            num = provnumb + 1
-            name = "Provenance %d" % num
-            data2[name] = nxdoc["properties"]["ucldc_schema:provenance"][
-                provnumb]
-            provnumb += 1
-    elif all_headers:
-        data2["Provenance 1"] = ""
 
 
 def make_fieldnames(data, all_headers):
