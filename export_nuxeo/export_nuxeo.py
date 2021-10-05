@@ -65,7 +65,7 @@ def main():
             except:
                 print(google_error_text)
         else:
-            item = item_level(nuxeo_top_path, all_headers)
+            item = get_data_item_level(nuxeo_top_path, all_headers)
             with open(item["filename"], "wb") as csvfile:
                 writer = csv.DictWriter(csvfile,
                                         fieldnames=item["fieldnames"],
@@ -81,7 +81,7 @@ def main():
             except:
                 print(google_error_text)
         else:
-            obj = object_level(nuxeo_top_path, all_headers)
+            obj = get_data_object_level(nuxeo_top_path, all_headers)
             with open(obj["filename"], "wb") as csvfile:
                 writer = csv.DictWriter(csvfile,
                                         fieldnames=obj["fieldnames"],
@@ -952,7 +952,7 @@ def get_physical_location(data2, x, all_headers):
         data2["Physical Location"] = ""
 
 
-def object_level(filepath, all_headers):
+def get_data_object_level(filepath, all_headers):
     nx = utils.Nuxeo()
     data = []
     for n in nx.children(filepath):
@@ -1011,7 +1011,7 @@ def object_level(filepath, all_headers):
     }
 
 
-def item_level(filepath, all_headers):
+def get_data_item_level(filepath, all_headers):
     nx = utils.Nuxeo()
     data = []
     for n in nx.children(filepath):
