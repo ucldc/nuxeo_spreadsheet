@@ -74,7 +74,7 @@ def main():
             data.append(metadata_row)
 
     fieldnames = sort_fieldnames(data)
-    sheet_name = nuxeo_top_path.split("/")[-1]
+    sheet_name = nuxeo_top_path.split("/")[-1].lower()
 
     if gsheets_url:
         write_gsheet(data, sheet_name, fieldnames, gsheets_url)
