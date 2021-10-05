@@ -53,14 +53,17 @@ def main():
     all_headers = args.all_headers
     gsheets_url = args.sheet.strip()
 
+    google_error_text = (
+        "\n*********\nWriting to Google document did not work."
+        "Make sure that Google document has been shared "
+        "with API key email address")
+
     if item_level:
         if gsheets_url:
             try:
                 google_item(nuxeo_top_path, all_headers, gsheets_url)
             except:
-                print("\n*********\nWriting to Google document did not work."
-                      "Make sure that Google document has been shared "
-                      "with API key email address")
+                print(google_error_text)
         else:
             item = item_level(nuxeo_top_path, all_headers)
             with open(item["filename"], "wb") as csvfile:
@@ -76,9 +79,7 @@ def main():
             try:
                 google_object(nuxeo_top_path, all_headers, gsheets_url)
             except:
-                print("\n*********\nWriting to Google document did not work."
-                      "Make sure that Google document has been shared "
-                      "with API key email address")
+                print(google_error_text)
         else:
             obj = object_level(nuxeo_top_path, all_headers)
             with open(obj["filename"], "wb") as csvfile:
