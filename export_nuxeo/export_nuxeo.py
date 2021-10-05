@@ -8,7 +8,7 @@ and saves to a local TSV file. It includes column headers
 only for properties that contain non-null and non-empty string values.
 
 Command-line options allow the choice to export to Google Sheets,
-export data at the item level (one row per item, including each 
+export data at the item level (one row per item, including each
 individual component of a complex object), or include all headers
 (including those with null/blank values)
 
