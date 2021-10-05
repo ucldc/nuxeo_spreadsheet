@@ -139,7 +139,7 @@ def get_simple_fields(data2, nxdoc):
         "Copyright Jurisdiction": "ucldc_schema:rightsjurisdiction",
         "Copyright Note": "ucldc_schema:rightsnote",
         "Source": "ucldc_schema:source",
-        "Physical Location": "ucldc_schema:physloc"
+        "Physical Location": "ucldc_schema:physlocation"
     }
 
     for key, value in property_map.items():
