@@ -75,7 +75,7 @@ def main():
             metadata_row = process_metadata(obj, all_headers)
             data.append(metadata_row)
 
-    fieldnames = sort_fieldnames(data)
+    fieldnames = make_fieldnames(data, all_headers)
     sheet_name = nuxeo_top_path.split("/")[-1].lower()
 
     if gsheets_url:
@@ -1008,14 +1008,40 @@ def get_physical_location(data2, nxdoc, all_headers):
         data2["Physical Location"] = ""
 
 
-def sort_fieldnames(data):
+def make_fieldnames(data, all_headers):
     """ ensures that File path, Title and Type are the first three rows
     """
-    fieldnames = ["File path", "Title", "Type"]
-    for data2 in data:
-        for key in data2.keys():
-            if key not in fieldnames:
-                fieldnames.append(key)
+    # TODO: sort complex fields correctly.
+    # current code is sorting Heading 1, Heading 2, Source 1, Source 2
+    # should be Heading 1, Source 1, Heading 2, Source 2
+
+    fields_in_use = []
+    for row in data:
+        for key in row.keys():
+            if key not in fields_in_use:
+                fields_in_use.append(key)
+
+    fieldnames = []
+
+    if all_headers:
+        with open("../csv2dict/columns.txt", "r") as infile:
+            valid_columns = [i.strip() for i in infile.readlines()]
+        for column in valid_columns:
+            if "%" in column:
+                num = 1
+                fieldnames.append(column % num)
+                num += 1
+                while column % num in fields_in_use:
+                    fieldnames.append(column % num)
+                    num += 1
+            else:
+                fieldnames.append(column)
+    else:
+        fieldnames = ["File path", "Title", "Type"]
+        for data2 in data:
+            for key in data2.keys():
+                if key not in fieldnames:
+                    fieldnames.append(key)
 
     return fieldnames
 
