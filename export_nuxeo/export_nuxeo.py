@@ -158,8 +158,8 @@ def get_alt_title(data2, nxdoc, all_headers):
                 nxdoc["properties"]["ucldc_schema:alternativetitle"]) > 0:
         while altnumb < len(
                 nxdoc["properties"]["ucldc_schema:alternativetitle"]):
-            numb = altnumb + 1
-            name = "Alternative Title %d" % numb
+            num = altnumb + 1
+            name = "Alternative Title %d" % num
             data2[name] = nxdoc["properties"]["ucldc_schema:alternativetitle"][
                 altnumb]
             altnumb += 1
@@ -182,8 +182,8 @@ def get_local_identifier(data2, nxdoc, all_headers):
                       nxdoc["properties"]["ucldc_schema:localidentifier"]) > 0:
         while locnumb < len(
                 nxdoc["properties"]["ucldc_schema:localidentifier"]):
-            numb = locnumb + 1
-            name = "Local Identifier %d" % numb
+            num = locnumb + 1
+            name = "Local Identifier %d" % num
             data2[name] = nxdoc["properties"]["ucldc_schema:localidentifier"][
                 locnumb]
             locnumb += 1
@@ -197,8 +197,8 @@ def get_campus_unit(data2, nxdoc, all_headers):
             nxdoc["properties"]["ucldc_schema:campusunit"],
             list) and len(nxdoc["properties"]["ucldc_schema:campusunit"]) > 0:
         while campnumb < len(nxdoc["properties"]["ucldc_schema:campusunit"]):
-            numb = campnumb + 1
-            name = "Campus/Unit %d" % numb
+            num = campnumb + 1
+            name = "Campus/Unit %d" % num
             data2[name] = nxdoc["properties"]["ucldc_schema:campusunit"][
                 campnumb]
             campnumb += 1
@@ -211,9 +211,9 @@ def get_date(data2, nxdoc, all_headers):
     if isinstance(nxdoc["properties"]["ucldc_schema:date"],
                   list) and len(nxdoc["properties"]["ucldc_schema:date"]) > 0:
         while datenumb < len(nxdoc["properties"]["ucldc_schema:date"]):
-            numb = datenumb + 1
+            num = datenumb + 1
             try:
-                name = "Date %d" % numb
+                name = "Date %d" % num
                 if nxdoc["properties"]["ucldc_schema:date"][datenumb][
                         "date"] is not None and nxdoc["properties"][
                             "ucldc_schema:date"][datenumb]["date"] != "":
@@ -224,7 +224,7 @@ def get_date(data2, nxdoc, all_headers):
             except:
                 pass
             try:
-                name = "Date %d Type" % numb
+                name = "Date %d Type" % num
                 if nxdoc["properties"]["ucldc_schema:date"][datenumb][
                         "datetype"] is not None and nxdoc["properties"][
                             "ucldc_schema:date"][datenumb]["datetype"] != "":
@@ -235,7 +235,7 @@ def get_date(data2, nxdoc, all_headers):
             except:
                 pass
             try:
-                name = "Date %d Inclusive Start" % numb
+                name = "Date %d Inclusive Start" % num
                 if nxdoc["properties"]["ucldc_schema:date"][datenumb][
                         "inclusivestart"] is not None and nxdoc["properties"][
                             "ucldc_schema:date"][datenumb][
@@ -247,7 +247,7 @@ def get_date(data2, nxdoc, all_headers):
             except:
                 pass
             try:
-                name = "Date %d Inclusive End" % numb
+                name = "Date %d Inclusive End" % num
                 if nxdoc["properties"]["ucldc_schema:date"][datenumb][
                         "inclusiveend"] is not None and nxdoc["properties"][
                             "ucldc_schema:date"][datenumb][
@@ -259,7 +259,7 @@ def get_date(data2, nxdoc, all_headers):
             except:
                 pass
             try:
-                name = "Date %d Single" % numb
+                name = "Date %d Single" % num
                 if nxdoc["properties"]["ucldc_schema:date"][datenumb][
                         "single"] is not None and nxdoc["properties"][
                             "ucldc_schema:date"][datenumb]["single"] != "":
@@ -284,8 +284,8 @@ def get_publication(data2, nxdoc, all_headers):
             nxdoc["properties"]["ucldc_schema:publisher"],
             list) and len(nxdoc["properties"]["ucldc_schema:publisher"]) > 0:
         while pubnumb < len(nxdoc["properties"]["ucldc_schema:publisher"]):
-            numb = pubnumb + 1
-            name = "Publication/Origination Info %d" % numb
+            num = pubnumb + 1
+            name = "Publication/Origination Info %d" % num
             data2[name] = nxdoc["properties"]["ucldc_schema:publisher"][
                 pubnumb]
             pubnumb += 1
@@ -299,9 +299,9 @@ def get_creator(data2, nxdoc, all_headers):
             nxdoc["properties"]["ucldc_schema:creator"],
             list) and len(nxdoc["properties"]["ucldc_schema:creator"]) > 0:
         while creatnumb < len(nxdoc["properties"]["ucldc_schema:creator"]):
-            numb = creatnumb + 1
+            num = creatnumb + 1
             try:
-                name = "Creator %d Name" % numb
+                name = "Creator %d Name" % num
                 if nxdoc["properties"]["ucldc_schema:creator"][creatnumb][
                         "name"] is not None and nxdoc["properties"][
                             "ucldc_schema:creator"][creatnumb]["name"] != "":
@@ -312,7 +312,7 @@ def get_creator(data2, nxdoc, all_headers):
             except:
                 pass
             try:
-                name = "Creator %d Name Type" % numb
+                name = "Creator %d Name Type" % num
                 if nxdoc["properties"]["ucldc_schema:creator"][creatnumb][
                         "nametype"] is not None and nxdoc["properties"][
                             "ucldc_schema:creator"][creatnumb][
@@ -324,7 +324,7 @@ def get_creator(data2, nxdoc, all_headers):
             except:
                 pass
             try:
-                name = "Creator %d Role" % numb
+                name = "Creator %d Role" % num
                 if nxdoc["properties"]["ucldc_schema:creator"][creatnumb][
                         "role"] is not None and nxdoc["properties"][
                             "ucldc_schema:creator"][creatnumb]["role"] != "":
@@ -335,7 +335,7 @@ def get_creator(data2, nxdoc, all_headers):
             except:
                 pass
             try:
-                name = "Creator %d Source" % numb
+                name = "Creator %d Source" % num
                 if nxdoc["properties"]["ucldc_schema:creator"][creatnumb][
                         "source"] is not None and nxdoc["properties"][
                             "ucldc_schema:creator"][creatnumb]["source"] != "":
@@ -346,7 +346,7 @@ def get_creator(data2, nxdoc, all_headers):
             except:
                 pass
             try:
-                name = "Creator %d Authority ID" % numb
+                name = "Creator %d Authority ID" % num
                 if nxdoc["properties"]["ucldc_schema:creator"][creatnumb][
                         "authorityid"] is not None and nxdoc["properties"][
                             "ucldc_schema:creator"][creatnumb][
@@ -372,9 +372,9 @@ def get_contributor(data2, nxdoc, all_headers):
             nxdoc["properties"]["ucldc_schema:contributor"],
             list) and len(nxdoc["properties"]["ucldc_schema:contributor"]) > 0:
         while contnumb < len(nxdoc["properties"]["ucldc_schema:contributor"]):
-            numb = contnumb + 1
+            num = contnumb + 1
             try:
-                name = "Contributor %d Name" % numb
+                name = "Contributor %d Name" % num
                 if nxdoc["properties"]["ucldc_schema:contributor"][contnumb][
                         "name"] is not None and nxdoc["properties"][
                             "ucldc_schema:contributor"][contnumb]["name"] != "":
@@ -385,7 +385,7 @@ def get_contributor(data2, nxdoc, all_headers):
             except:
                 pass
             try:
-                name = "Contributor %d Name Type" % numb
+                name = "Contributor %d Name Type" % num
                 if nxdoc["properties"]["ucldc_schema:contributor"][contnumb][
                         "nametype"] is not None and nxdoc["properties"][
                             "ucldc_schema:contributor"][contnumb][
@@ -397,7 +397,7 @@ def get_contributor(data2, nxdoc, all_headers):
             except:
                 pass
             try:
-                name = "Contributor %d Role" % numb
+                name = "Contributor %d Role" % num
                 if nxdoc["properties"]["ucldc_schema:contributor"][contnumb][
                         "role"] is not None and nxdoc["properties"][
                             "ucldc_schema:contributor"][contnumb]["role"] != "":
@@ -408,7 +408,7 @@ def get_contributor(data2, nxdoc, all_headers):
             except:
                 pass
             try:
-                name = "Contributor %d Source" % numb
+                name = "Contributor %d Source" % num
                 if nxdoc["properties"]["ucldc_schema:contributor"][contnumb][
                         "source"] is not None and nxdoc["properties"][
                             "ucldc_schema:contributor"][contnumb][
@@ -420,7 +420,7 @@ def get_contributor(data2, nxdoc, all_headers):
             except:
                 pass
             try:
-                name = "Contributor %d Authority ID" % numb
+                name = "Contributor %d Authority ID" % num
                 if nxdoc["properties"]["ucldc_schema:contributor"][contnumb][
                         "authorityid"] is not None and nxdoc["properties"][
                             "ucldc_schema:contributor"][contnumb][
@@ -455,9 +455,9 @@ def get_description(data2, nxdoc, all_headers):
             nxdoc["properties"]["ucldc_schema:description"],
             list) and len(nxdoc["properties"]["ucldc_schema:description"]) > 0:
         while descnumb < len(nxdoc["properties"]["ucldc_schema:description"]):
-            numb = descnumb + 1
+            num = descnumb + 1
             try:
-                name = "Description %d Note" % numb
+                name = "Description %d Note" % num
                 if nxdoc["properties"]["ucldc_schema:description"][descnumb][
                         "item"] is not None and nxdoc["properties"][
                             "ucldc_schema:description"][descnumb]["item"] != "":
@@ -468,7 +468,7 @@ def get_description(data2, nxdoc, all_headers):
             except:
                 pass
             try:
-                name = "Description %d Type" % numb
+                name = "Description %d Type" % num
                 if nxdoc["properties"]["ucldc_schema:description"][descnumb][
                         "type"] is not None and nxdoc["properties"][
                             "ucldc_schema:description"][descnumb]["type"] != "":
@@ -498,9 +498,9 @@ def get_language(data2, nxdoc, all_headers):
             nxdoc["properties"]["ucldc_schema:language"],
             list) and len(nxdoc["properties"]["ucldc_schema:language"]) > 0:
         while langnumb < len(nxdoc["properties"]["ucldc_schema:language"]):
-            numb = langnumb + 1
+            num = langnumb + 1
             try:
-                name = "Language %d" % numb
+                name = "Language %d" % num
                 if nxdoc["properties"]["ucldc_schema:language"][langnumb][
                         "language"] is not None and nxdoc["properties"][
                             "ucldc_schema:language"][langnumb][
@@ -512,7 +512,7 @@ def get_language(data2, nxdoc, all_headers):
             except:
                 pass
             try:
-                name = "Language %d Code" % numb
+                name = "Language %d Code" % num
                 if nxdoc["properties"]["ucldc_schema:language"][langnumb][
                         "languagecode"] is not None and nxdoc["properties"][
                             "ucldc_schema:language"][langnumb][
@@ -537,8 +537,8 @@ def get_temporal_coverage(data2, nxdoc, all_headers):
                 nxdoc["properties"]["ucldc_schema:temporalcoverage"]) > 0:
         while tempnumb < len(
                 nxdoc["properties"]["ucldc_schema:temporalcoverage"]):
-            numb = tempnumb + 1
-            name = "Temporal Coverage %d" % numb
+            num = tempnumb + 1
+            name = "Temporal Coverage %d" % num
             data2[name] = nxdoc["properties"]["ucldc_schema:temporalcoverage"][
                 tempnumb]
             tempnumb += 1
@@ -590,9 +590,9 @@ def get_copyright_holder(data2, nxdoc, all_headers):
                       nxdoc["properties"]["ucldc_schema:rightsholder"]) > 0:
         while rightsnumb < len(
                 nxdoc["properties"]["ucldc_schema:rightsholder"]):
-            numb = rightsnumb + 1
+            num = rightsnumb + 1
             try:
-                name = "Copyright Holder %d Name" % numb
+                name = "Copyright Holder %d Name" % num
                 if nxdoc["properties"]["ucldc_schema:rightsholder"][
                         rightsnumb]["name"] is not None and nxdoc[
                             "properties"]["ucldc_schema:rightsholder"][
@@ -604,7 +604,7 @@ def get_copyright_holder(data2, nxdoc, all_headers):
             except:
                 pass
             try:
-                name = "Copyright Holder %d Name Type" % numb
+                name = "Copyright Holder %d Name Type" % num
                 if nxdoc["properties"]["ucldc_schema:rightsholder"][
                         rightsnumb]["nametype"] is not None and nxdoc[
                             "properties"]["ucldc_schema:rightsholder"][
@@ -616,7 +616,7 @@ def get_copyright_holder(data2, nxdoc, all_headers):
             except:
                 pass
             try:
-                name = "Copyright Holder %d Source" % numb
+                name = "Copyright Holder %d Source" % num
                 if nxdoc["properties"]["ucldc_schema:rightsholder"][
                         rightsnumb]["source"] is not None and nxdoc[
                             "properties"]["ucldc_schema:rightsholder"][
@@ -628,7 +628,7 @@ def get_copyright_holder(data2, nxdoc, all_headers):
             except:
                 pass
             try:
-                name = "Copyright Holder %d Authority ID" % numb
+                name = "Copyright Holder %d Authority ID" % num
                 if nxdoc["properties"]["ucldc_schema:rightsholder"][
                         rightsnumb]["authorityid"] is not None and nxdoc[
                             "properties"]["ucldc_schema:rightsholder"][
@@ -707,8 +707,8 @@ def get_collection(data2, nxdoc, all_headers):
             nxdoc["properties"]["ucldc_schema:collection"],
             list) and len(nxdoc["properties"]["ucldc_schema:collection"]) > 0:
         while collnumb < len(nxdoc["properties"]["ucldc_schema:collection"]):
-            numb = collnumb + 1
-            name = "Collection %d" % numb
+            num = collnumb + 1
+            name = "Collection %d" % num
             data2[name] = nxdoc["properties"]["ucldc_schema:collection"][
                 collnumb]
             collnumb += 1
@@ -723,8 +723,8 @@ def get_related_resource(data2, nxdoc, all_headers):
                       nxdoc["properties"]["ucldc_schema:relatedresource"]) > 0:
         while relnumb < len(
                 nxdoc["properties"]["ucldc_schema:relatedresource"]):
-            numb = relnumb + 1
-            name = "Related Resource %d" % numb
+            num = relnumb + 1
+            name = "Related Resource %d" % num
             data2[name] = nxdoc["properties"]["ucldc_schema:relatedresource"][
                 relnumb]
             relnumb += 1
@@ -746,9 +746,9 @@ def get_subject_name(data2, nxdoc, all_headers):
             nxdoc["properties"]["ucldc_schema:subjectname"],
             list) and len(nxdoc["properties"]["ucldc_schema:subjectname"]) > 0:
         while subnumb < len(nxdoc["properties"]["ucldc_schema:subjectname"]):
-            numb = subnumb + 1
+            num = subnumb + 1
             try:
-                name = "Subject (Name) %d Name" % numb
+                name = "Subject (Name) %d Name" % num
                 if nxdoc["properties"]["ucldc_schema:subjectname"][subnumb][
                         "name"] is not None and nxdoc["properties"][
                             "ucldc_schema:subjectname"][subnumb]["name"] != "":
@@ -759,7 +759,7 @@ def get_subject_name(data2, nxdoc, all_headers):
             except:
                 pass
             try:
-                name = "Subject (Name) %d Name Type" % numb
+                name = "Subject (Name) %d Name Type" % num
                 if nxdoc["properties"]["ucldc_schema:subjectname"][subnumb][
                         "name_type"] is not None and nxdoc["properties"][
                             "ucldc_schema:subjectname"][subnumb][
@@ -771,7 +771,7 @@ def get_subject_name(data2, nxdoc, all_headers):
             except:
                 pass
             try:
-                name = "Subject (Name) %d Role" % numb
+                name = "Subject (Name) %d Role" % num
                 if nxdoc["properties"]["ucldc_schema:subjectname"][subnumb][
                         "role"] is not None and nxdoc["properties"][
                             "ucldc_schema:subjectname"][subnumb]["role"] != "":
@@ -782,7 +782,7 @@ def get_subject_name(data2, nxdoc, all_headers):
             except:
                 pass
             try:
-                name = "Subject (Name) %d Source" % numb
+                name = "Subject (Name) %d Source" % num
                 if nxdoc["properties"]["ucldc_schema:subjectname"][subnumb][
                         "source"] is not None and nxdoc["properties"][
                             "ucldc_schema:subjectname"][subnumb][
@@ -794,7 +794,7 @@ def get_subject_name(data2, nxdoc, all_headers):
             except:
                 pass
             try:
-                name = "Subject (Name) %d Authority ID" % numb
+                name = "Subject (Name) %d Authority ID" % num
                 if nxdoc["properties"]["ucldc_schema:subjectname"][subnumb][
                         "authorityid"] is not None and nxdoc["properties"][
                             "ucldc_schema:subjectname"][subnumb][
@@ -819,9 +819,9 @@ def get_place(data2, nxdoc, all_headers):
     if isinstance(nxdoc["properties"]["ucldc_schema:place"],
                   list) and len(nxdoc["properties"]["ucldc_schema:place"]) > 0:
         while plcnumb < len(nxdoc["properties"]["ucldc_schema:place"]):
-            numb = plcnumb + 1
+            num = plcnumb + 1
             try:
-                name = "Place %d Name" % numb
+                name = "Place %d Name" % num
                 if nxdoc["properties"]["ucldc_schema:place"][plcnumb][
                         "name"] is not None and nxdoc["properties"][
                             "ucldc_schema:place"][plcnumb]["name"] != "":
@@ -832,7 +832,7 @@ def get_place(data2, nxdoc, all_headers):
             except:
                 pass
             try:
-                name = "Place %d Coordinates" % numb
+                name = "Place %d Coordinates" % num
                 if nxdoc["properties"]["ucldc_schema:place"][plcnumb][
                         "coordinates"] is not None and nxdoc["properties"][
                             "ucldc_schema:place"][plcnumb]["coordinates"] != "":
@@ -843,7 +843,7 @@ def get_place(data2, nxdoc, all_headers):
             except:
                 pass
             try:
-                name = "Place %d Source" % numb
+                name = "Place %d Source" % num
                 if nxdoc["properties"]["ucldc_schema:place"][plcnumb][
                         "source"] is not None and nxdoc["properties"][
                             "ucldc_schema:place"][plcnumb]["source"] != "":
@@ -854,7 +854,7 @@ def get_place(data2, nxdoc, all_headers):
             except:
                 pass
             try:
-                name = "Place %d Authority ID" % numb
+                name = "Place %d Authority ID" % num
                 if nxdoc["properties"]["ucldc_schema:place"][plcnumb][
                         "authorityid"] is not None and nxdoc["properties"][
                             "ucldc_schema:place"][plcnumb]["authorityid"] != "":
@@ -878,9 +878,9 @@ def get_subject_topic(data2, nxdoc, all_headers):
                   list) and len(
                       nxdoc["properties"]["ucldc_schema:subjecttopic"]) > 0:
         while topnumb < len(nxdoc["properties"]["ucldc_schema:subjecttopic"]):
-            numb = topnumb + 1
+            num = topnumb + 1
             try:
-                name = "Subject (Topic) %d Heading" % numb
+                name = "Subject (Topic) %d Heading" % num
                 if nxdoc["properties"]["ucldc_schema:subjecttopic"][topnumb][
                         "heading"] is not None and nxdoc["properties"][
                             "ucldc_schema:subjecttopic"][topnumb][
@@ -892,7 +892,7 @@ def get_subject_topic(data2, nxdoc, all_headers):
             except:
                 pass
             try:
-                name = "Subject (Topic) %d Heading Type" % numb
+                name = "Subject (Topic) %d Heading Type" % num
                 if nxdoc["properties"]["ucldc_schema:subjecttopic"][topnumb][
                         "headingtype"] is not None and nxdoc["properties"][
                             "ucldc_schema:subjecttopic"][topnumb][
@@ -904,7 +904,7 @@ def get_subject_topic(data2, nxdoc, all_headers):
             except:
                 pass
             try:
-                name = "Subject (Topic) %d Source" % numb
+                name = "Subject (Topic) %d Source" % num
                 if nxdoc["properties"]["ucldc_schema:subjecttopic"][topnumb][
                         "source"] is not None and nxdoc["properties"][
                             "ucldc_schema:subjecttopic"][topnumb][
@@ -916,7 +916,7 @@ def get_subject_topic(data2, nxdoc, all_headers):
             except:
                 pass
             try:
-                name = "Subject (Topic) %d Authority ID" % numb
+                name = "Subject (Topic) %d Authority ID" % num
                 if nxdoc["properties"]["ucldc_schema:subjecttopic"][topnumb][
                         "authorityid"] is not None and nxdoc["properties"][
                             "ucldc_schema:subjecttopic"][topnumb][
@@ -941,9 +941,9 @@ def get_form_genre(data2, nxdoc, all_headers):
             nxdoc["properties"]["ucldc_schema:formgenre"],
             list) and len(nxdoc["properties"]["ucldc_schema:formgenre"]) > 0:
         while formnumb < len(nxdoc["properties"]["ucldc_schema:formgenre"]):
-            numb = formnumb + 1
+            num = formnumb + 1
             try:
-                name = "Form/Genre %d Heading" % numb
+                name = "Form/Genre %d Heading" % num
                 if nxdoc["properties"]["ucldc_schema:formgenre"][formnumb][
                         "heading"] is not None and nxdoc["properties"][
                             "ucldc_schema:formgenre"][formnumb][
@@ -955,7 +955,7 @@ def get_form_genre(data2, nxdoc, all_headers):
             except:
                 pass
             try:
-                name = "Form/Genre %d Source" % numb
+                name = "Form/Genre %d Source" % num
                 if nxdoc["properties"]["ucldc_schema:formgenre"][formnumb][
                         "source"] is not None and nxdoc["properties"][
                             "ucldc_schema:formgenre"][formnumb]["source"] != "":
@@ -966,7 +966,7 @@ def get_form_genre(data2, nxdoc, all_headers):
             except:
                 pass
             try:
-                name = "Form/Genre %d Authority ID" % numb
+                name = "Form/Genre %d Authority ID" % num
                 if nxdoc["properties"]["ucldc_schema:formgenre"][formnumb][
                         "authorityid"] is not None and nxdoc["properties"][
                             "ucldc_schema:formgenre"][formnumb][
@@ -990,8 +990,8 @@ def get_provenance(data2, nxdoc, all_headers):
             nxdoc["properties"]["ucldc_schema:provenance"],
             list) and len(nxdoc["properties"]["ucldc_schema:provenance"]) > 0:
         while provnumb < len(nxdoc["properties"]["ucldc_schema:provenance"]):
-            numb = provnumb + 1
-            name = "Provenance %d" % numb
+            num = provnumb + 1
+            name = "Provenance %d" % num
             data2[name] = nxdoc["properties"]["ucldc_schema:provenance"][
                 provnumb]
             provnumb += 1
