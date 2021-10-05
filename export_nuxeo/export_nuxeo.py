@@ -53,7 +53,9 @@ def main():
     nuxeo_top_path = args.path[0].strip()
     item_level = args.item_level
     all_headers = args.all_headers
-    gsheets_url = args.sheet.strip()
+    gsheets_url = args.sheet
+    if gsheets_url:
+        gsheets_url = gsheets_url.strip()
 
     nx = utils.Nuxeo()
 
