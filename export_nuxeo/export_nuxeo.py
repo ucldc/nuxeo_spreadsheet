@@ -1,41 +1,93 @@
 """
-This script allows the users to download metadata from Nuxeo
-and save to either a Google Sheets spreadsheet or a local TSV file
+This script allows the users to export descriptive metadata from Nuxeo
+and save to either a Google Sheets spreadsheet or a local TSV file.
 
-It allows for metadata to be downloaded at the object level
-(one spreadsheet row per parent-level digital object), or item level
-(one spreadsheet row per any item, including each component of a complex object)
+Default behavior downloads metadata at the object level
+(one spreadsheet row per parent-level digital object)
+and saves to a local TSV file. It includes column headers
+only for properties that contain non-null and non-empty string values.
 
-It also asks if all headers should be downloaded, or if properties with
-null values in Nuxeo should be excluded from the export.
+Command-line options allow the choice to export to Google Sheets,
+export data at the item level (one row per item, including each 
+individual component of a complex object), or include all headers
+(including those with null/blank values)
 
 First written by Niqui O'Neill (UCLA Digital Library Program) in 2018.
 """
 import os
+import argparse
 import unicodecsv as csv
 from pynux import utils
 
-try:
-    filepath = raw_input('Enter Nuxeo File Path: ')
-except:
-    filepath = input('Enter Nuxeo File Path: ')
-try:
-    choice = raw_input('Object Level (ENTER O) or Item Level (ENTER I): ')
-except:
-    choice = input('Object Level (ENTER O) or Item Level (ENTER I): ')
-try:
-    url = raw_input('Enter Google Sheet URL: ')
-except:
-    url = input('Enter Google Sheet URL: ')
-try:
-    all_headers = raw_input('All Headers? (Y/N): ')
-except:
-    all_headers = input('All Headers? (Y/N): ')
 
-filepath = filepath.strip()
-choice = choice.lower().strip()
-url = url.strip()
-all_headers = choice.lower().strip()
+def main():
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument('path',
+                        nargs=1,
+                        type=str,
+                        help="Nuxeo file path to export metadata from")
+
+    parser.add_argument(
+        '--item-level',
+        action='store_true',
+        help=
+        'export data for all items, including component items of complex objects.'
+    )
+
+    parser.add_argument(
+        '--all-headers',
+        action='store_true',
+        help='export data with all headers, even if values are blank')
+
+    parser.add_argument('-s',
+                        '--sheet',
+                        type=str,
+                        required=False,
+                        help='Google Sheets destination URL')
+
+    args = parser.parse_args()
+
+    nuxeo_top_path = args.path[0].strip()
+    item_level = args.item_level
+    all_headers = args.all_headers
+    gsheets_url = args.sheet.strip()
+
+    if item_level:
+        if gsheets_url:
+            try:
+                google_item(nuxeo_top_path, all_headers, gsheets_url)
+            except:
+                print("\n*********\nWriting to Google document did not work."
+                      "Make sure that Google document has been shared "
+                      "with API key email address")
+        else:
+            item = item_level(nuxeo_top_path, all_headers)
+            with open(item['filename'], "wb") as csvfile:
+                writer = csv.DictWriter(csvfile,
+                                        fieldnames=item['fieldnames'],
+                                        delimiter="\t")
+                writer.writeheader()
+                for row in item['data']:
+                    writer.writerow(row)
+
+    else:
+        if gsheets_url:
+            try:
+                google_object(nuxeo_top_path, all_headers, gsheets_url)
+            except:
+                print("\n*********\nWriting to Google document did not work."
+                      "Make sure that Google document has been shared "
+                      "with API key email address")
+        else:
+            obj = object_level(nuxeo_top_path, all_headers)
+            with open(obj['filename'], "wb") as csvfile:
+                writer = csv.DictWriter(csvfile,
+                                        fieldnames=obj['fieldnames'],
+                                        delimiter="\t")
+                writer.writeheader()
+                for row in obj['data']:
+                    writer.writerow(row)
 
 
 def get_title(data2, x):
@@ -899,7 +951,7 @@ def get_physical_location(data2, x, all_headers):
         data2['Physical Location'] = ''
 
 
-def object_level(filepath):
+def object_level(filepath, all_headers):
     nx = utils.Nuxeo()
     data = []
     for n in nx.children(filepath):
@@ -958,7 +1010,7 @@ def object_level(filepath):
     }
 
 
-def item_level(filepath):
+def item_level(filepath, all_headers):
     nx = utils.Nuxeo()
     data = []
     for n in nx.children(filepath):
@@ -1021,10 +1073,10 @@ def item_level(filepath):
 # if google function not chosen
 
 
-def google_object(filepath, url):
+def google_object(filepath, all_headers, url):
     import gspread
     from oauth2client.service_account import ServiceAccountCredentials
-    obj = object_level(filepath)
+    obj = object_level(filepath, all_headers)
     nx = utils.Nuxeo()
     scope = [
         'https://spreadsheets.google.com/feeds',
@@ -1048,10 +1100,10 @@ def google_object(filepath, url):
     os.remove("temp.csv")
 
 
-def google_item(filepath, url):
+def google_item(filepath, all_headers, url):
     import gspread
     from oauth2client.service_account import ServiceAccountCredentials
-    item = item_level(filepath)
+    item = item_level(filepath, all_headers)
     nx = utils.Nuxeo()
     scope = [
         'https://spreadsheets.google.com/feeds',
@@ -1076,37 +1128,5 @@ def google_item(filepath, url):
     os.remove("temp.csv")  #removes temporary csv
 
 
-if choice == "o":
-    if 'http' in url:
-        try:
-            google_object(filepath, url)
-        except:
-            print("\n*********\nWriting to Google document did not work."
-                  "Make sure that Google document has been shared "
-                  "with API key email address")
-    else:
-        obj = object_level(filepath)
-        with open(obj['filename'], "wb") as csvfile:
-            writer = csv.DictWriter(csvfile,
-                                    fieldnames=obj['fieldnames'],
-                                    delimiter="\t")
-            writer.writeheader()
-            for row in obj['data']:
-                writer.writerow(row)
-elif choice == "i":
-    if 'http' in url:
-        try:
-            google_item(filepath, url)
-        except:
-            print("\n*********\nWriting to Google document did not work."
-                  "Make sure that Google document has been shared "
-                  "with API key email address")
-    else:
-        item = item_level(filepath)
-        with open(item['filename'], "wb") as csvfile:
-            writer = csv.DictWriter(csvfile,
-                                    fieldnames=item['fieldnames'],
-                                    delimiter="\t")
-            writer.writeheader()
-            for row in item['data']:
-                writer.writerow(row)
+if __name__ == '__main__':
+    main()
