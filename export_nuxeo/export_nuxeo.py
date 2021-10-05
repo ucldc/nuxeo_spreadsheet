@@ -68,11 +68,11 @@ def main():
     if item_level:
         for obj in nx.children(nuxeo_top_path):
             for item in nx.children(obj["path"]):
-                metadata_row = process_metadata(item, all_headers)
+                metadata_row = process_metadata(item)
                 data.append(metadata_row)
     else:
         for obj in nx.children(nuxeo_top_path):
-            metadata_row = process_metadata(obj, all_headers)
+            metadata_row = process_metadata(obj)
             data.append(metadata_row)
 
     fieldnames = make_fieldnames(data, all_headers)
@@ -86,7 +86,7 @@ def main():
         write_csv(data, sheet_name, fieldnames, delimiter="\t")
 
 
-def process_metadata(nxdoc, all_headers):
+def process_metadata(nxdoc):
     """ map Nuxeo JSON to flat data structure with human-readable labels
     """
 
@@ -287,10 +287,11 @@ def write_gsheet(data, sheet_name, fieldnames, gsheets_url):
     creds = ServiceAccountCredentials.from_json_keyfile_name(
         "client_secret.json", scope)
     client = gspread.authorize(creds)
-    with open(temp, encoding="utf8") as f:  #opens and reads temporary csv file
-        s = f.read() + "\n"
+    with open(temp,
+              encoding="utf8") as infile:  #opens and reads temporary csv file
+        data = infile.read() + "\n"
     sheet_id = client.open_by_url(gsheets_url).id
-    client.import_csv(sheet_id, s)  #writes csv file to google sheet
+    client.import_csv(sheet_id, data)  #writes csv file to google sheet
     client.open_by_key(sheet_id).sheet1.update_title(sheet_name)
     os.remove(temp)  #removes temporary csv
 
