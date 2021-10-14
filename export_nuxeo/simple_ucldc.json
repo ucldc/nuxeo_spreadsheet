@@ -1,0 +1,106 @@
+{
+    "string":
+    {
+        "Title": "dc:title",
+        "Identifier": "ucldc_schema:identifier",
+        "Type": "ucldc_schema:type",
+        "Format/Physical Description": "ucldc_schema:physdesc",
+        "Extent": "ucldc_schema:extent",
+        "Transcription": "ucldc_schema:transcription",
+        "Access Restrictions": "ucldc_schema:accessrestrict",
+        "Copyright Statement": "ucldc_schema:rightsstatement",
+        "Copyright Status": "ucldc_schema:rightsstatus",
+        "Copyright Contact": "ucldc_schema:rightscontact",
+        "Copyright Notice": "ucldc_schema:rightsnotice",
+        "Copyright Determination Date": "ucldc_schema:rightsdeterminationdate",
+        "Copyright End Date": "ucldc_schema:rightsstartdate",
+        "Copyright Jurisdiction": "ucldc_schema:rightsjurisdiction",
+        "Copyright Note": "ucldc_schema:rightsnote",
+        "Source": "ucldc_schema:source",
+        "Physical Location": "ucldc_schema:physlocation"
+    },
+    "string_list":
+    {
+        "Alternative Title %d": "ucldc_schema:alternativetitle",
+        "Local Identifier %d": "ucldc_schema:localidentifier",
+        "Campus/Unit %d": "ucldc_schema:campusunit",
+        "Publication/Origination Info %d": "ucldc_schema:publisher",
+        "Temporal Coverage %d": "ucldc_schema:temporalcoverage",
+        "Collection %d": "ucldc_schema:collection",
+        "Related Resource %d": "ucldc_schema:relatedresource",
+        "Provenance %d": "ucldc_schema:provenance"
+    },
+    "complex_list":
+    {
+        "ucldc_schema:date":
+        {
+            "Date %d": "date",
+            "Date %d Type": "datetype",
+            "Date %d Inclusive Start": "inclusivestart",
+            "Date %d Inclusive End": "inclusiveend",
+            "Date %d Single": "single"
+        },
+        "ucldc_schema:creator":
+        {
+            "Creator %d Name": "name",
+            "Creator %d Name Type": "nametype",
+            "Creator %d Role": "role",
+            "Creator %d Source": "source",
+            "Creator %d Authority ID": "authorityid"
+        },
+        "ucldc_schema:contributor":
+        {
+            "Contributor %d Name": "name",
+            "Contributor %d Name Type": "nametype",
+            "Contributor %d Role": "role",
+            "Contributor %d Source": "source",
+            "Contributor %d Authority ID": "authorityid"
+        },
+        "ucldc_schema:description":
+        {
+            "Description %d Note": "item",
+            "Description %d Type": "type"
+        },
+        "ucldc_schema:language":
+        {
+            "Language %d": "language",
+            "Language %d Code": "languagecode"
+        },
+        "ucldc_schema:rightsholder":
+        {
+            "Copyright Holder %d Name": "name",
+            "Copyright Holder %d Name Type": "nametype",
+            "Copyright Holder %d Role": "role",
+            "Copyright Holder %d Source": "source",
+            "Copyright Holder %d Authority ID": "authorityid"
+        },
+        "ucldc_schema:subjectname":
+        {
+            "Contributor %d Name": "name",
+            "Contributor %d Name Type": "nametype",
+            "Contributor %d Role": "role",
+            "Contributor %d Source": "source",
+            "Contributor %d Authority ID": "authorityid"
+        },
+        "ucldc_schema:place":
+        {
+            "Place %d Name": "name",
+            "Place %d Source": "source",
+            "Place %d Coordinates": "coordinates",
+            "Place %d Authority ID": "authorityid"
+        },
+        "ucldc_schema:subjecttopic":
+        {
+            "Subject (Topic) %d Heading": "heading",
+            "Subject (Topic) %d Heading Type": "headingtype",
+            "Subject (Topic) %d Source": "source",
+            "Subject (Topic) %d Authority ID": "authorityid"
+        },
+        "ucldc_schema:formgenre":
+        {
+            "Form/Genre %d Heading": "heading",
+            "Form/Genre %d Source": "source",
+            "Form/Genre %d Authority ID": "authorityid"
+        }
+    }
+}
