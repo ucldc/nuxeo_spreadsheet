@@ -40,7 +40,7 @@ Note with the following considerations:
 
 * Each row in the spreadsheet can contain metadata for either a simple object, a parent-level record for a complex object, or a component for a complex object. The main thing to ensure is that the row corresponds to the correct <b>File Path</b> in Nuxeo.
 
-* <b>File Path</b> (color-coded in red) is required for each row; additionally, either <b>Title</b>, <b>Type</b>, <b>Copyright Status</b>, and/or <b>Copyright Statement</b> is required, if and when the objects will be published in Calisphere. For additional information on the metadata requirements, see the <a href="https://registry.cdlib.org/documentation/docs/dams/metadata-model/">Nuxeo user guide</a>
+* <b>File Path</b> (color-coded in red) is required for each row; additionally, either <b>Title</b>, <b>Type</b>, <b>Copyright Status</b>, and/or <b>Copyright Statement</b> is required, if and when the objects will be published in Calisphere. For additional information on the metadata requirements, see the <a href="https://help.oac.cdlib.org/support/solutions/articles/9000100809-nuxeo-metadata-requirements-and-scheme">Nuxeo user guide</a>
 
 * The <b>File Path</b> cell should contain the *exact* file directory path to the content file in Nuxeo, to be associated with the metadata record (e.g., "/asset-library/UCOP/nuxeo_tab_import_demo/ucm_li_1998_009_i.jpg").
 
