@@ -1,7 +1,7 @@
 # Prerequisites
 [Follow these instructions first](https://github.com/ucldc/nuxeo_spreadsheet/wiki), to install the prerequisites to run `nuxeo_spreadsheet`. 
 
-**Python 3** version
+**Python 3.6** version
 
 
 # Using `nuxeo_spreadsheet`
